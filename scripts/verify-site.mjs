@@ -20,7 +20,8 @@ const expectedPages = [
   '404.html',
   'rss.xml',
   'sitemap-index.xml',
-  'Arun_Jose_CV_Placeholder.txt'
+  'Arun_Jose_CV_Placeholder.txt',
+  'google537e747bd917cf5b.html'
 ];
 
 let failures = 0;
@@ -99,7 +100,9 @@ for (const snippet of requiredHomeSnippets) {
 }
 
 // 4. Verify Accessibility Landmarks & Single H1 per HTML page
-const htmlPages = expectedPages.filter((p) => p.endsWith('.html'));
+const htmlPages = expectedPages.filter(
+  (p) => p.endsWith('.html') && !p.startsWith('google')
+);
 for (const page of htmlPages) {
   const html = fs.readFileSync(path.join(distDir, page), 'utf-8');
   const h1Matches = html.match(/<h1[\s>]/gi) || [];

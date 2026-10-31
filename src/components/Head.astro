@@ -13,8 +13,29 @@ const {
   ogType = 'website'
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://arun-jose.github.io');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iamarunjose.github.io');
 const fullTitle = title.includes(PROFILE.name) ? title : `${title} | ${PROFILE.name}`;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: PROFILE.name,
+  jobTitle: PROFILE.role,
+  worksFor: {
+    '@type': 'Organization',
+    name: PROFILE.currentOrg
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: PROFILE.education.institution
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: PROFILE.location
+  },
+  url: canonicalURL.toString(),
+  sameAs: [PROFILE.contact.githubPlaceholder]
+};
 ---
 
 <head>
@@ -52,6 +73,9 @@ const fullTitle = title.includes(PROFILE.name) ? title : `${title} | ${PROFILE.n
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#FFF7E8" />
+
+  <!-- Schema.org Structured Data for Google Search -->
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
   <!-- Google Fonts: Archivo Black, Space Grotesk, Space Mono, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />

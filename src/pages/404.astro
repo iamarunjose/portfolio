@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="404 — Route Not Found | Arun Jose"
+  description="The requested page could not be located on Arun Jose's portfolio."
+>
+  <section class="bg-cream pattern-grid py-20 sm:py-28 border-b-[4px] border-ink">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="memphis-card bg-paper p-8 sm:p-12 border-[4px] border-ink shadow-[10px_10px_0px_#171717] space-y-6">
+        <span class="memphis-label bg-pink -rotate-2">
+          ERR_CODE // 404_NOT_FOUND
+        </span>
+        <h1 class="memphis-hero-title text-6xl sm:text-8xl m-0">
+          404
+        </h1>
+        <p class="font-mono text-sm sm:text-base font-bold text-ink m-0">
+          SYSTEM INTERRUPT: Requested address does not exist in memory bank.
+        </p>
+        <p class="font-sans text-base text-ink/85 max-w-lg mx-auto m-0">
+          Check the URL path or return to the main workstation index to explore projects, experience, research, and writing.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <a href="/" class="memphis-btn memphis-btn-yellow text-sm">
+            ← Return to Homepage
+          </a>
+          <a href="/projects" class="memphis-btn memphis-btn-teal text-sm">
+            View Projects →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+

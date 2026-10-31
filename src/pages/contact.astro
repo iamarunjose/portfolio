@@ -1,0 +1,235 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { PROFILE } from '../data/portfolio';
+---
+
+<Layout
+  title="Contact & Collaborations — Arun Jose"
+  description="Get in touch with Arun Jose (Software Engineer in Denmark) via GitHub, LinkedIn, Email, or download his Curriculum Vitae."
+>
+  <!-- Page Header Band -->
+  <section class="bg-pink border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-4">
+        <span class="memphis-label bg-yellow -rotate-2">
+          COMMUNICATIONS TERMINAL // DISPATCH
+        </span>
+        <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+          Contact
+        </h1>
+        <div class="memphis-card bg-paper p-5 border-l-[10px] border-l-teal">
+          <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+            Reach out regarding software engineering, platform observability, applied AI & knowledge graph collaborations, or speaking and research inquiries.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Contact Channels & Dispatch Terminal -->
+  <section class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <!-- Left 7 Columns: Direct Channels Grid -->
+        <div class="lg:col-span-7 space-y-6">
+          <SectionHeading
+            label="DIRECT CHANNELS"
+            title="Connect with Arun Jose"
+            subtitle="All unknown contact addresses and profile URLs below use clearly labeled placeholders ready for production replacement."
+            labelColor="yellow"
+            rotate="left"
+          />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Email Card -->
+            <div class="memphis-card bg-paper p-6 flex flex-col justify-between space-y-4">
+              <div>
+                <span class="memphis-label bg-yellow text-xs mb-3">01 // ELECTRONIC MAIL</span>
+                <h2 class="font-display text-xl uppercase text-ink m-0">Email Address</h2>
+                <p class="font-mono text-xs font-bold text-ink/80 mt-2 break-all">
+                  {PROFILE.contact.emailPlaceholder}
+                </p>
+                <p class="font-sans text-xs text-ink/75 mt-1 m-0">
+                  [Placeholder address — replace with verified inbox before deployment]
+                </p>
+              </div>
+              <a
+                href={`mailto:${PROFILE.contact.emailPlaceholder}`}
+                class="memphis-btn memphis-btn-yellow text-xs w-full py-2.5"
+              >
+                Compose Email →
+              </a>
+            </div>
+
+            <!-- GitHub Card -->
+            <div class="memphis-card bg-paper p-6 flex flex-col justify-between space-y-4">
+              <div>
+                <span class="memphis-label bg-teal text-xs mb-3">02 // CODE REPOSITORIES</span>
+                <h2 class="font-display text-xl uppercase text-ink m-0">GitHub Profile</h2>
+                <p class="font-mono text-xs font-bold text-ink/80 mt-2 break-all">
+                  {PROFILE.contact.githubPlaceholder}
+                </p>
+                <p class="font-sans text-xs text-ink/75 mt-1 m-0">
+                  [Placeholder URL — no unverified repository links invented]
+                </p>
+              </div>
+              <a
+                href={PROFILE.contact.githubPlaceholder}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="memphis-btn memphis-btn-teal text-xs w-full py-2.5"
+              >
+                Open GitHub Profile ↗
+              </a>
+            </div>
+
+            <!-- LinkedIn Card -->
+            <div class="memphis-card bg-paper p-6 flex flex-col justify-between space-y-4">
+              <div>
+                <span class="memphis-label bg-pink text-xs mb-3">03 // PROFESSIONAL NETWORK</span>
+                <h2 class="font-display text-xl uppercase text-ink m-0">LinkedIn</h2>
+                <p class="font-mono text-xs font-bold text-ink/80 mt-2 break-all">
+                  {PROFILE.contact.linkedinPlaceholder}
+                </p>
+                <p class="font-sans text-xs text-ink/75 mt-1 m-0">
+                  [Placeholder URL — connect regarding engineering & research]
+                </p>
+              </div>
+              <a
+                href={PROFILE.contact.linkedinPlaceholder}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="memphis-btn memphis-btn-pink text-xs w-full py-2.5"
+              >
+                Connect on LinkedIn ↗
+              </a>
+            </div>
+
+            <!-- Downloadable CV Card -->
+            <div class="memphis-card bg-paper p-6 flex flex-col justify-between space-y-4">
+              <div>
+                <span class="memphis-label bg-blue text-white text-xs mb-3">04 // CURRICULUM VITAE</span>
+                <h2 class="font-display text-xl uppercase text-ink m-0">Downloadable CV</h2>
+                <p class="font-mono text-xs font-bold text-ink/80 mt-2">
+                  Printable Web Sheet & Plain-Text Dossier
+                </p>
+                <p class="font-sans text-xs text-ink/75 mt-1 m-0">
+                  Includes Siemens experience, TU Chemnitz MSc, and research summary.
+                </p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <a href="/cv" class="memphis-btn memphis-btn-blue text-xs w-full py-2.5">
+                  Open Printable CV →
+                </a>
+                <a
+                  href="/Arun_Jose_CV_Placeholder.txt"
+                  download="Arun_Jose_CV_Placeholder.txt"
+                  class="memphis-btn memphis-btn-cream text-xs w-full py-2"
+                >
+                  Download .TXT Placeholder ↓
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 5 Columns: Retro Dispatch Message Terminal -->
+        <div class="lg:col-span-5">
+          <div class="memphis-card bg-paper border-[4px] border-ink shadow-[10px_10px_0px_#171717]">
+            <div class="memphis-window-bar bg-yellow text-ink">
+              <div class="memphis-window-dots" aria-hidden="true">
+                <span class="memphis-window-dot bg-paper"></span>
+                <span class="memphis-window-dot bg-pink"></span>
+                <span class="memphis-window-dot bg-teal"></span>
+              </div>
+              <span>DISPATCH_COMPOSER.EXE</span>
+            </div>
+
+            <form
+              id="contact-dispatch-form"
+              class="p-6 space-y-4"
+              aria-label="Quick message composer"
+            >
+              <div>
+                <label for="sender-name" class="block font-mono text-xs font-bold uppercase text-ink mb-1.5">
+                  01 // Your Name
+                </label>
+                <input
+                  id="sender-name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Ada Lovelace"
+                  class="w-full font-mono text-sm bg-cream text-ink px-3.5 py-2.5 border-[3px] border-ink focus:bg-paper"
+                />
+              </div>
+
+              <div>
+                <label for="sender-topic" class="block font-mono text-xs font-bold uppercase text-ink mb-1.5">
+                  02 // Subject Vector
+                </label>
+                <select
+                  id="sender-topic"
+                  name="topic"
+                  class="w-full font-mono text-sm bg-cream text-ink px-3.5 py-2.5 border-[3px] border-ink focus:bg-paper"
+                >
+                  <option value="Platform Engineering & Infrastructure">Platform Engineering & Infrastructure</option>
+                  <option value="Applied AI & Knowledge Graphs">Applied AI & Knowledge Graphs</option>
+                  <option value="Research Collaboration">Research Collaboration</option>
+                  <option value="General Engineering Inquiry">General Engineering Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="sender-message" class="block font-mono text-xs font-bold uppercase text-ink mb-1.5">
+                  03 // Transmission Message
+                </label>
+                <textarea
+                  id="sender-message"
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Hello Arun, let's discuss..."
+                  class="w-full font-mono text-sm bg-cream text-ink px-3.5 py-2.5 border-[3px] border-ink focus:bg-paper"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="memphis-btn memphis-btn-pink w-full text-sm py-3">
+                Prepare Email Client Draft →
+              </button>
+
+              <p id="dispatch-status" class="font-mono text-xs font-bold text-ink/80 m-0 hidden" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ emailPlaceholder: PROFILE.contact.emailPlaceholder }}>
+  function initContactForm() {
+    const form = document.getElementById('contact-dispatch-form');
+    const status = document.getElementById('dispatch-status');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const name = String(formData.get('name') || '').trim();
+      const topic = String(formData.get('topic') || '').trim();
+      const message = String(formData.get('message') || '').trim();
+
+      const subject = encodeURIComponent(`[Portfolio Inquiry: ${topic}] from ${name}`);
+      const body = encodeURIComponent(`${message}\n\n— ${name}`);
+      status.textContent = 'STATUS: Opening default mail client with pre-filled draft...';
+      status.classList.remove('hidden');
+      window.location.href = `mailto:${emailPlaceholder}?subject=${subject}&body=${body}`;
+    });
+  }
+
+  initContactForm();
+  document.addEventListener('astro:after-swap', initContactForm);
+</script>
+

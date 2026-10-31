@@ -1,0 +1,177 @@
+---
+import ArcadeMode from './mascots/ArcadeMode.astro';
+
+const pathname = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Home', href: '/', color: 'bg-yellow' },
+  { label: 'Projects', href: '/projects', color: 'bg-teal' },
+  { label: 'Experience', href: '/experience', color: 'bg-pink' },
+  { label: 'Research', href: '/research', color: 'bg-yellow' },
+  { label: 'Writing', href: '/writing', color: 'bg-teal' },
+  { label: 'Media', href: '/media', color: 'bg-pink' },
+  { label: 'About', href: '/about', color: 'bg-yellow' },
+  { label: 'Contact', href: '/contact', color: 'bg-teal' }
+];
+
+function isActive(href: string, currentPath: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+---
+
+<header class="sticky top-0 z-50 w-full bg-cream border-b-[4px] border-ink no-print">
+  <!-- Vintage System Status Top Strip -->
+  <div class="bg-ink text-cream font-mono text-[11px] sm:text-xs py-1 px-4 border-b-2 border-ink">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 bg-teal border border-cream" aria-hidden="true"></span>
+        <span class="tracking-wider font-bold">SYS.86 // ARUN_JOSE.PORTFOLIO</span>
+        <span class="hidden md:inline text-yellow">//</span>
+        <span class="hidden md:inline text-cream/90">SOFTWARE ENGINEER @ SIEMENS ENERGY (DK)</span>
+      </div>
+      <div class="flex items-center gap-3 font-mono">
+        <span
+          class="hidden sm:inline-flex items-center gap-1.5 bg-teal text-ink font-bold px-2 py-0.2 text-[10px] uppercase border border-cream"
+          data-header-boot-badge
+        >
+          <span class="w-1.5 h-1.5 bg-ink inline-block" aria-hidden="true"></span>
+          <span
+            data-boot-scramble
+            data-boot-initial="SYS.86 // INITIALIZING"
+            data-boot-final="SYS.86 // SYSTEM READY"
+          >
+            SYS.86 // SYSTEM READY
+          </span>
+        </span>
+        <ArcadeMode />
+        <span class="bg-pink text-ink font-bold px-1.5 py-0.2 text-[10px] uppercase border border-cream">
+          MEMPHIS.OS v2.6
+        </span>
+        <span class="hidden sm:inline text-yellow">LOC: DENMARK</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compact Vintage Navigation Bar -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
+    <!-- AJ Monogram Logo -->
+    <a
+      href="/"
+      class="group inline-flex items-center gap-3 text-ink no-underline focus:outline-none"
+      aria-label="Arun Jose — Home"
+    >
+      <div class="relative inline-flex items-center justify-center w-11 h-11 bg-yellow border-[3px] border-ink shadow-[4px_4px_0px_#FF5793] group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] transition-transform">
+        <span class="font-display text-xl tracking-tighter text-ink leading-none">AJ</span>
+        <span
+          class="absolute -top-1.5 -right-1.5 w-3 h-3 bg-teal border-2 border-ink"
+          aria-hidden="true"
+        ></span>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-display text-base sm:text-lg uppercase tracking-tight leading-none text-ink">
+          Arun Jose
+        </span>
+        <span class="font-mono text-[11px] font-bold text-ink/80 tracking-tight">
+          ENG // AI // GRAPHS
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Compact Vintage Pill Navigation -->
+    <nav aria-label="Main Navigation" class="hidden lg:flex items-center gap-1.5 bg-paper p-1.5 border-[3px] border-ink shadow-[4px_4px_0px_#171717]">
+      {navItems.map((item) => {
+        const active = isActive(item.href, pathname);
+        return (
+          <a
+            href={item.href}
+            aria-current={active ? 'page' : undefined}
+            class:list={[
+              'font-mono text-xs font-bold uppercase tracking-wider px-3 py-1.5 border-2 transition-all duration-100 no-underline',
+              active
+                ? `${item.color} text-ink border-ink shadow-[2px_2px_0px_#171717] -translate-y-0.5`
+                : 'bg-transparent text-ink border-transparent hover:border-ink hover:bg-cream'
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Quick Action CTA + Mobile Hamburger -->
+    <div class="flex items-center gap-2.5">
+      <a
+        href="/cv"
+        class="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase bg-pink text-ink px-3 py-2 border-[3px] border-ink shadow-[3px_3px_0px_#171717] hover:bg-yellow transition-colors no-underline"
+      >
+        <span aria-hidden="true">■</span> CV.DOC
+      </a>
+
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+        aria-label="Toggle navigation menu"
+        class="lg:hidden inline-flex items-center justify-center gap-1.5 font-mono text-xs font-bold uppercase bg-yellow text-ink px-3 py-2 border-[3px] border-ink shadow-[3px_3px_0px_#171717] active:translate-x-0.5 active:translate-y-0.5"
+      >
+        <svg class="w-4 h-4 stroke-ink" stroke-width="3" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="square" />
+        </svg>
+        <span>MENU</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <nav
+    id="mobile-nav-drawer"
+    aria-label="Mobile Navigation"
+    class="hidden lg:hidden border-t-[3px] border-ink bg-cream px-4 py-4 pattern-grid"
+  >
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-7xl mx-auto">
+      {navItems.map((item) => {
+        const active = isActive(item.href, pathname);
+        return (
+          <a
+            href={item.href}
+            aria-current={active ? 'page' : undefined}
+            class:list={[
+              'font-mono text-xs font-bold uppercase px-3 py-2.5 border-[2.5px] border-ink shadow-[3px_3px_0px_#171717] flex items-center justify-between no-underline',
+              active ? `${item.color} text-ink` : 'bg-paper text-ink hover:bg-yellow'
+            ]}
+          >
+            <span>{item.label}</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        );
+      })}
+      <a
+        href="/cv"
+        class="font-mono text-xs font-bold uppercase px-3 py-2.5 border-[2.5px] border-ink shadow-[3px_3px_0px_#171717] bg-blue text-white flex items-center justify-between no-underline"
+      >
+        <span>CV Sheet</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function setupMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    if (!toggle || !drawer) return;
+
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isExpanded));
+      drawer.classList.toggle('hidden', isExpanded);
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener('astro:after-swap', setupMobileMenu);
+</script>
+

@@ -1,0 +1,120 @@
+---
+import type { ProjectItem } from '../data/portfolio';
+import Spark from './mascots/Spark.astro';
+
+export interface Props {
+  project: ProjectItem;
+  detailed?: boolean;
+  index?: number;
+}
+
+const { project, detailed = false, index = 0 } = Astro.props;
+
+const headerColorMap = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+
+const badgeColorMap = {
+  yellow: 'bg-pink text-ink',
+  pink: 'bg-yellow text-ink',
+  teal: 'bg-yellow text-ink',
+  blue: 'bg-yellow text-ink'
+};
+---
+
+<article
+  class="memphis-card memphis-card-interactive memphis-project-card flex flex-col justify-between h-full bg-paper"
+  data-project-card
+  data-stagger-index={index}
+  style={`--stagger-index: ${index};`}
+>
+  <div>
+    <!-- Vintage Printed Panel Window Header -->
+    <div class:list={['memphis-window-bar', headerColorMap[project.accentColor]]}>
+      <div class="memphis-window-dots" aria-hidden="true">
+        <span class="memphis-window-dot bg-paper"></span>
+        <span class="memphis-window-dot bg-yellow"></span>
+        <span class="memphis-window-dot bg-pink"></span>
+      </div>
+      <span class="tracking-wider uppercase">{project.number} // {project.category}</span>
+    </div>
+
+    <!-- Halftone Banner & Status Strip -->
+    <div class="px-5 pt-4 pb-3 border-b-[3px] border-ink bg-cream pattern-grid flex flex-wrap items-center justify-between gap-2">
+      <span
+        class:list={[
+          'font-mono text-[11px] font-bold uppercase px-2.5 py-1 border-2 border-ink shadow-[2px_2px_0px_#171717]',
+          badgeColorMap[project.accentColor]
+        ]}
+      >
+        {project.statusBadge}
+      </span>
+      {project.id === 'infrastructure-monitoring-automation' ? (
+        <Spark id={`spark-${detailed ? 'page' : 'home'}-${project.id}`} size="sm" />
+      ) : (
+        <span class="font-mono text-xs font-bold text-ink/75">
+          [PUBLIC OVERVIEW]
+        </span>
+      )}
+    </div>
+
+    <!-- Card Body -->
+    <div class="p-5 sm:p-6 space-y-4">
+      <h3 class="font-display text-xl sm:text-2xl uppercase tracking-tight leading-snug text-ink m-0">
+        {project.title}
+      </h3>
+
+      <p class="font-sans text-sm sm:text-base text-ink/90 leading-relaxed m-0">
+        {project.summary}
+      </p>
+
+      {detailed && (
+        <div class="space-y-3 pt-2 border-t-2 border-dashed border-ink/40">
+          <div class="bg-cream p-3.5 border-2 border-ink">
+            <h4 class="font-mono text-xs font-bold uppercase text-ink mb-1">
+              Problem & Domain Context
+            </h4>
+            <p class="font-sans text-sm text-ink/90 m-0 leading-relaxed">
+              {project.problemContext}
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-mono text-xs font-bold uppercase text-ink mb-2">
+              Engineering & Research Highlights
+            </h4>
+            <ul class="space-y-1.5 font-sans text-sm text-ink/90 pl-4 m-0 list-square">
+              {project.approachHighlights.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      <!-- Tech & Domain Tags -->
+      <div class="flex flex-wrap gap-1.5 pt-2" aria-label="Technologies and domains">
+        {project.tags.map((tag) => (
+          <span class="memphis-tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Footer with Governance Note & CTA -->
+  <div class="px-5 sm:px-6 py-4 bg-cream border-t-[3px] border-ink space-y-3">
+    <p class="font-mono text-[11px] text-ink/80 m-0 leading-snug">
+      <strong class="text-ink">NOTE:</strong> {project.note}
+    </p>
+    <a
+      href={project.ctaHref}
+      class="memphis-btn memphis-btn-yellow w-full text-xs sm:text-sm py-2.5"
+    >
+      <span>{project.ctaLabel}</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

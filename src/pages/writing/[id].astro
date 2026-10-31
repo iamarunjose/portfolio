@@ -1,0 +1,101 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { PROFILE } from '../../data/portfolio';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const colorClasses = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+---
+
+<Layout
+  title={`${post.data.title} — Technical Writing | Arun Jose`}
+  description={post.data.summary}
+  ogType="article"
+>
+  <article class="bg-cream pattern-grid py-12 sm:py-16 border-b-[4px] border-ink">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Back Breadcrumb -->
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <a href="/writing" class="memphis-btn memphis-btn-cream text-xs py-2 px-3.5">
+          ← Back to Writing Index
+        </a>
+        <span class="memphis-label bg-yellow">
+          STATUS: {post.data.status.toUpperCase()} // UNPUBLISHED
+        </span>
+      </div>
+
+      <!-- Article Window Frame -->
+      <div class="memphis-card bg-paper border-[4px] border-ink shadow-[10px_10px_0px_#171717]">
+        <div class:list={['memphis-window-bar', colorClasses[post.data.accentColor]]}>
+          <div class="memphis-window-dots" aria-hidden="true">
+            <span class="memphis-window-dot bg-paper"></span>
+            <span class="memphis-window-dot bg-yellow"></span>
+            <span class="memphis-window-dot bg-pink"></span>
+          </div>
+          <span>{post.data.issueCode} // {post.data.category.toUpperCase()}</span>
+          <span>{post.data.readingTime}</span>
+        </div>
+
+        <!-- Article Header -->
+        <header class="p-6 sm:p-10 bg-cream border-b-[3px] border-ink space-y-4">
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <span class="memphis-tag">{tag}</span>
+            ))}
+          </div>
+
+          <h1 class="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-ink leading-tight m-0">
+            {post.data.title}
+          </h1>
+
+          <p class="font-mono text-sm sm:text-base font-bold text-ink/80 m-0">
+            {post.data.subtitle}
+          </p>
+
+          <div class="pt-3 border-t-2 border-dashed border-ink/30 flex flex-wrap items-center justify-between gap-2 font-mono text-xs">
+            <span>AUTHOR: <strong>{PROFILE.name.toUpperCase()}</strong> ({PROFILE.role} @ {PROFILE.currentOrg})</span>
+            <span class="bg-pink text-ink font-bold px-2 py-0.5 border border-ink">
+              WORKING DRAFT // NO PUBLICATION DATE ASSIGNED
+            </span>
+          </div>
+        </header>
+
+        <!-- MDX Content Body -->
+        <div class="p-6 sm:p-10 memphis-prose">
+          <Content />
+        </div>
+
+        <!-- Article Footer -->
+        <footer class="p-6 sm:p-8 bg-yellow border-t-[3px] border-ink flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="font-mono text-xs font-bold text-ink">
+            Interested in discussing this topic or collaborating on research?
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="/contact" class="memphis-btn memphis-btn-pink text-xs py-2 px-4">
+              Get in Touch →
+            </a>
+            <a href="/writing" class="memphis-btn memphis-btn-cream text-xs py-2 px-4">
+              More Drafts
+            </a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </article>
+</Layout>
+

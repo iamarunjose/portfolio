@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BroadcastSection from '../components/BroadcastSection.astro';
+import PaperEdgeDivider from '../components/PaperEdgeDivider.astro';
+import { PROFILE, SPEAKER_KIT } from '../data/portfolio';
+---
+
+<Layout
+  title="Podcast, Tech Talks & YouTube — Arun Jose"
+  description="Arun Jose's Broadcast Studio: YouTube engineering deep-dives, Systems & Signals FM podcast episodes, conference tech talks, and speaker kit."
+>
+  <!-- Page Header Band -->
+  <section class="bg-yellow border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl space-y-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="memphis-label bg-pink -rotate-1">
+            BROADCAST_86 // ON AIR STUDIO
+          </span>
+          <span class="inline-flex items-center gap-2 bg-ink text-cream font-mono text-xs font-bold px-3 py-1 border-2 border-ink">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal inline-block animate-pulse"></span>
+            <span>CH-01 YOUTUBE • CH-02 PODCAST • CH-03 TALKS</span>
+          </span>
+        </div>
+
+        <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+          Podcast, Talks &amp; YouTube
+        </h1>
+
+        <div class="memphis-card-static bg-paper p-5 border-l-[10px] border-l-teal">
+          <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+            Beyond writing production code and applied AI research, I host <strong>{PROFILE.contact.podcastName}</strong>, publish visual architecture deep-dives on <strong>YouTube</strong>, and speak at conferences, engineering sessions, and university lectures.
+          </p>
+        </div>
+
+        <!-- Quick-Jump Deck Buttons -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="#youtube-deck" class="memphis-btn memphis-btn-pink text-xs">
+            ▶ YouTube VHS Deck
+          </a>
+          <a href="#podcast-deck" class="memphis-btn memphis-btn-teal text-xs">
+            🎙 Podcast Cassette Deck
+          </a>
+          <a href="#talks-stage" class="memphis-btn memphis-btn-white text-xs">
+            🎤 Conference &amp; Talk Log
+          </a>
+          <a href="#speaker-kit" class="memphis-btn memphis-btn-blue text-xs">
+            📋 Speaker Rider &amp; Bio
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Broadcast Section (Full Archive) -->
+  <BroadcastSection compact={false} />
+
+  <PaperEdgeDivider topColor="cream" bottomColor="teal" variant="notched" direction="left" />
+
+  <!-- Speaker Rider & Press Kit (SPEAKER_KIT.86) -->
+  <section id="speaker-kit" class="bg-teal py-16 md:py-24 border-b-[4px] border-ink" aria-labelledby="speaker-kit-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="memphis-card-static bg-paper border-[4px] border-ink p-6 sm:p-10 shadow-[10px_10px_0px_#171717]">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 mb-8 border-b-[4px] border-ink">
+          <div>
+            <span class="inline-block bg-yellow border-2 border-ink px-3 py-1 font-mono text-xs font-bold mb-2 shadow-[3px_3px_0px_#171717]">
+              SPEAKER_KIT.86 // EVENT &amp; PODCAST PRESS KIT
+            </span>
+            <h2 id="speaker-kit-heading" class="font-display text-2xl sm:text-4xl uppercase text-ink m-0">
+              {SPEAKER_KIT.headline}
+            </h2>
+          </div>
+          <a href="/contact" class="memphis-btn memphis-btn-pink text-xs shrink-0">
+            Book Arun for Your Event / Show →
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Formats & Signature Topics -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-cream border-[3px] border-ink p-5 shadow-[5px_5px_0px_#171717]">
+              <h3 class="font-display text-lg uppercase text-ink mb-3 pb-2 border-b-2 border-ink">
+                01 // Speaking Formats
+              </h3>
+              <ul class="space-y-2.5 font-sans text-sm text-ink list-none p-0 m-0">
+                {SPEAKER_KIT.formats.map((fmt) => (
+                  <li class="flex items-start gap-2">
+                    <span class="font-mono font-bold text-pink">▸</span>
+                    <span>{fmt}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="bg-cream border-[3px] border-ink p-5 shadow-[5px_5px_0px_#171717]">
+              <h3 class="font-display text-lg uppercase text-ink mb-3 pb-2 border-b-2 border-ink">
+                02 // Signature Topics
+              </h3>
+              <ul class="space-y-2.5 font-sans text-sm text-ink list-none p-0 m-0">
+                {SPEAKER_KIT.signatureTopics.map((topic) => (
+                  <li class="flex items-start gap-2">
+                    <span class="font-mono font-bold text-blue">✦</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Ready-to-Copy Organizer Speaker Bio -->
+          <div class="lg:col-span-5 bg-ink text-cream border-[3px] border-ink p-5 shadow-[6px_6px_0px_#FFDE43]">
+            <div class="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-cream/25 font-mono text-xs font-bold">
+              <span class="text-yellow">SPEAKER_BIO.TXT // READY FOR ORGANIZERS</span>
+              <button
+                type="button"
+                data-copy-speaker-bio
+                data-bio-text={SPEAKER_KIT.shortSpeakerBio}
+                class="bg-teal text-ink px-2.5 py-1 border-2 border-cream text-[10px] uppercase cursor-pointer hover:bg-yellow transition-colors"
+              >
+                📋 COPY BIO
+              </button>
+            </div>
+            <p class="font-mono text-xs text-cream/90 leading-relaxed m-0">
+              "{SPEAKER_KIT.shortSpeakerBio}"
+            </p>
+            <div class="mt-4 pt-3 border-t border-cream/20 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] text-teal">
+              <span>BASE: DENMARK (CET/CEST)</span>
+              <span>FORMAT: IN-PERSON &amp; REMOTE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const initSpeakerBioCopy = () => {
+    const btn = document.querySelector<HTMLButtonElement>('[data-copy-speaker-bio]');
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+      const bio = btn.getAttribute('data-bio-text') || '';
+      try {
+        await navigator.clipboard.writeText(bio);
+        const orig = btn.textContent;
+        btn.textContent = '✔ COPIED!';
+        setTimeout(() => {
+          btn.textContent = orig;
+        }, 2000);
+      } catch {
+        // Fallback if clipboard permission denied
+      }
+    });
+  };
+
+  initSpeakerBioCopy();
+  document.addEventListener('astro:page-load', initSpeakerBioCopy);
+</script>

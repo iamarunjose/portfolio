@@ -1,0 +1,91 @@
+---
+import Mascot from './Mascot.astro';
+import type { MascotState } from '../../lib/mascot-animation';
+
+export interface Props {
+  id?: string;
+  size?: 'sm' | 'md' | 'lg';
+  initialState?: MascotState;
+  interactive?: boolean;
+  showHud?: boolean;
+  label?: string;
+}
+
+const {
+  id = 'mascot-pixel',
+  size = 'md',
+  initialState = 'idle',
+  interactive = true,
+  showHud = true,
+  label = 'PIXEL retro floppy disk writing mascot. Click or press Enter for floppy disk flip and page turn.'
+} = Astro.props;
+---
+
+<Mascot
+  id={id}
+  name="pixel"
+  displayName="PIXEL.DSK"
+  defaultStatus="DISK // 1.44MB"
+  size={size}
+  initialState={initialState}
+  interactive={interactive}
+  showHud={showHud}
+  label={label}
+>
+  <svg
+    viewBox="0 0 64 64"
+    class="mascot-svg mascot-pixel-art"
+    aria-hidden="true"
+  >
+    <!-- Ground Shadow -->
+    <rect x="16" y="58" width="32" height="3.5" fill="#171717" opacity="0.25" />
+
+    <g class="mascot-body-root">
+      <!-- Animated Page-Turn Manuscript Corner -->
+      <g class="pixel-page-leaf">
+        <rect x="44" y="4" width="14" height="16" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+        <line x1="47" y1="9" x2="55" y2="9" stroke="#171717" stroke-width="2" />
+        <line x1="47" y1="13" x2="54" y2="13" stroke="#171717" stroke-width="2" />
+      </g>
+
+      <!-- Small Hands -->
+      <g class="mascot-arm-left">
+        <rect x="7" y="30" width="7" height="8" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+      </g>
+      <g class="mascot-arm-right">
+        <rect x="50" y="28" width="7" height="8" fill="#38D8C4" stroke="#171717" stroke-width="2.5" />
+      </g>
+
+      <!-- 3.5-Inch Retro Floppy Disk Body (Pink #FF5793 & Cobalt Blue #377AF5) -->
+      <rect x="14" y="10" width="36" height="40" fill="#FF5793" stroke="#171717" stroke-width="3" />
+      <!-- Blue Lower Jacket Strip -->
+      <rect x="14" y="34" width="36" height="16" fill="#377AF5" stroke="#171717" stroke-width="3" />
+
+      <!-- Top Metal Shutter -->
+      <rect x="22" y="10" width="20" height="11" fill="#FFFDF9" stroke="#171717" stroke-width="2.5" />
+      <rect x="33" y="12" width="5" height="7" fill="#171717" />
+
+      <!-- Expressive Pixel Eyes -->
+      <g class="mascot-eyes">
+        <rect x="21" y="24" width="6" height="6" fill="#171717" />
+        <rect x="22" y="25" width="2" height="2" fill="#FFFDF9" />
+        <rect x="37" y="24" width="6" height="6" fill="#171717" />
+        <rect x="38" y="25" width="2" height="2" fill="#FFFDF9" />
+      </g>
+
+      <!-- Disk Label Area on Lower Jacket -->
+      <rect x="20" y="38" width="24" height="9" fill="#FFFDF9" stroke="#171717" stroke-width="2" />
+      <line x1="23" y1="42" x2="41" y2="42" stroke="#FF5793" stroke-width="2" />
+      <line x1="23" y1="45" x2="36" y2="45" stroke="#171717" stroke-width="1.5" />
+
+      <!-- Small Feet -->
+      <g class="mascot-leg-left">
+        <rect x="20" y="50" width="8" height="7" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+      </g>
+      <g class="mascot-leg-right">
+        <rect x="36" y="50" width="8" height="7" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+      </g>
+    </g>
+  </svg>
+</Mascot>
+

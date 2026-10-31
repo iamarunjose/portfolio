@@ -1,0 +1,457 @@
+---
+import NodeMascot from './mascots/Node.astro';
+
+export interface Props {
+  idPrefix?: string;
+}
+
+const { idPrefix = 'kg-viz' } = Astro.props;
+
+const graphNodes = [
+  {
+    id: 'nlp',
+    code: 'NODE_01',
+    label: 'NLP',
+    subtitle: 'Semantic Query & Text Parsing',
+    description:
+      'Extracts technical entities, regulatory thresholds, and intent constraints from unstructured engineering descriptions.',
+    connectedTo: ['rag', 'kg', 'ast'],
+    edgeIds: ['edge-nlp-rag', 'edge-nlp-kg', 'edge-nlp-ast'],
+    color: '#38D8C4',
+    textColor: '#171717'
+  },
+  {
+    id: 'rag',
+    code: 'NODE_02',
+    label: 'RAG',
+    subtitle: 'Dense Vector Retrieval',
+    description:
+      'Captures high-recall semantic similarity across distributed technical documentation and regulatory clauses.',
+    connectedTo: ['nlp', 'kg', 'fusion'],
+    edgeIds: ['edge-nlp-rag', 'edge-rag-kg', 'edge-rag-fusion'],
+    color: '#FF5793',
+    textColor: '#171717'
+  },
+  {
+    id: 'kg',
+    code: 'NODE_03',
+    label: 'KNOWLEDGE GRAPHS',
+    subtitle: 'Symbolic Ontology & Multi-Hop',
+    description:
+      'Enforces hierarchical taxonomies, cross-reference links, and explicit relational constraints across domains.',
+    connectedTo: ['nlp', 'rag', 'ast', 'fusion', 'verify'],
+    edgeIds: ['edge-nlp-kg', 'edge-rag-kg', 'edge-kg-ast', 'edge-kg-fusion', 'edge-kg-verify'],
+    color: '#FFDE43',
+    textColor: '#171717'
+  },
+  {
+    id: 'ast',
+    code: 'NODE_04',
+    label: 'CODE GRAPH',
+    subtitle: 'AST & Dependency Topology',
+    description:
+      'Maps repository call graphs, symbol definitions, and module boundaries for deterministic software intelligence.',
+    connectedTo: ['nlp', 'kg', 'fusion'],
+    edgeIds: ['edge-nlp-ast', 'edge-kg-ast', 'edge-ast-fusion'],
+    color: '#377AF5',
+    textColor: '#FFFFFF'
+  },
+  {
+    id: 'fusion',
+    code: 'NODE_05',
+    label: 'HYBRID FUSION',
+    subtitle: 'Reciprocal Rank & Context Synthesis',
+    description:
+      'Joins neural vector candidates with symbolic graph neighborhoods to eliminate ungrounded hallucinations.',
+    connectedTo: ['rag', 'kg', 'ast', 'verify'],
+    edgeIds: ['edge-rag-fusion', 'edge-kg-fusion', 'edge-ast-fusion', 'edge-fusion-verify'],
+    color: '#FFFDF9',
+    textColor: '#171717'
+  },
+  {
+    id: 'verify',
+    code: 'NODE_06',
+    label: 'VERIFICATION',
+    subtitle: 'Traceable Compliance & Audit',
+    description:
+      'Produces deterministic citation chains linking every synthesized claim back to verifiable source graph nodes.',
+    connectedTo: ['kg', 'fusion'],
+    edgeIds: ['edge-kg-verify', 'edge-fusion-verify'],
+    color: '#FFDE43',
+    textColor: '#171717'
+  }
+];
+---
+
+<div
+  class="memphis-card bg-paper border-[4px] border-ink shadow-[8px_8px_0px_#171717] overflow-hidden mb-10"
+  data-kg-widget
+  id={idPrefix}
+>
+  <!-- Retro Window Bar -->
+  <div class="memphis-window-bar bg-ink text-cream border-b-[4px] border-ink px-4 py-2.5">
+    <div class="flex items-center gap-2">
+      <span class="memphis-window-dot bg-yellow border-cream"></span>
+      <span class="memphis-window-dot bg-pink border-cream"></span>
+      <span class="memphis-window-dot bg-teal border-cream"></span>
+      <span class="ml-1 tracking-wider text-yellow">
+        SEMANTIC_GRAPH_ENGINE.SYS // INTERACTIVE TOPOLOGY
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="bg-teal text-ink px-2 py-0.5 border border-cream text-[10px] font-bold">
+        HOVER OR TAB NODES
+      </span>
+    </div>
+  </div>
+
+  <!-- Interactive Quick-Filter Controls Bar + NODE Mascot -->
+  <div class="px-4 sm:px-6 py-3 bg-cream border-b-[3px] border-ink flex flex-wrap items-center justify-between gap-3">
+    <div class="flex flex-wrap items-center gap-3">
+      <NodeMascot id={`${idPrefix}-node-mascot`} size="sm" />
+      <span class="font-mono text-xs font-bold uppercase text-ink">
+        INSPECT CONCEPT NODE //
+      </span>
+    </div>
+    <div class="flex flex-wrap gap-1.5" role="toolbar" aria-label="Highlight knowledge graph concepts">
+      <button
+        type="button"
+        class="kg-filter-btn font-mono text-[11px] font-bold uppercase px-2.5 py-1 border-2 border-ink bg-ink text-yellow shadow-[2px_2px_0px_#171717] cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
+        data-kg-filter="all"
+        aria-pressed="true"
+      >
+        ALL NODES
+      </button>
+      {graphNodes.map((node) => (
+        <button
+          type="button"
+          class="kg-filter-btn font-mono text-[11px] font-bold uppercase px-2.5 py-1 border-2 border-ink bg-paper text-ink hover:bg-yellow shadow-[2px_2px_0px_#171717] cursor-pointer transition-colors"
+          data-kg-filter={node.id}
+          aria-pressed="false"
+        >
+          {node.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Main SVG Graph Canvas + Inspector Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12">
+    <!-- Left/Center Interactive SVG Canvas -->
+    <div class="lg:col-span-8 p-4 sm:p-6 bg-cream pattern-grid border-b-[3px] lg:border-b-0 lg:border-r-[3px] border-ink relative">
+      <svg
+        viewBox="0 0 780 380"
+        class="w-full h-auto block select-none kg-svg-canvas"
+        role="group"
+        aria-label="Interactive Knowledge Graph connecting NLP, RAG, Knowledge Graphs, Code Graph AST, Hybrid Fusion, and Verification."
+      >
+        <defs>
+          <pattern id={`${idPrefix}-dots`} width="12" height="12" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="1.75" fill="#171717" opacity="0.22" />
+          </pattern>
+        </defs>
+
+        <!-- Decorative Memphis Halftone Corner Zones -->
+        <rect x="14" y="145" width="90" height="84" fill={`url(#${idPrefix}-dots)`} />
+        <rect x="462" y="16" width="84" height="54" fill={`url(#${idPrefix}-dots)`} />
+
+        <!-- ==============================================================
+             GRAPH EDGES (Sequential Draw via stroke-dashoffset)
+             ============================================================== -->
+        <g class="kg-edges-layer">
+          <!-- NLP (105,83) -> RAG (355,61) -->
+          <line
+            data-kg-edge="edge-nlp-rag"
+            data-source="nlp"
+            data-target="rag"
+            x1="105"
+            y1="83"
+            x2="355"
+            y2="61"
+            stroke="#171717"
+            stroke-width="4"
+            class="kg-edge kg-edge-1"
+          />
+          <!-- NLP (105,83) -> KG (355,204) -->
+          <line
+            data-kg-edge="edge-nlp-kg"
+            data-source="nlp"
+            data-target="kg"
+            x1="105"
+            y1="83"
+            x2="355"
+            y2="204"
+            stroke="#171717"
+            stroke-width="4"
+            class="kg-edge kg-edge-2"
+          />
+          <!-- NLP (105,83) -> AST (105,297) -->
+          <line
+            data-kg-edge="edge-nlp-ast"
+            data-source="nlp"
+            data-target="ast"
+            x1="105"
+            y1="83"
+            x2="105"
+            y2="297"
+            stroke="#171717"
+            stroke-width="3.5"
+            class="kg-edge kg-edge-3"
+          />
+          <!-- RAG (355,61) -> KG (355,204) -->
+          <line
+            data-kg-edge="edge-rag-kg"
+            data-source="rag"
+            data-target="kg"
+            x1="355"
+            y1="61"
+            x2="355"
+            y2="204"
+            stroke="#FF5793"
+            stroke-width="4"
+            class="kg-edge kg-edge-4"
+          />
+          <!-- KG (355,204) -> AST (105,297) -->
+          <line
+            data-kg-edge="edge-kg-ast"
+            data-source="kg"
+            data-target="ast"
+            x1="355"
+            y1="204"
+            x2="105"
+            y2="297"
+            stroke="#377AF5"
+            stroke-width="4"
+            class="kg-edge kg-edge-5"
+          />
+          <!-- RAG (355,61) -> FUSION (640,106) -->
+          <line
+            data-kg-edge="edge-rag-fusion"
+            data-source="rag"
+            data-target="fusion"
+            x1="355"
+            y1="61"
+            x2="640"
+            y2="106"
+            stroke="#171717"
+            stroke-width="4"
+            class="kg-edge kg-edge-6"
+          />
+          <!-- KG (355,204) -> FUSION (640,106) -->
+          <line
+            data-kg-edge="edge-kg-fusion"
+            data-source="kg"
+            data-target="fusion"
+            x1="355"
+            y1="204"
+            x2="640"
+            y2="106"
+            stroke="#171717"
+            stroke-width="4.5"
+            class="kg-edge kg-edge-7"
+          />
+          <!-- AST (105,297) -> FUSION (640,106) -->
+          <line
+            data-kg-edge="edge-ast-fusion"
+            data-source="ast"
+            data-target="fusion"
+            x1="105"
+            y1="297"
+            x2="640"
+            y2="106"
+            stroke="#38D8C4"
+            stroke-width="3.5"
+            class="kg-edge kg-edge-8"
+          />
+          <!-- KG (355,204) -> VERIFY (640,288) -->
+          <line
+            data-kg-edge="edge-kg-verify"
+            data-source="kg"
+            data-target="verify"
+            x1="355"
+            y1="204"
+            x2="640"
+            y2="288"
+            stroke="#171717"
+            stroke-width="3.5"
+            class="kg-edge kg-edge-9"
+          />
+          <!-- FUSION (640,106) -> VERIFY (640,288) -->
+          <line
+            data-kg-edge="edge-fusion-verify"
+            data-source="fusion"
+            data-target="verify"
+            x1="640"
+            y1="106"
+            x2="640"
+            y2="288"
+            stroke="#FF5793"
+            stroke-width="4.5"
+            class="kg-edge kg-edge-10"
+          />
+        </g>
+
+        <!-- Edge Relationship Labels (Positioned in clean midpoints) -->
+        <g class="font-mono" font-family="Space Mono, monospace" font-weight="700" font-size="9">
+          <rect x="196" y="62" width="58" height="16" fill="#FFFDF9" stroke="#171717" stroke-width="2" />
+          <text x="225" y="73" text-anchor="middle" fill="#171717">EMBED</text>
+
+          <rect x="190" y="132" width="64" height="16" fill="#FFFDF9" stroke="#171717" stroke-width="2" />
+          <text x="222" y="143" text-anchor="middle" fill="#171717">ENTITIES</text>
+
+          <rect x="464" y="142" width="74" height="16" fill="#FFDE43" stroke="#171717" stroke-width="2" />
+          <text x="501" y="153" text-anchor="middle" fill="#171717">MULTI-HOP</text>
+
+          <rect x="602" y="188" width="76" height="16" fill="#38D8C4" stroke="#171717" stroke-width="2" />
+          <text x="640" y="199" text-anchor="middle" fill="#171717">PROVENANCE</text>
+        </g>
+
+        <!-- ==============================================================
+             GRAPH NODES (Sequential Reveal + Hover/Keyboard Focusable)
+             ============================================================== -->
+        <!-- 1. NLP Node -->
+        <g
+          class="kg-node kg-node-1 cursor-pointer"
+          data-kg-node="nlp"
+          tabindex="0"
+          role="button"
+          aria-label="NLP: Semantic Query and Text Parsing. Connected to RAG, Knowledge Graphs, and Code Graph."
+        >
+          <rect x="36" y="56" width="150" height="66" fill="#171717" />
+          <rect class="kg-node-box" x="30" y="50" width="150" height="66" fill="#38D8C4" stroke="#171717" stroke-width="3.5" />
+          <rect x="30" y="50" width="150" height="18" fill="#171717" />
+          <text x="38" y="62" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#38D8C4">NODE_01 // PARSER</text>
+          <text x="105" y="88" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-weight="900" font-size="14" fill="#171717">NLP</text>
+          <text x="105" y="104" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9.5" fill="#171717">Semantic Parsing</text>
+        </g>
+
+        <!-- 2. RAG Node -->
+        <g
+          class="kg-node kg-node-2 cursor-pointer"
+          data-kg-node="rag"
+          tabindex="0"
+          role="button"
+          aria-label="RAG: Dense Vector Retrieval. Connected to NLP, Knowledge Graphs, and Hybrid Fusion."
+        >
+          <rect x="286" y="34" width="150" height="66" fill="#171717" />
+          <rect class="kg-node-box" x="280" y="28" width="150" height="66" fill="#FF5793" stroke="#171717" stroke-width="3.5" />
+          <rect x="280" y="28" width="150" height="18" fill="#171717" />
+          <text x="288" y="40" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#FF5793">NODE_02 // DENSE</text>
+          <text x="355" y="66" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-weight="900" font-size="14" fill="#171717">HYBRID RAG</text>
+          <text x="355" y="82" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9.5" fill="#171717">Vector Recall</text>
+        </g>
+
+        <!-- 3. KNOWLEDGE GRAPHS Central Hub Node -->
+        <g
+          class="kg-node kg-node-3 cursor-pointer"
+          data-kg-node="kg"
+          tabindex="0"
+          role="button"
+          aria-label="Knowledge Graphs: Symbolic Ontology and Multi-Hop Reasoning. Central hub connected to all concepts."
+        >
+          <rect x="271" y="174" width="180" height="72" fill="#171717" />
+          <rect class="kg-node-box" x="265" y="168" width="180" height="72" fill="#FFDE43" stroke="#171717" stroke-width="4" />
+          <rect x="265" y="168" width="180" height="20" fill="#171717" />
+          <text x="274" y="181" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#FFDE43">NODE_03 // CORE HUB</text>
+          <text x="355" y="208" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-weight="900" font-size="13.5" fill="#171717">KNOWLEDGE GRAPHS</text>
+          <text x="355" y="226" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9.5" fill="#171717">Symbolic Ontology</text>
+        </g>
+
+        <!-- 4. AST / CODE GRAPH Node -->
+        <g
+          class="kg-node kg-node-4 cursor-pointer"
+          data-kg-node="ast"
+          tabindex="0"
+          role="button"
+          aria-label="Code Graph: AST and Dependency Topology. Connected to NLP, Knowledge Graphs, and Hybrid Fusion."
+        >
+          <rect x="36" y="270" width="150" height="66" fill="#171717" />
+          <rect class="kg-node-box" x="30" y="264" width="150" height="66" fill="#377AF5" stroke="#171717" stroke-width="3.5" />
+          <rect x="30" y="264" width="150" height="18" fill="#171717" />
+          <text x="38" y="276" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#FFDE43">NODE_04 // AST</text>
+          <text x="105" y="302" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-weight="900" font-size="13.5" fill="#FFFFFF">CODE GRAPH</text>
+          <text x="105" y="318" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9.5" fill="#FFF7E8">AST &amp; Call Graph</text>
+        </g>
+
+        <!-- 5. HYBRID FUSION Node -->
+        <g
+          class="kg-node kg-node-5 cursor-pointer"
+          data-kg-node="fusion"
+          tabindex="0"
+          role="button"
+          aria-label="Hybrid Fusion: Reciprocal Rank and Context Synthesis. Connected to RAG, Knowledge Graphs, Code Graph, and Verification."
+        >
+          <rect x="566" y="78" width="160" height="68" fill="#171717" />
+          <rect class="kg-node-box" x="560" y="72" width="160" height="68" fill="#FFFDF9" stroke="#171717" stroke-width="3.5" />
+          <rect x="560" y="72" width="160" height="18" fill="#38D8C4" stroke="#171717" stroke-width="3" />
+          <text x="568" y="84" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">NODE_05 // FUSION</text>
+          <text x="640" y="111" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-weight="900" font-size="13.5" fill="#171717">HYBRID FUSION</text>
+          <text x="640" y="127" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9.5" fill="#171717">Rank &amp; Context</text>
+        </g>
+
+        <!-- 6. VERIFICATION Node -->
+        <g
+          class="kg-node kg-node-6 cursor-pointer"
+          data-kg-node="verify"
+          tabindex="0"
+          role="button"
+          aria-label="Verification: Traceable Compliance and Audit Evidence. Connected to Knowledge Graphs and Hybrid Fusion."
+        >
+          <rect x="566" y="260" width="160" height="68" fill="#171717" />
+          <rect class="kg-node-box" x="560" y="254" width="160" height="68" fill="#FFDE43" stroke="#171717" stroke-width="3.5" />
+          <rect x="560" y="254" width="160" height="18" fill="#FF5793" stroke="#171717" stroke-width="3" />
+          <text x="568" y="266" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">NODE_06 // OUTPUT</text>
+          <text x="640" y="293" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-weight="900" font-size="13.5" fill="#171717">VERIFICATION</text>
+          <text x="640" y="309" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9.5" fill="#171717">Traceable Proof</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Right Column: Live Node Inspector Readout Panel -->
+    <div class="lg:col-span-4 p-5 sm:p-6 bg-paper flex flex-col justify-between space-y-4" aria-live="polite">
+      <div class="space-y-3">
+        <div class="flex items-center justify-between border-b-2 border-ink pb-2">
+          <span
+            class="font-mono text-xs font-bold uppercase px-2 py-0.5 border-2 border-ink bg-yellow"
+            data-kg-inspector-code
+          >
+            NODE_03 // ACTIVE
+          </span>
+          <span class="font-mono text-[11px] font-bold text-ink/70">SEMANTIC INSPECTOR</span>
+        </div>
+
+        <h3 class="font-display text-xl sm:text-2xl uppercase text-ink m-0" data-kg-inspector-title>
+          KNOWLEDGE GRAPHS
+        </h3>
+
+        <p class="font-mono text-xs font-bold text-blue m-0" data-kg-inspector-subtitle>
+          Symbolic Ontology &amp; Multi-Hop
+        </p>
+
+        <p class="font-sans text-sm text-ink/90 leading-relaxed m-0" data-kg-inspector-desc>
+          Enforces hierarchical taxonomies, cross-reference links, and explicit relational constraints across domains.
+        </p>
+      </div>
+
+      <div class="pt-3 border-t-2 border-dashed border-ink/30 space-y-2">
+        <span class="font-mono text-[11px] font-bold uppercase text-ink/75 block">
+          CONNECTED GRAPH NEIGHBORS //
+        </span>
+        <div class="flex flex-wrap gap-1.5" data-kg-inspector-links>
+          <span class="memphis-tag bg-teal">NLP</span>
+          <span class="memphis-tag bg-pink">RAG</span>
+          <span class="memphis-tag bg-blue text-white">CODE GRAPH</span>
+          <span class="memphis-tag bg-cream">HYBRID FUSION</span>
+          <span class="memphis-tag bg-yellow">VERIFICATION</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embedded JSON metadata for zero-dependency client interaction -->
+  <script
+    type="application/json"
+    data-kg-metadata
+    set:html={JSON.stringify(graphNodes)}
+  />
+</div>

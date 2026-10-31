@@ -1,0 +1,1235 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FFF7E8;
+  --color-yellow: #FFDE43;
+  --color-pink: #FF5793;
+  --color-teal: #38D8C4;
+  --color-blue: #377AF5;
+  --color-ink: #171717;
+  --color-paper: #FFFDF9;
+
+  --font-display: 'Archivo Black', 'Arial Black', 'Impact', 'Space Grotesk', system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', 'Arial Black', system-ui, sans-serif;
+  --font-mono: 'Space Mono', 'Consolas', 'Courier New', ui-monospace, monospace;
+  --font-sans: 'Plus Jakarta Sans', 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --color-bg: #FFF7E8;
+  --color-paper: #FFFDF9;
+  --color-yellow: #FFDE43;
+  --color-pink: #FF5793;
+  --color-teal: #38D8C4;
+  --color-blue: #377AF5;
+  --color-ink: #171717;
+
+  --border-thin: 2px solid var(--color-ink);
+  --border-thick: 3px solid var(--color-ink);
+  --border-heavy: 4px solid var(--color-ink);
+
+  --shadow-hard-xs: 3px 3px 0px var(--color-ink);
+  --shadow-hard-sm: 4px 4px 0px var(--color-ink);
+  --shadow-hard-md: 6px 6px 0px var(--color-ink);
+  --shadow-hard-lg: 8px 8px 0px var(--color-ink);
+  --shadow-hard-xl: 12px 12px 0px var(--color-ink);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+/* Focus accessibility */
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--color-yellow);
+}
+
+/* ==========================================================================
+   1980s Memphis Typography & Multi-Layer Offset Shadows
+   ========================================================================== */
+
+h1, h2, h3, h4 {
+  font-weight: 900;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+  font-weight: 800;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Giant hero display heading with pink + yellow layered 80s offset */
+.memphis-hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
+  color: var(--color-ink);
+  text-shadow:
+    4px 4px 0px var(--color-yellow),
+    8px 8px 0px var(--color-pink);
+}
+
+/* Section heading with crisp yellow + pink offset shadow */
+.memphis-section-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  color: var(--color-ink);
+  text-shadow:
+    3px 3px 0px var(--color-yellow),
+    6px 6px 0px var(--color-pink);
+}
+
+.memphis-section-title-teal {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  color: var(--color-ink);
+  text-shadow:
+    3px 3px 0px var(--color-teal),
+    6px 6px 0px var(--color-pink);
+}
+
+/* ==========================================================================
+   Memphis Patterns & Halftone Textures (Pure CSS, Zero Blur)
+   ========================================================================== */
+
+.bg-memphis-paper {
+  background-color: var(--color-bg);
+  background-image: radial-gradient(var(--color-ink) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.pattern-halftone {
+  background-image: radial-gradient(var(--color-ink) 1.75px, transparent 1.75px);
+  background-size: 10px 10px;
+}
+
+.pattern-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-ink),
+    var(--color-ink) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+.pattern-stripes-yellow {
+  background-color: var(--color-yellow);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-ink),
+    var(--color-ink) 2px,
+    var(--color-yellow) 2px,
+    var(--color-yellow) 10px
+  );
+}
+
+.pattern-grid {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(23, 23, 23, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 23, 23, 0.09) 1px, transparent 1px);
+}
+
+/* ==========================================================================
+   Neo-Brutalist Cards, Panels, Buttons & Labels
+   ========================================================================== */
+
+.memphis-card {
+  background-color: var(--color-paper);
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-hard-md);
+  min-width: 0;
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.memphis-card-interactive:hover,
+.memphis-card-interactive:focus-within {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px var(--color-ink);
+}
+
+.memphis-card-interactive:active,
+.memphis-card-interactive.is-card-pressed {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-hard-xs);
+}
+
+.memphis-panel-lg {
+  border: 4px solid var(--color-ink);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+/* Tactile Neo-Brutalist Button */
+.memphis-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  padding: 0.85rem 1.4rem;
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-hard-sm);
+  color: var(--color-ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+  user-select: none;
+}
+
+.memphis-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-hard-md);
+}
+
+.memphis-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--color-ink);
+}
+
+.memphis-btn-yellow {
+  background-color: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+.memphis-btn-pink {
+  background-color: var(--color-pink);
+  color: var(--color-ink);
+}
+
+.memphis-btn-teal {
+  background-color: var(--color-teal);
+  color: var(--color-ink);
+}
+
+.memphis-btn-blue {
+  background-color: var(--color-blue);
+  color: #FFFFFF;
+}
+
+.memphis-btn-cream {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Rotated Section Label / Eyebrow Badge */
+.memphis-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.8rem;
+  border: 2.5px solid var(--color-ink);
+  box-shadow: 3px 3px 0px var(--color-ink);
+  color: var(--color-ink);
+}
+
+.memphis-boot-pill {
+  background-color: var(--color-ink);
+  color: var(--color-yellow);
+  box-shadow: 3px 3px 0px var(--color-pink);
+}
+
+/* Tag / Chip for Tech Stack */
+.memphis-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border: 2px solid var(--color-ink);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  box-shadow: 2px 2px 0px var(--color-ink);
+}
+
+/* Vintage Window Titlebar */
+.memphis-window-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 3px solid var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.memphis-window-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.memphis-window-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 9999px;
+  border: 2px solid var(--color-ink);
+  display: inline-block;
+}
+
+/* MDX Prose Styling for Technical Writing */
+.memphis-prose {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-ink);
+}
+
+.memphis-prose h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.55rem;
+  text-transform: uppercase;
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.memphis-prose h3 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.memphis-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.memphis-prose ul,
+.memphis-prose ol {
+  margin-bottom: 1.35rem;
+  padding-left: 1.5rem;
+}
+
+.memphis-prose ul {
+  list-style-type: square;
+}
+
+.memphis-prose ol {
+  list-style-type: decimal;
+}
+
+.memphis-prose li {
+  margin-bottom: 0.45rem;
+}
+
+.memphis-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--color-yellow);
+  padding: 0.15rem 0.4rem;
+  border: 1.5px solid var(--color-ink);
+  font-weight: 700;
+}
+
+.memphis-prose pre {
+  font-family: var(--font-mono);
+  background-color: var(--color-ink) !important;
+  color: var(--color-bg) !important;
+  padding: 1.25rem;
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-hard-md);
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.memphis-prose pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-weight: 400;
+}
+
+.memphis-prose blockquote {
+  background-color: var(--color-yellow);
+  border: 3px solid var(--color-ink);
+  border-left-width: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  box-shadow: var(--shadow-hard-sm);
+}
+
+/* ==========================================================================
+   1980s Memphis & Neo-Brutalist Motion System (Animations 1–7)
+   ========================================================================== */
+
+/* --- Animation 1: Retro System Boot (500–900 ms, once per navigation) --- */
+@keyframes bootSlideUp {
+  0% {
+    opacity: 0.12;
+    transform: translate3d(0, 14px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bootWordPop {
+  0% {
+    opacity: 0.15;
+    transform: translate3d(0, 16px, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes bootWorkstationEnter {
+  0% {
+    opacity: 0.15;
+    transform: translate3d(18px, 14px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+html.boot-playing .boot-stagger-1 {
+  animation: bootSlideUp 460ms cubic-bezier(0.22, 1, 0.36, 1) 0ms both;
+}
+
+html.boot-playing .boot-word-1 {
+  animation: bootWordPop 520ms cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
+}
+
+html.boot-playing .boot-word-2 {
+  animation: bootWordPop 520ms cubic-bezier(0.22, 1, 0.36, 1) 160ms both;
+}
+
+html.boot-playing .boot-stagger-3 {
+  animation: bootSlideUp 540ms cubic-bezier(0.22, 1, 0.36, 1) 210ms both;
+}
+
+html.boot-playing .boot-stagger-4 {
+  animation: bootSlideUp 560ms cubic-bezier(0.22, 1, 0.36, 1) 290ms both;
+}
+
+html.boot-playing .boot-stagger-5 {
+  animation: bootSlideUp 580ms cubic-bezier(0.22, 1, 0.36, 1) 360ms both;
+}
+
+html.boot-playing .boot-workstation-enter {
+  animation: bootWorkstationEnter 680ms cubic-bezier(0.22, 1, 0.36, 1) 140ms both;
+}
+
+.boot-status-led.is-scrambling {
+  background-color: var(--color-pink);
+}
+
+/* --- Animation 2: Interactive Memphis Shapes (Spring Physics) --- */
+.memphis-spring-shape {
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+@keyframes memphisFloat1 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(12deg); }
+  50% { transform: translate3d(6px, -10px, 0) rotate(22deg); }
+}
+
+@keyframes memphisFloat2 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-6deg); }
+  50% { transform: translate3d(-8px, -8px, 0) rotate(4deg); }
+}
+
+@keyframes memphisFloat3 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate3d(-6px, 9px, 0) rotate(25deg) scale(1.1); }
+}
+
+@keyframes memphisFloat4 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(45deg); }
+  50% { transform: translate3d(8px, -9px, 0) rotate(65deg); }
+}
+
+.memphis-float-1 { animation: memphisFloat1 3.8s ease-in-out infinite; }
+.memphis-float-2 { animation: memphisFloat2 4.2s ease-in-out infinite 0.5s; }
+.memphis-float-3 { animation: memphisFloat3 3.4s ease-in-out infinite 1.0s; }
+.memphis-float-4 { animation: memphisFloat4 4.0s ease-in-out infinite 1.5s; }
+
+.hero-svg-shape {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 480ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.boot-workstation-enter:hover .hero-svg-shape-circle {
+  transform: translate(-4px, -4px) scale(1.03);
+}
+
+.boot-workstation-enter:hover .hero-svg-shape-triangle {
+  transform: translate(4px, -3px) rotate(-5deg);
+}
+
+.boot-workstation-enter:hover .hero-svg-shape-zigzag {
+  transform: translateY(-3px) scaleX(1.04);
+}
+
+/* --- Animation 3: Scroll-Driven Headline Highlights (450–650 ms) --- */
+.memphis-heading-highlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.memphis-hl-segment {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.12em;
+}
+
+.memphis-hl-text {
+  position: relative;
+  z-index: 2;
+}
+
+.memphis-hl-bar {
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  bottom: 0.04em;
+  height: 0.38em;
+  z-index: 1;
+  border: 2px solid var(--color-ink);
+  transform-origin: left center;
+  transform: scaleX(1) skewX(-6deg);
+  transition: transform 540ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.memphis-hl-bar-yellow {
+  background-color: var(--color-yellow);
+  box-shadow: 2px 2px 0px var(--color-ink);
+}
+
+.memphis-hl-bar-pink {
+  background-color: var(--color-pink);
+  box-shadow: 2px 2px 0px var(--color-ink);
+  transition-delay: 110ms;
+}
+
+html.motion-ready [data-heading-highlight]:not(.is-inview) .memphis-hl-bar {
+  transform: scaleX(0) skewX(-6deg);
+}
+
+html.motion-ready [data-heading-highlight].is-inview .memphis-hl-bar {
+  transform: scaleX(1) skewX(-6deg);
+}
+
+/* --- Animation 4: Neo-Brutalist Project Cards --- */
+.memphis-project-card {
+  position: relative;
+}
+
+html.motion-ready [data-project-card]:not(.is-inview) {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+}
+
+html.motion-ready [data-project-card].is-inview {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.memphis-project-card:hover,
+.memphis-project-card:focus-within {
+  transform: translate(-3px, -3px) !important;
+  box-shadow: 9px 9px 0px var(--color-ink) !important;
+}
+
+.memphis-project-card:focus-within {
+  outline: 3px solid var(--color-yellow);
+  outline-offset: 2px;
+}
+
+.memphis-project-card:active,
+.memphis-project-card.is-card-pressed {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 3px 3px 0px var(--color-ink) !important;
+}
+
+/* --- Animation 5: Career Logbook (Spine + Sequential Hinged Panel Reveal) --- */
+.logbook-progress-bar {
+  width: 100%;
+  transform-origin: left center;
+  transform: scaleX(1);
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.motion-ready [data-logbook-spine]:not(.is-inview) .logbook-progress-bar {
+  transform: scaleX(0);
+}
+
+.career-vertical-spine-fill {
+  transform-origin: top center;
+  transform: scaleY(1);
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.motion-ready [data-logbook-spine]:not(.is-inview) .career-vertical-spine-fill {
+  transform: scaleY(0);
+}
+
+.logbook-hinge-card {
+  transform-origin: top left;
+  transition:
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 460ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.motion-ready [data-logbook-entry]:not(.is-inview) {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(-6deg) translate3d(0, 16px, 0);
+}
+
+html.motion-ready [data-logbook-entry].is-inview {
+  opacity: 1;
+  transform: perspective(1000px) rotateX(0deg) translate3d(0, 0, 0);
+  transition-delay: calc(var(--logbook-index, 0) * 110ms);
+}
+
+/* --- Animation 6: Knowledge Graph Visualization --- */
+.kg-edge {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 0;
+  transition:
+    stroke-dashoffset 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    stroke-width 200ms ease;
+}
+
+html.motion-ready [data-kg-widget]:not(.is-inview) .kg-edge {
+  stroke-dashoffset: 420;
+}
+
+.kg-edge-1 { transition-delay: 80ms; }
+.kg-edge-2 { transition-delay: 140ms; }
+.kg-edge-3 { transition-delay: 200ms; }
+.kg-edge-4 { transition-delay: 260ms; }
+.kg-edge-5 { transition-delay: 320ms; }
+.kg-edge-6 { transition-delay: 380ms; }
+.kg-edge-7 { transition-delay: 440ms; }
+.kg-edge-8 { transition-delay: 500ms; }
+.kg-edge-9 { transition-delay: 560ms; }
+.kg-edge-10 { transition-delay: 620ms; }
+
+.kg-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html.motion-ready [data-kg-widget]:not(.is-inview) .kg-node {
+  opacity: 0;
+  transform: scale(0.86) translateY(8px);
+}
+
+.kg-node-1 { transition-delay: 40ms; }
+.kg-node-2 { transition-delay: 120ms; }
+.kg-node-3 { transition-delay: 200ms; }
+.kg-node-4 { transition-delay: 280ms; }
+.kg-node-5 { transition-delay: 360ms; }
+.kg-node-6 { transition-delay: 440ms; }
+
+.kg-node:hover,
+.kg-node:focus-visible,
+.kg-node.is-kg-active {
+  transform: translate(-3px, -3px) scale(1.03);
+  outline: none;
+}
+
+.kg-node:focus-visible .kg-node-box,
+.kg-node.is-kg-active .kg-node-box {
+  stroke-width: 5px;
+}
+
+.kg-node.is-kg-dimmed {
+  opacity: 0.35;
+}
+
+.kg-edge.is-kg-dimmed {
+  opacity: 0.2;
+}
+
+.kg-edge.is-kg-highlighted {
+  stroke-width: 6px;
+  opacity: 1;
+}
+
+/* --- Hero CRT Monitor Live Knowledge Graph & Telemetry Periodic Motion --- */
+.hero-kg-node,
+.hero-kg-status-pill,
+.hero-crt-led {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes heroKgNodeTraversal {
+  0%, 70%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  15% {
+    transform: translate3d(0, -4px, 0) scale(1.18);
+  }
+  30% {
+    transform: translate3d(2px, 2px, 0) scale(0.96);
+  }
+  45% {
+    transform: translate3d(-2px, -2px, 0) scale(1.06);
+  }
+}
+
+.hero-kg-node-rag {
+  animation: heroKgNodeTraversal 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: 0s;
+}
+
+.hero-kg-node-kg {
+  animation: heroKgNodeTraversal 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: 0.7s;
+}
+
+.hero-kg-node-ast {
+  animation: heroKgNodeTraversal 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: 1.4s;
+}
+
+.hero-kg-node-nlp {
+  animation: heroKgNodeTraversal 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: 2.1s;
+}
+
+.hero-kg-node-verify {
+  animation: heroKgNodeTraversal 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: 2.8s;
+}
+
+@keyframes heroKgEdgePulse {
+  0%, 65%, 100% {
+    opacity: 0.78;
+    stroke-width: 3px;
+  }
+  25% {
+    opacity: 1;
+    stroke-width: 4.5px;
+  }
+}
+
+.hero-kg-edge-1 {
+  animation: heroKgEdgePulse 4.2s ease-in-out infinite 0.2s;
+}
+
+.hero-kg-edge-2 {
+  animation: heroKgEdgePulse 4.2s ease-in-out infinite 0.9s;
+}
+
+.hero-kg-edge-3 {
+  animation: heroKgEdgePulse 4.2s ease-in-out infinite 1.6s;
+}
+
+.hero-kg-edge-4 {
+  animation: heroKgEdgePulse 4.2s ease-in-out infinite 2.2s;
+}
+
+@keyframes heroKgDashFlow {
+  0% {
+    stroke-dashoffset: 32;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-kg-edge-dashed {
+  animation: heroKgDashFlow 1.6s linear infinite;
+}
+
+@keyframes heroKgPacketPath1 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.7);
+  }
+  8% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  35% {
+    opacity: 1;
+    transform: translate3d(70px, -14px, 0) scale(1.2);
+  }
+  65% {
+    opacity: 1;
+    transform: translate3d(140px, 10px, 0) scale(1.1);
+  }
+  75%, 100% {
+    opacity: 0;
+    transform: translate3d(140px, 10px, 0) scale(0.5);
+  }
+}
+
+@keyframes heroKgPacketPath2 {
+  0%, 18% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  52% {
+    opacity: 1;
+    transform: translate3d(43px, 50px, 0) scale(1.2);
+  }
+  82% {
+    opacity: 1;
+    transform: translate3d(123px, 58px, 0) scale(1.1);
+  }
+  92%, 100% {
+    opacity: 0;
+    transform: translate3d(123px, 58px, 0) scale(0.5);
+  }
+}
+
+@keyframes heroKgPacketPath3 {
+  0%, 35% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.7);
+  }
+  45% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.15);
+  }
+  80% {
+    opacity: 1;
+    transform: translate3d(53px, 72px, 0) scale(1.15);
+  }
+  90%, 100% {
+    opacity: 0;
+    transform: translate3d(53px, 72px, 0) scale(0.5);
+  }
+}
+
+.hero-kg-packet-1 {
+  animation: heroKgPacketPath1 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.hero-kg-packet-2 {
+  animation: heroKgPacketPath2 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.hero-kg-packet-3 {
+  animation: heroKgPacketPath3 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes heroStatusBlink {
+  0%, 60%, 100% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+}
+
+.hero-kg-status-pill {
+  animation: heroStatusBlink 4.2s ease-in-out infinite;
+}
+
+.hero-crt-led {
+  animation: bootLedPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes heroTelemetryDraw {
+  0%, 100% {
+    stroke-dashoffset: 0;
+    transform: translateY(0);
+  }
+  40% {
+    stroke-dashoffset: 240;
+    transform: translateY(-1.5px);
+  }
+  75% {
+    stroke-dashoffset: 0;
+    transform: translateY(1px);
+  }
+}
+
+.hero-telemetry-wave {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 0;
+  animation: heroTelemetryDraw 5s ease-in-out infinite;
+}
+
+/* --- Retro Keyboard Console Lights & Keycap Chasing Motion --- */
+.hero-kbd-key,
+.hero-floppy-led {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes heroFloppyLedBlink {
+  0%, 45%, 100% {
+    fill: #FF5793;
+    opacity: 1;
+  }
+  50%, 75% {
+    fill: #38D8C4;
+    opacity: 0.85;
+  }
+}
+
+.hero-floppy-led {
+  animation: heroFloppyLedBlink 1.6s steps(2, end) infinite;
+}
+
+@keyframes heroKbdKeyChase {
+  0%, 65%, 100% {
+    transform: translateY(0);
+    fill: #FFFDF9;
+  }
+  12% {
+    transform: translateY(2px);
+    fill: #FF5793;
+  }
+  28% {
+    transform: translateY(1px);
+    fill: #38D8C4;
+  }
+  44% {
+    transform: translateY(2px);
+    fill: #377AF5;
+  }
+}
+
+@keyframes heroKbdAccentPink {
+  0%, 100% {
+    transform: translateY(0);
+    fill: #FF5793;
+  }
+  25% {
+    transform: translateY(2px);
+    fill: #38D8C4;
+  }
+  50% {
+    transform: translateY(0);
+    fill: #377AF5;
+  }
+  75% {
+    transform: translateY(2px);
+    fill: #FFFDF9;
+  }
+}
+
+@keyframes heroKbdAccentTeal {
+  0%, 100% {
+    transform: translateY(0);
+    fill: #38D8C4;
+  }
+  25% {
+    transform: translateY(2px);
+    fill: #377AF5;
+  }
+  50% {
+    transform: translateY(0);
+    fill: #FF5793;
+  }
+  75% {
+    transform: translateY(2px);
+    fill: #FFFDF9;
+  }
+}
+
+@keyframes heroKbdAccentBlue {
+  0%, 100% {
+    transform: translateY(0);
+    fill: #377AF5;
+  }
+  25% {
+    transform: translateY(2px);
+    fill: #FF5793;
+  }
+  50% {
+    transform: translateY(0);
+    fill: #38D8C4;
+  }
+  75% {
+    transform: translateY(2px);
+    fill: #FFFDF9;
+  }
+}
+
+@keyframes heroKbdSpacePulse {
+  0%, 70%, 100% {
+    transform: translateY(0);
+    fill: #FFFDF9;
+  }
+  25% {
+    transform: translateY(2px);
+    fill: #38D8C4;
+  }
+  50% {
+    transform: translateY(1.5px);
+    fill: #FF5793;
+  }
+}
+
+.hero-kbd-key-1 {
+  animation: heroKbdKeyChase 2.4s steps(4, end) infinite 0s;
+}
+.hero-kbd-key-2 {
+  animation: heroKbdKeyChase 2.4s steps(4, end) infinite 0.25s;
+}
+.hero-kbd-key-3 {
+  animation: heroKbdAccentPink 2.0s steps(4, end) infinite 0.1s;
+}
+.hero-kbd-key-4 {
+  animation: heroKbdKeyChase 2.4s steps(4, end) infinite 0.5s;
+}
+.hero-kbd-key-5 {
+  animation: heroKbdKeyChase 2.4s steps(4, end) infinite 0.75s;
+}
+.hero-kbd-key-6 {
+  animation: heroKbdAccentTeal 2.0s steps(4, end) infinite 0.4s;
+}
+.hero-kbd-key-7 {
+  animation: heroKbdKeyChase 2.4s steps(4, end) infinite 1.0s;
+}
+.hero-kbd-key-8 {
+  animation: heroKbdAccentBlue 2.0s steps(4, end) infinite 0.7s;
+}
+.hero-kbd-space {
+  animation: heroKbdSpacePulse 3.2s steps(4, end) infinite 1.2s;
+}
+
+/* --- Animation 7: Paper-Edge Section Transitions --- */
+.paper-edge-svg {
+  transform: translate3d(var(--paper-offset, 0px), 0, 0);
+  transition: transform 120ms linear;
+  will-change: transform;
+}
+
+/* --- SYNTH.86 FM Equalizer & Custom 1980s Pixel Cursor --- */
+@keyframes synthEqBounce {
+  0%, 100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1.3);
+  }
+}
+
+.synth-eq-bar {
+  transform-origin: bottom center;
+}
+
+[data-synth-eq].is-playing .synth-eq-bar:nth-child(1) {
+  animation: synthEqBounce 0.36s steps(3, end) infinite 0s;
+}
+[data-synth-eq].is-playing .synth-eq-bar:nth-child(2) {
+  animation: synthEqBounce 0.32s steps(3, end) infinite 0.08s;
+}
+[data-synth-eq].is-playing .synth-eq-bar:nth-child(3) {
+  animation: synthEqBounce 0.4s steps(3, end) infinite 0.16s;
+}
+[data-synth-eq].is-playing .synth-eq-bar:nth-child(4) {
+  animation: synthEqBounce 0.28s steps(3, end) infinite 0.05s;
+}
+[data-synth-eq].is-playing .synth-eq-bar:nth-child(5) {
+  animation: synthEqBounce 0.38s steps(3, end) infinite 0.12s;
+}
+
+/* Custom 1980s Neo-Brutalist Pixel Arrow Cursor on Desktop */
+@media (pointer: fine) {
+  html.arcade-mode-active body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M2 2 L2 18 L7 14 L11 20 L14 18 L10 12 L17 12 Z' fill='%23FFDE43' stroke='%23171717' stroke-width='2' stroke-linejoin='miter'/%3E%3C/svg%3E") 2 2, auto;
+  }
+}
+
+/* --- Engineering Blueprint / CAD X-Ray Mode (BLUEPRINT: ON) --- */
+html.blueprint-mode-active body {
+  background-image:
+    linear-gradient(to right, rgba(55, 122, 245, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(55, 122, 245, 0.22) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+html.blueprint-mode-active [data-boot-workstation],
+html.blueprint-mode-active [data-project-card],
+html.blueprint-mode-active [data-logbook-entry],
+html.blueprint-mode-active [data-kg-widget] {
+  outline: 2.5px dashed #377AF5 !important;
+  outline-offset: 4px !important;
+  position: relative;
+}
+
+html.blueprint-mode-active [data-boot-workstation]::after {
+  content: 'CAD_SPEC // WORKSTATION_86 (560x430 SVG SMIL + 4-FRAME PORTRAIT.BMP)';
+  position: absolute;
+  top: -22px;
+  left: 0;
+  background: #377AF5;
+  color: #FFF7E8;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border: 2px solid #171717;
+  z-index: 40;
+}
+
+html.blueprint-mode-active [data-project-card]::after {
+  content: 'CAD_SPEC // NEO-BRUTALIST PANEL (STAGGER REVEAL + HARD OFFSET SHADOW)';
+  position: absolute;
+  top: -20px;
+  right: 0;
+  background: #FFDE43;
+  color: #171717;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border: 2px solid #171717;
+  z-index: 40;
+}
+
+html.blueprint-mode-active [data-kg-widget]::after {
+  content: 'CAD_SPEC // SEMANTIC_GRAPH_ENGINE.SYS (6 NODES // 10 EDGES // AUTO-TRAVERSAL)';
+  position: absolute;
+  top: -22px;
+  left: 0;
+  background: #FF5793;
+  color: #171717;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border: 2px solid #171717;
+  z-index: 40;
+}
+
+/* Reduced motion compliance (honored when motion is not explicitly enabled, or when MOTION: OFF is selected) */
+html.motion-disabled *,
+html.motion-disabled *::before,
+html.motion-disabled *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.motion-enabled) *,
+  html:not(.motion-enabled) *::before,
+  html:not(.motion-enabled) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html:not(.motion-enabled).motion-ready [data-project-card]:not(.is-inview),
+  html:not(.motion-enabled).motion-ready [data-logbook-entry]:not(.is-inview),
+  html:not(.motion-enabled).motion-ready [data-kg-widget]:not(.is-inview) .kg-node {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  html:not(.motion-enabled).motion-ready [data-heading-highlight]:not(.is-inview) .memphis-hl-bar,
+  html:not(.motion-enabled).motion-ready [data-logbook-spine]:not(.is-inview) .logbook-progress-bar,
+  html:not(.motion-enabled).motion-ready [data-logbook-spine]:not(.is-inview) .career-vertical-spine-fill {
+    transform: none !important;
+  }
+
+  html:not(.motion-enabled).motion-ready [data-kg-widget]:not(.is-inview) .kg-edge {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* Print stylesheet for CV */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body, html {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .memphis-card, .memphis-panel-lg {
+    box-shadow: none !important;
+    border: 2px solid #000000 !important;
+  }
+}

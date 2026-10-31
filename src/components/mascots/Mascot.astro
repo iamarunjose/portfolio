@@ -1,0 +1,74 @@
+---
+import type { MascotName, MascotState } from '../../lib/mascot-animation';
+
+export interface Props {
+  id?: string;
+  name: MascotName;
+  displayName: string;
+  defaultStatus?: string;
+  size?: 'sm' | 'md' | 'lg';
+  initialState?: MascotState;
+  position?: 'inline' | 'dock' | 'badge';
+  speed?: 'slow' | 'normal' | 'fast';
+  interactive?: boolean;
+  showHud?: boolean;
+  label?: string;
+}
+
+const {
+  id,
+  name,
+  displayName,
+  defaultStatus = 'ONLINE // READY',
+  size = 'md',
+  initialState = 'idle',
+  position = 'inline',
+  speed = 'normal',
+  interactive = true,
+  showHud = true,
+  label = `${displayName} interactive arcade mascot. Press Enter or Space to trigger animation.`
+} = Astro.props;
+
+const sizeClass =
+  size === 'sm'
+    ? 'mascot-size-sm'
+    : size === 'lg'
+      ? 'mascot-size-lg'
+      : 'mascot-size-md';
+---
+
+<div
+  id={id}
+  class:list={[
+    'mascot-stage',
+    sizeClass,
+    interactive ? 'mascot-stage-interactive' : 'pointer-events-none'
+  ]}
+  data-mascot-stage
+  data-mascot-name={name}
+  data-mascot-state={initialState}
+  data-mascot-position={position}
+  data-mascot-speed={speed}
+  data-mascot-interactive={interactive ? 'true' : 'false'}
+  role={interactive ? 'button' : undefined}
+  tabindex={interactive ? 0 : undefined}
+  aria-label={interactive ? label : undefined}
+  aria-hidden={interactive ? undefined : 'true'}
+>
+  <div class="mascot-avatar-wrap">
+    <slot />
+  </div>
+
+  {showHud && (
+    <div class="mascot-hud" aria-hidden="true">
+      <span class="mascot-hud-name">
+        <span class="mascot-hud-dot"></span>
+        <span>{displayName}</span>
+      </span>
+      <span class="mascot-hud-status" data-mascot-status>
+        {defaultStatus}
+      </span>
+    </div>
+  )}
+</div>
+

@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const slides = [
+  {
+    num: 1,
+    title: 'Page 01 // Cover: Engineer & Researcher Workbench',
+    desc: 'Introduces Arun Jose, Software Engineer at Siemens Energy (Denmark) & MSc Web Engineering (TU Chemnitz), featuring the custom 1980s Memphis workstation and knowledge graph illustration.',
+    img: '/linkedin-brochure/page-1.png',
+    html: '/linkedin-brochure/page-1.html'
+  },
+  {
+    num: 2,
+    title: 'Page 02 // Featured Projects & R&D Lab',
+    desc: 'Showcases the three vintage printed project panels: Hybrid Semantic Framework for Export Control Compliance, Infrastructure Monitoring & Automation, and Code Intelligence Lab.',
+    img: '/linkedin-brochure/page-2.png',
+    html: '/linkedin-brochure/page-2.html'
+  },
+  {
+    num: 3,
+    title: 'Page 03 // Applied AI Research & Hybrid RAG Pipeline',
+    desc: 'Features the custom architectural diagram of the Hybrid Semantic Retrieval & Knowledge Graph Pipeline alongside four core research vectors.',
+    img: '/linkedin-brochure/page-3.png',
+    html: '/linkedin-brochure/page-3.html'
+  },
+  {
+    num: 4,
+    title: 'Page 04 // International Career Timeline & Philosophy',
+    desc: 'Highlights the professional career progression across Denmark, Germany, and India within Siemens organizations and core software engineering tenets.',
+    img: '/linkedin-brochure/page-4.png',
+    html: '/linkedin-brochure/page-4.html'
+  },
+  {
+    num: 5,
+    title: 'Page 05 // Technical Writing, Design Tokens & Connect CTA',
+    desc: 'Presents the 4 MDX technical blog working drafts, the 1980s Memphis color token system, and a LinkedIn collaboration call-to-action.',
+    img: '/linkedin-brochure/page-5.png',
+    html: '/linkedin-brochure/page-5.html'
+  }
+];
+---
+
+<Layout
+  title="5-Page LinkedIn Portfolio Brochure — Arun Jose"
+  description="Downloadable 5-page 1980s Memphis & Neo-Brutalist LinkedIn carousel brochure (PDF & 1080x1350 PNG slides) for Arun Jose's portfolio."
+>
+  <!-- Header Band -->
+  <section class="bg-yellow border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-3xl space-y-4">
+          <span class="memphis-label bg-pink -rotate-2">
+            SOCIAL MEDIA KIT // 1080 × 1350 PX (4:5)
+          </span>
+          <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+            LinkedIn Brochure
+          </h1>
+          <div class="memphis-card bg-paper p-5 border-l-[10px] border-l-teal">
+            <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+              A 5-page 1980s Memphis & Neo-Brutalist carousel brochure designed specifically for LinkedIn Document posts (PDF) and multi-image carousel posts (`1080×1350` portrait slides).
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/linkedin-brochure/Arun_Jose_LinkedIn_Brochure_5Pages.pdf"
+            download="Arun_Jose_LinkedIn_Brochure_5Pages.pdf"
+            class="memphis-btn memphis-btn-pink text-xs sm:text-sm"
+          >
+            Download 5-Page PDF Carousel ↓
+          </a>
+          <a
+            href="/linkedin-brochure/index.html"
+            target="_blank"
+            class="memphis-btn memphis-btn-cream text-xs sm:text-sm"
+          >
+            Open Full Print Sheet ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5-Page Slide Gallery -->
+  <section class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="5-PAGE CAROUSEL DECK"
+        title="Brochure Pages (01–05)"
+        subtitle="Upload the 5-page PDF directly as a LinkedIn Document post for a swipeable carousel, or download individual 1080×1350 PNG slides."
+        labelColor="teal"
+        rotate="left"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {slides.map((slide) => (
+          <article class="memphis-card bg-paper flex flex-col justify-between">
+            <div>
+              <div class="memphis-window-bar bg-yellow text-ink">
+                <span>SLIDE 0{slide.num} / 05</span>
+                <span>1080 × 1350 PX</span>
+              </div>
+              <div class="p-4 bg-ink border-b-[3px] border-ink">
+                <img
+                  src={slide.img}
+                  alt={slide.title}
+                  width="1080"
+                  height="1350"
+                  loading="lazy"
+                  class="w-full h-auto block border-2 border-cream"
+                />
+              </div>
+              <div class="p-5 space-y-2">
+                <h2 class="font-display text-lg uppercase text-ink m-0">
+                  {slide.title}
+                </h2>
+                <p class="font-sans text-sm text-ink/90 m-0 leading-relaxed">
+                  {slide.desc}
+                </p>
+              </div>
+            </div>
+            <div class="px-5 py-3.5 bg-cream border-t-[3px] border-ink flex items-center justify-between gap-2">
+              <a
+                href={slide.img}
+                download={`Arun_Jose_Brochure_Page_${slide.num}.png`}
+                class="memphis-btn memphis-btn-yellow text-xs py-2 px-3 flex-1"
+              >
+                Download PNG ↓
+              </a>
+              <a
+                href={slide.html}
+                target="_blank"
+                class="memphis-btn memphis-btn-cream text-xs py-2 px-3"
+              >
+                HTML ↗
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+

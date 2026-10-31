@@ -1,0 +1,514 @@
+---
+import {
+  PROFILE,
+  MEDIA_CHANNELS,
+  YOUTUBE_VIDEOS,
+  PODCAST_EPISODES,
+  TECH_TALKS
+} from '../data/portfolio';
+import Pixel from './mascots/Pixel.astro';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+const videosToShow = compact ? YOUTUBE_VIDEOS.slice(0, 2) : YOUTUBE_VIDEOS;
+const episodesToShow = compact ? PODCAST_EPISODES.slice(0, 2) : PODCAST_EPISODES;
+const talksToShow = compact ? TECH_TALKS.slice(0, 2) : TECH_TALKS;
+
+const badgeBgMap: Record<string, string> = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+---
+
+<section
+  id="broadcast-studio"
+  class="py-16 md:py-24 bg-cream relative overflow-hidden"
+  aria-labelledby="broadcast-heading"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header + Studio ON AIR Control Bar -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
+      <div>
+        <div class="flex flex-wrap items-center gap-3 mb-3">
+          <div class="section-number-badge bg-pink text-ink">
+            <span>05B // BROADCAST_86 STUDIO</span>
+          </div>
+          <!-- Animated ON AIR Studio Light Pill -->
+          <div class="inline-flex items-center gap-2 bg-ink text-cream font-mono text-xs font-bold px-3 py-1 border-[3px] border-ink shadow-[4px_4px_0px_#FFDE43]">
+            <span class="w-2.5 h-2.5 rounded-full bg-pink inline-block animate-pulse"></span>
+            <span>ON AIR // YOUTUBE • PODCAST • TALKS</span>
+          </div>
+          <Pixel id="broadcast-pixel" size="sm" interactive={true} showHud={true} />
+        </div>
+        <h2 id="broadcast-heading" class="font-display text-3xl sm:text-5xl uppercase text-ink">
+          Podcast, Tech Talks &amp; <span class="bg-yellow px-2 border-2 border-ink">YouTube</span>
+        </h2>
+      </div>
+      <div class="flex flex-col sm:items-end gap-3">
+        <p class="font-sans text-base text-ink/80 max-w-md m-0">
+          Sharing engineering deep-dives, Knowledge Graph &amp; Hybrid RAG tutorials, and conversations on software &amp; life in Europe across video, audio, and live stages.
+        </p>
+        {compact && (
+          <a href="/media" class="memphis-btn memphis-btn-teal text-xs">
+            Enter Full Broadcast Studio (/media) →
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- 3-Channel Overview Banner Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" data-motion-group>
+      {MEDIA_CHANNELS.map((ch) => (
+        <article
+          data-motion-item
+          class="memphis-card bg-paper p-5 flex flex-col justify-between border-[3px] border-ink"
+        >
+          <div>
+            <div class="flex items-center justify-between gap-2 pb-3 mb-3 border-b-2 border-ink font-mono text-xs font-bold">
+              <span class="bg-ink text-cream px-2 py-0.5">{ch.code}</span>
+              <span class={`px-2 py-0.5 border-2 border-ink text-[10px] uppercase ${badgeBgMap[ch.accentColor]}`}>
+                {ch.cadenceOrBadge}
+              </span>
+            </div>
+            <p class="font-mono text-[11px] font-bold uppercase text-ink/70 m-0">
+              {ch.label}
+            </p>
+            <h3 class="font-display text-xl uppercase text-ink mt-1 mb-1.5">
+              {ch.title}
+            </h3>
+            <p class="font-mono text-xs font-bold text-blue mb-3">
+              {ch.handleOrFormat}
+            </p>
+            <p class="font-sans text-sm text-ink/85 leading-relaxed mb-5">
+              {ch.description}
+            </p>
+          </div>
+          <a
+            href={ch.ctaHref}
+            target={ch.ctaHref.startsWith('http') ? '_blank' : undefined}
+            rel={ch.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class={`memphis-btn text-xs w-full justify-center ${
+              ch.accentColor === 'pink'
+                ? 'memphis-btn-pink'
+                : ch.accentColor === 'teal'
+                  ? 'memphis-btn-teal'
+                  : 'memphis-btn-yellow'
+            }`}
+          >
+            {ch.ctaLabel}
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <!-- Main 2-Column Broadcast Decks: Left = YouTube VHS Deck, Right = Podcast FM Cassette Deck -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+      <!-- LEFT (6 cols): MTV-86 // YOUTUBE VHS VIDEO DECK -->
+      <div id="youtube-deck" class="lg:col-span-6 memphis-card-static bg-paper border-[4px] border-ink overflow-hidden flex flex-col">
+        <!-- VHS Window Bar -->
+        <div class="bg-pink text-ink border-b-[4px] border-ink px-4 py-3 flex items-center justify-between font-mono text-xs font-bold">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-yellow border-2 border-ink inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-teal border-2 border-ink inline-block"></span>
+            <span class="tracking-wider">MTV-86 // YOUTUBE VIDEO DECK</span>
+          </div>
+          <span class="bg-ink text-yellow px-2 py-0.5 text-[10px] border border-ink">
+            REC ● {PROFILE.contact.youtubeHandle}
+          </span>
+        </div>
+
+        <!-- Animated 1980s CRT Broadcast Monitor Graphic -->
+        <div class="bg-ink text-cream p-4 border-b-[3px] border-ink">
+          <div class="flex items-center justify-between gap-3 mb-3 font-mono text-[11px]">
+            <span class="text-yellow font-bold">▶ CHANNEL FEED // ENGINEERING &amp; AI</span>
+            <span class="text-teal">SP MODE // HI-FI STEREO</span>
+          </div>
+
+          <!-- SVG Retro TV Screen Preview -->
+          <svg
+            viewBox="0 0 500 130"
+            class="w-full h-auto block border-2 border-cream/30 bg-[#111111]"
+            role="img"
+            aria-label="Animated 1980s YouTube Broadcast CRT Monitor"
+          >
+            <defs>
+              <pattern id="yt-crt-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#38D8C4" stroke-width="0.6" stroke-opacity="0.22" />
+              </pattern>
+            </defs>
+            <rect width="500" height="130" fill="url(#yt-crt-grid)" />
+
+            <!-- Sweeping CRT Scanline Bar -->
+            <rect x="0" y="0" width="500" height="10" fill="#FFDE43" opacity="0.12">
+              <animate attributeName="y" values="-10;130" dur="3.2s" repeatCount="indefinite" />
+            </rect>
+
+            <!-- Play Button Emblem -->
+            <g transform="translate(24, 24)">
+              <rect x="4" y="4" width="84" height="60" fill="#FFDE43" stroke="#171717" stroke-width="3" />
+              <rect x="0" y="0" width="84" height="60" fill="#FF5793" stroke="#FFF7E8" stroke-width="3">
+                <animate attributeName="fill" values="#FF5793;#38D8C4;#FF5793" dur="4s" repeatCount="indefinite" />
+              </rect>
+              <polygon points="33,17 33,43 57,30" fill="#171717" />
+            </g>
+
+            <!-- Live Broadcast Readout -->
+            <text x="128" y="42" font-family="Space Mono, monospace" font-size="12" font-weight="700" fill="#FFDE43">
+              ARUN JOSE // YOUTUBE CHANNEL
+            </text>
+            <text x="128" y="64" font-family="Space Mono, monospace" font-size="11" fill="#FFF7E8">
+              • Hybrid RAG &amp; Knowledge Graphs
+            </text>
+            <text x="128" y="82" font-family="Space Mono, monospace" font-size="11" fill="#38D8C4">
+              • Platform Engineering &amp; Observability
+            </text>
+
+            <!-- Blinking REC Dot -->
+            <circle cx="468" cy="24" r="6" fill="#FF5793">
+              <animate attributeName="opacity" values="1;0.2;1" dur="1.1s" repeatCount="indefinite" />
+            </circle>
+            <text x="415" y="28" font-family="Space Mono, monospace" font-size="10" font-weight="700" fill="#FF5793">
+              LIVE
+            </text>
+
+            <!-- Bottom Tape Counter Bar -->
+            <rect x="12" y="98" width="476" height="22" fill="#171717" stroke="#38D8C4" stroke-width="1.5" />
+            <text x="22" y="113" font-family="Space Mono, monospace" font-size="10" font-weight="700" fill="#38D8C4">
+              TAPE COUNTER: 01:14:86 // 1080P RETRO-HD
+            </text>
+          </svg>
+        </div>
+
+        <!-- Video Tape List -->
+        <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
+          <div class="space-y-4">
+            {videosToShow.map((video) => (
+              <article class="bg-cream border-[3px] border-ink p-4 shadow-[4px_4px_0px_#171717] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2 font-mono text-[11px] font-bold">
+                  <span class={`px-2 py-0.5 border-2 border-ink ${badgeBgMap[video.accentColor]}`}>
+                    {video.tapeCode}
+                  </span>
+                  <div class="flex items-center gap-2">
+                    <span class="bg-paper px-2 py-0.5 border border-ink text-ink">
+                      {video.publishedLabel}
+                    </span>
+                    <span class="bg-ink text-yellow px-2 py-0.5">
+                      ⏱ {video.duration}
+                    </span>
+                  </div>
+                </div>
+                <h3 class="font-display text-lg uppercase text-ink mb-1.5 leading-snug">
+                  {video.title}
+                </h3>
+                <p class="font-sans text-sm text-ink/85 leading-relaxed mb-3">
+                  {video.summary}
+                </p>
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink/15">
+                  <div class="flex flex-wrap gap-1.5">
+                    {video.tags.map((tag) => (
+                      <span class="font-mono text-[10px] font-bold bg-paper px-2 py-0.5 border border-ink">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={video.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-xs font-bold text-ink bg-yellow hover:bg-pink px-2.5 py-1 border-2 border-ink shadow-[2px_2px_0px_#171717] no-underline"
+                  >
+                    ▶ Watch Tape →
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <a
+              href={PROFILE.contact.youtubePlaceholder}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="memphis-btn memphis-btn-pink text-xs"
+            >
+              ▶ Visit YouTube Channel →
+            </a>
+            {compact && (
+              <a href="/media#youtube-deck" class="font-mono text-xs font-bold text-ink underline hover:text-blue">
+                See All {YOUTUBE_VIDEOS.length} Video Tapes →
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT (6 cols): FM.86 // PODCAST CASSETTE TAPE DECK -->
+      <div id="podcast-deck" class="lg:col-span-6 memphis-card-static bg-paper border-[4px] border-ink overflow-hidden flex flex-col">
+        <!-- Cassette Deck Bar -->
+        <div class="bg-teal text-ink border-b-[4px] border-ink px-4 py-3 flex items-center justify-between font-mono text-xs font-bold">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-yellow border-2 border-ink inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-pink border-2 border-ink inline-block"></span>
+            <span class="tracking-wider">FM.86 // PODCAST CASSETTE DECK</span>
+          </div>
+          <span class="bg-ink text-teal px-2 py-0.5 text-[10px] border border-ink">
+            STEREO // CrO2 TAPE
+          </span>
+        </div>
+
+        <!-- Animated 1980s Cassette Tape + Equalizer Graphic -->
+        <div class="bg-ink text-cream p-4 border-b-[3px] border-ink">
+          <div class="flex items-center justify-between gap-3 mb-3 font-mono text-[11px]">
+            <span class="text-teal font-bold">🎙 {PROFILE.contact.podcastName}</span>
+            <span class="text-yellow">DOLBY NR // ON</span>
+          </div>
+
+          <!-- SVG Animated Cassette Tape + VU Meter -->
+          <svg
+            viewBox="0 0 500 130"
+            class="w-full h-auto block border-2 border-cream/30 bg-[#171717]"
+            role="img"
+            aria-label="Animated 1980s Podcast Cassette Tape and Equalizer"
+          >
+            <!-- Cassette Body -->
+            <rect x="18" y="14" width="260" height="102" rx="6" fill="#FFDE43" stroke="#FFF7E8" stroke-width="3" />
+            <rect x="30" y="24" width="236" height="58" fill="#FFF7E8" stroke="#171717" stroke-width="2.5" />
+            <rect x="30" y="24" width="236" height="16" fill="#FF5793" stroke="#171717" stroke-width="2" />
+            <text x="40" y="36" font-family="Space Mono, monospace" font-size="9.5" font-weight="700" fill="#171717">
+              SIDE A // SYSTEMS &amp; SIGNALS FM
+            </text>
+
+            <!-- Center Tape Window -->
+            <rect x="66" y="45" width="164" height="30" fill="#171717" stroke="#171717" stroke-width="2" />
+
+            <!-- Left Rotating Spool -->
+            <g transform="translate(100, 60)">
+              <g>
+                <circle cx="0" cy="0" r="11" fill="#FFF7E8" stroke="#38D8C4" stroke-width="2.5" />
+                <line x1="-11" y1="0" x2="11" y2="0" stroke="#171717" stroke-width="2.5" />
+                <line x1="0" y1="-11" x2="0" y2="11" stroke="#171717" stroke-width="2.5" />
+                <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="4s" repeatCount="indefinite" />
+              </g>
+            </g>
+
+            <!-- Right Rotating Spool -->
+            <g transform="translate(196, 60)">
+              <g>
+                <circle cx="0" cy="0" r="11" fill="#FFF7E8" stroke="#FF5793" stroke-width="2.5" />
+                <line x1="-11" y1="0" x2="11" y2="0" stroke="#171717" stroke-width="2.5" />
+                <line x1="0" y1="-11" x2="0" y2="11" stroke="#171717" stroke-width="2.5" />
+                <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="4s" repeatCount="indefinite" />
+              </g>
+            </g>
+
+            <!-- Cassette Bottom Trapezoid -->
+            <polygon points="56,116 70,90 226,90 240,116" fill="#38D8C4" stroke="#171717" stroke-width="2.5" />
+            <circle cx="105" cy="104" r="4" fill="#171717" />
+            <circle cx="191" cy="104" r="4" fill="#171717" />
+
+            <!-- Right Side Studio Equalizer VU Meter -->
+            <text x="300" y="30" font-family="Space Mono, monospace" font-size="10" font-weight="700" fill="#38D8C4">
+              STUDIO VU EQUALIZER
+            </text>
+            <g transform="translate(300, 40)">
+              <rect x="0" y="20" width="16" height="44" fill="#38D8C4">
+                <animate attributeName="y" values="20;6;28;12;20" dur="1.1s" repeatCount="indefinite" />
+                <animate attributeName="height" values="44;58;36;52;44" dur="1.1s" repeatCount="indefinite" />
+              </rect>
+              <rect x="24" y="10" width="16" height="54" fill="#FFDE43">
+                <animate attributeName="y" values="10;30;8;22;10" dur="0.9s" repeatCount="indefinite" />
+                <animate attributeName="height" values="54;34;56;42;54" dur="0.9s" repeatCount="indefinite" />
+              </rect>
+              <rect x="48" y="24" width="16" height="40" fill="#FF5793">
+                <animate attributeName="y" values="24;4;26;14;24" dur="1.3s" repeatCount="indefinite" />
+                <animate attributeName="height" values="40;60;38;50;40" dur="1.3s" repeatCount="indefinite" />
+              </rect>
+              <rect x="72" y="14" width="16" height="50" fill="#377AF5">
+                <animate attributeName="y" values="14;32;10;20;14" dur="1.0s" repeatCount="indefinite" />
+                <animate attributeName="height" values="50;32;54;44;50" dur="1.0s" repeatCount="indefinite" />
+              </rect>
+              <rect x="96" y="18" width="16" height="46" fill="#38D8C4">
+                <animate attributeName="y" values="18;8;30;12;18" dur="0.85s" repeatCount="indefinite" />
+                <animate attributeName="height" values="46;56;34;52;46" dur="0.85s" repeatCount="indefinite" />
+              </rect>
+              <rect x="120" y="8" width="16" height="56" fill="#FFDE43">
+                <animate attributeName="y" values="8;26;12;30;8" dur="1.15s" repeatCount="indefinite" />
+                <animate attributeName="height" values="56;38;52;34;56" dur="1.15s" repeatCount="indefinite" />
+              </rect>
+              <rect x="144" y="22" width="16" height="42" fill="#FF5793">
+                <animate attributeName="y" values="22;10;28;6;22" dur="0.95s" repeatCount="indefinite" />
+                <animate attributeName="height" values="42;54;36;58;42" dur="0.95s" repeatCount="indefinite" />
+              </rect>
+            </g>
+            <text x="300" y="118" font-family="Space Mono, monospace" font-size="9.5" fill="#FFF7E8">
+              SPOTIFY • APPLE • YOUTUBE
+            </text>
+          </svg>
+        </div>
+
+        <!-- Podcast Episode Cards -->
+        <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
+          <div class="space-y-4">
+            {episodesToShow.map((ep) => (
+              <article class="bg-cream border-[3px] border-ink p-4 shadow-[4px_4px_0px_#171717] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2 font-mono text-[11px] font-bold">
+                  <span class={`px-2 py-0.5 border-2 border-ink ${badgeBgMap[ep.accentColor]}`}>
+                    {ep.episodeCode}
+                  </span>
+                  <span class="bg-ink text-teal px-2 py-0.5">
+                    🎙 {ep.duration}
+                  </span>
+                </div>
+                <p class="font-mono text-[10px] font-bold text-blue uppercase mb-1">
+                  {ep.guestOrTopic}
+                </p>
+                <h3 class="font-display text-lg uppercase text-ink mb-1.5 leading-snug">
+                  {ep.title}
+                </h3>
+                <p class="font-sans text-sm text-ink/85 leading-relaxed mb-3">
+                  {ep.summary}
+                </p>
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink/15">
+                  <div class="flex flex-wrap gap-1.5">
+                    {ep.platforms.map((platform) => (
+                      <span class="font-mono text-[10px] font-bold bg-paper px-2 py-0.5 border border-ink">
+                        {platform}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={ep.listenUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-xs font-bold text-ink bg-teal hover:bg-yellow px-2.5 py-1 border-2 border-ink shadow-[2px_2px_0px_#171717] no-underline"
+                  >
+                    🎧 Play Episode →
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <a
+              href={PROFILE.contact.podcastPlaceholder}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="memphis-btn memphis-btn-teal text-xs"
+            >
+              🎧 Subscribe to Podcast →
+            </a>
+            {compact && (
+              <a href="/media#podcast-deck" class="font-mono text-xs font-bold text-ink underline hover:text-blue">
+                See All {PODCAST_EPISODES.length} Episodes →
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: VIP STAGE PASS // TECH TALKS & SPEAKING -->
+    <div id="talks-stage" class="memphis-card-static bg-paper border-[4px] border-ink p-6 sm:p-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b-[3px] border-ink">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-yellow border-2 border-ink px-2.5 py-0.5 font-mono text-xs font-bold mb-2 shadow-[3px_3px_0px_#171717]">
+            <span>🎤 VIP STAGE PASS // CONFERENCE &amp; LECTURE LOG</span>
+          </div>
+          <h3 class="font-display text-2xl sm:text-3xl uppercase text-ink">
+            Tech Talks, Lectures &amp; Community Sessions
+          </h3>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="/contact" class="memphis-btn memphis-btn-yellow text-xs">
+            Invite Arun to Speak →
+          </a>
+          {compact && (
+            <a href="/media#talks-stage" class="memphis-btn memphis-btn-white text-xs">
+              View Speaker Kit &amp; All Talks →
+            </a>
+          )}
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {talksToShow.map((talk) => (
+          <article class="bg-cream border-[3px] border-ink shadow-[6px_6px_0px_#171717] flex flex-col justify-between overflow-hidden">
+            <!-- Ticket Stub Top Header -->
+            <div>
+              <div class={`px-4 py-2 border-b-[3px] border-ink flex items-center justify-between font-mono text-xs font-bold ${badgeBgMap[talk.accentColor]}`}>
+                <span>{talk.passCode}</span>
+                <span class="bg-ink text-cream px-2 py-0.5 text-[10px]">{talk.type}</span>
+              </div>
+              <div class="p-5">
+                <div class="flex items-center justify-between gap-2 font-mono text-[11px] font-bold text-ink/75 mb-2">
+                  <span>📍 {talk.location}</span>
+                  <span>📅 {talk.date}</span>
+                </div>
+                <p class="font-mono text-xs font-bold text-blue uppercase mb-1">
+                  {talk.event}
+                </p>
+                <h4 class="font-display text-lg uppercase text-ink mb-2 leading-snug">
+                  {talk.title}
+                </h4>
+                <p class="font-sans text-sm text-ink/85 leading-relaxed mb-4">
+                  {talk.summary}
+                </p>
+              </div>
+            </div>
+
+            <!-- Perforated Ticket Stub Footer -->
+            <div class="px-5 py-3 bg-paper border-t-[3px] border-dashed border-ink flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap gap-1">
+                {talk.topics.map((t) => (
+                  <span class="font-mono text-[10px] font-bold bg-cream px-2 py-0.5 border border-ink">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <div class="flex items-center gap-2 font-mono text-xs font-bold">
+                <a href={talk.slidesUrl} class="text-ink underline hover:text-pink">
+                  Slides/Notes
+                </a>
+                <span>•</span>
+                <a href={talk.recordingUrl} class="text-blue underline hover:text-ink">
+                  Watch/Listen
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+
+        {compact && (
+          <article class="bg-yellow border-[3px] border-ink p-5 shadow-[6px_6px_0px_#171717] flex flex-col justify-between">
+            <div>
+              <span class="inline-block bg-ink text-cream font-mono text-[11px] font-bold px-2.5 py-1 mb-3">
+                BOOKING // SPEAKER RIDER 86
+              </span>
+              <h4 class="font-display text-xl uppercase text-ink mb-2">
+                Hosting a Conference, Meetup, or Engineering Podcast?
+              </h4>
+              <p class="font-sans text-sm text-ink/90 leading-relaxed mb-4">
+                Arun speaks on Hybrid RAG &amp; Knowledge Graphs, Observability-First Platform Engineering, AST Code Intelligence, and international engineering careers in Europe.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <a href="/media#speaker-kit" class="memphis-btn memphis-btn-white text-xs">
+                Speaker Kit &amp; Bio →
+              </a>
+              <a href="/contact" class="memphis-btn memphis-btn-pink text-xs">
+                Book a Session →
+              </a>
+            </div>
+          </article>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

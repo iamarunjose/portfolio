@@ -1,0 +1,89 @@
+---
+import Mascot from './Mascot.astro';
+import type { MascotState } from '../../lib/mascot-animation';
+
+export interface Props {
+  id?: string;
+  size?: 'sm' | 'md' | 'lg';
+  initialState?: MascotState;
+  interactive?: boolean;
+  showHud?: boolean;
+  label?: string;
+}
+
+const {
+  id = 'mascot-spark',
+  size = 'sm',
+  initialState = 'idle',
+  interactive = true,
+  showHud = true,
+  label = 'SPARK automation lightning mascot. Click or press Enter for electrical spark boost.'
+} = Astro.props;
+---
+
+<Mascot
+  id={id}
+  name="spark"
+  displayName="SPARK.BOT"
+  defaultStatus="AUTO // 99.9%"
+  size={size}
+  initialState={initialState}
+  interactive={interactive}
+  showHud={showHud}
+  label={label}
+>
+  <svg
+    viewBox="0 0 64 64"
+    class="mascot-svg mascot-pixel-art"
+    aria-hidden="true"
+  >
+    <!-- Ground Shadow -->
+    <rect x="18" y="58" width="28" height="3.5" fill="#171717" opacity="0.25" />
+
+    <!-- Electrical Spark Particles -->
+    <g class="spark-bolt-particle">
+      <rect x="5" y="12" width="5" height="5" fill="#38D8C4" stroke="#171717" stroke-width="2" />
+      <rect x="53" y="34" width="5" height="5" fill="#FF5793" stroke="#171717" stroke-width="2" />
+    </g>
+    <g class="spark-bolt-particle spark-bolt-particle-2">
+      <rect x="51" y="10" width="6" height="6" fill="#FFDE43" stroke="#171717" stroke-width="2" />
+      <rect x="6" y="36" width="5" height="5" fill="#377AF5" stroke="#171717" stroke-width="2" />
+    </g>
+
+    <g class="mascot-body-root">
+      <!-- Left & Right Pixel Arms -->
+      <g class="mascot-arm-left">
+        <rect x="10" y="27" width="8" height="6" fill="#38D8C4" stroke="#171717" stroke-width="2.5" />
+      </g>
+      <g class="mascot-arm-right">
+        <rect x="46" y="25" width="8" height="6" fill="#FF5793" stroke="#171717" stroke-width="2.5" />
+      </g>
+
+      <!-- Yellow Lightning-Bolt Body (#FFDE43) with Thick Black Pixel Outline -->
+      <polygon
+        points="26,4 46,4 36,22 50,22 28,50 32,32 16,32"
+        fill="#FFDE43"
+        stroke="#171717"
+        stroke-width="3.5"
+        stroke-linejoin="miter"
+      />
+
+      <!-- Expressive Pixel Eyes Visor -->
+      <g class="mascot-eyes">
+        <rect x="24" y="13" width="5" height="6" fill="#171717" />
+        <rect x="25" y="14" width="2" height="2" fill="#FFFDF9" />
+        <rect x="34" y="13" width="5" height="6" fill="#171717" />
+        <rect x="35" y="14" width="2" height="2" fill="#FFFDF9" />
+      </g>
+
+      <!-- Running Legs -->
+      <g class="mascot-leg-left">
+        <rect x="20" y="48" width="7" height="9" fill="#377AF5" stroke="#171717" stroke-width="2.5" />
+      </g>
+      <g class="mascot-leg-right">
+        <rect x="33" y="48" width="7" height="9" fill="#FF5793" stroke="#171717" stroke-width="2.5" />
+      </g>
+    </g>
+  </svg>
+</Mascot>
+

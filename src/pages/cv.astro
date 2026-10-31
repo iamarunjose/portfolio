@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  PROFILE,
+  EXPERIENCE_TIMELINE,
+  FEATURED_PROJECTS,
+  RESEARCH_TOPICS
+} from '../data/portfolio';
+---
+
+<Layout
+  title="Curriculum Vitae — Arun Jose | Software Engineer"
+  description="Printable and downloadable Curriculum Vitae for Arun Jose, Software Engineer at Siemens Energy, Denmark (MSc Web Engineering, TU Chemnitz)."
+>
+  <section class="bg-cream py-12 sm:py-16 border-b-[4px] border-ink">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Action Toolbar (Hidden when printing) -->
+      <div class="no-print mb-8 memphis-card bg-yellow p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
+        <div class="font-mono text-xs sm:text-sm font-bold text-ink">
+          <span class="bg-ink text-yellow px-2 py-0.5 mr-2">CV.SHEET</span>
+          Print-ready Curriculum Vitae (Placeholder contact URLs — verify exact roles and dates before publication).
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button
+            id="print-cv-btn"
+            type="button"
+            class="memphis-btn memphis-btn-pink text-xs py-2 px-4"
+          >
+            Print / Save as PDF ⎙
+          </button>
+          <a
+            href="/Arun_Jose_CV_Placeholder.txt"
+            download="Arun_Jose_CV_Placeholder.txt"
+            class="memphis-btn memphis-btn-cream text-xs py-2 px-4"
+          >
+            Download .TXT Dossier ↓
+          </a>
+        </div>
+      </div>
+
+      <!-- Printable CV Document Sheet -->
+      <div class="memphis-card bg-paper p-6 sm:p-10 lg:p-12 border-[4px] border-ink shadow-[10px_10px_0px_#171717] space-y-8">
+        <!-- CV Header -->
+        <header class="border-b-[4px] border-ink pb-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <span class="font-mono text-xs font-bold uppercase bg-teal px-2.5 py-1 border-2 border-ink">
+              CURRICULUM VITAE // DOSSIER
+            </span>
+            <h1 class="font-display text-4xl sm:text-5xl uppercase text-ink mt-3 mb-1">
+              {PROFILE.name}
+            </h1>
+            <p class="font-mono text-sm sm:text-base font-bold text-blue m-0">
+              {PROFILE.role} — {PROFILE.currentOrg} ({PROFILE.location})
+            </p>
+          </div>
+
+          <div class="font-mono text-xs space-y-1 text-ink/90 bg-cream p-3.5 border-2 border-ink">
+            <div><strong>LOCATION:</strong> {PROFILE.location}</div>
+            <div><strong>EMAIL:</strong> {PROFILE.contact.emailPlaceholder}</div>
+            <div><strong>GITHUB:</strong> {PROFILE.contact.githubHandle}</div>
+            <div><strong>LINKEDIN:</strong> {PROFILE.contact.linkedinHandle}</div>
+          </div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section>
+          <h2 class="font-display text-lg uppercase text-ink border-b-2 border-ink pb-1.5 mb-3">
+            01 // Profile Summary
+          </h2>
+          <p class="font-sans text-sm sm:text-base text-ink/90 leading-relaxed m-0">
+            {PROFILE.heroTagline} {PROFILE.shortBio}
+          </p>
+        </section>
+
+        <!-- Experience -->
+        <section>
+          <div class="flex flex-wrap items-center justify-between border-b-2 border-ink pb-1.5 mb-4 gap-2">
+            <h2 class="font-display text-lg uppercase text-ink m-0">
+              02 // Professional Experience
+            </h2>
+            <span class="font-mono text-[11px] font-bold bg-yellow px-2 py-0.5 border border-ink">
+              Note: Verify exact roles and dates before publication
+            </span>
+          </div>
+
+          <div class="space-y-5">
+            {EXPERIENCE_TIMELINE.map((exp) => (
+              <div class="border-l-[4px] border-ink pl-4">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="font-display text-base uppercase text-ink m-0">
+                    {exp.role} — {exp.company}
+                  </h3>
+                  <span class="font-mono text-xs font-bold text-ink">
+                    {exp.location} | {exp.period}
+                  </span>
+                </div>
+                <ul class="mt-2 space-y-1 font-sans text-sm text-ink/90 pl-4 m-0 list-square">
+                  {exp.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+          <h2 class="font-display text-lg uppercase text-ink border-b-2 border-ink pb-1.5 mb-3">
+            03 // Education
+          </h2>
+          <div class="border-l-[4px] border-ink pl-4">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 class="font-display text-base uppercase text-ink m-0">
+                {PROFILE.education.degree}
+              </h3>
+              <span class="font-mono text-xs font-bold text-ink">
+                {PROFILE.education.institution}, {PROFILE.education.location}
+              </span>
+            </div>
+            <p class="font-sans text-sm text-ink/90 mt-1 mb-0">
+              Master's Research: <em>Hybrid Semantic Framework for Export Control Compliance</em> (Hybrid RAG, Knowledge Graphs, NLP & Semantic Reasoning).
+            </p>
+          </div>
+        </section>
+
+        <!-- Selected Projects & Research -->
+        <section>
+          <h2 class="font-display text-lg uppercase text-ink border-b-2 border-ink pb-1.5 mb-3">
+            04 // Selected Projects & Research
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {FEATURED_PROJECTS.map((proj) => (
+              <div class="bg-cream border-2 border-ink p-3.5">
+                <span class="font-mono text-[10px] font-bold uppercase text-blue">
+                  {proj.category}
+                </span>
+                <h3 class="font-display text-sm uppercase text-ink mt-1 mb-1.5">
+                  {proj.title}
+                </h3>
+                <p class="font-sans text-xs text-ink/90 m-0 leading-relaxed">
+                  {proj.summary}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Core Competencies -->
+        <section>
+          <h2 class="font-display text-lg uppercase text-ink border-b-2 border-ink pb-1.5 mb-3">
+            05 // Core Areas of Interest
+          </h2>
+          <div class="flex flex-wrap gap-2">
+            {PROFILE.interests.map((interest) => (
+              <span class="memphis-tag">{interest}</span>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function setupPrintButton() {
+    const btn = document.getElementById('print-cv-btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => window.print());
+  }
+  setupPrintButton();
+  document.addEventListener('astro:after-swap', setupPrintButton);
+</script>
+

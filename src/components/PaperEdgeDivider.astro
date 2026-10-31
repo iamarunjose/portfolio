@@ -1,0 +1,87 @@
+---
+export interface Props {
+  topColor?: 'cream' | 'yellow' | 'teal' | 'pink' | 'blue' | 'paper';
+  bottomColor?: 'cream' | 'yellow' | 'teal' | 'pink' | 'blue' | 'paper';
+  variant?: 'scrapbook' | 'notched' | 'deckle';
+  direction?: 'left' | 'right';
+}
+
+const {
+  topColor = 'cream',
+  bottomColor = 'teal',
+  variant = 'scrapbook',
+  direction = 'left'
+} = Astro.props;
+
+const hexMap: Record<string, string> = {
+  cream: '#FFF7E8',
+  paper: '#FFFDF9',
+  yellow: '#FFDE43',
+  pink: '#FF5793',
+  teal: '#38D8C4',
+  blue: '#377AF5'
+};
+
+const topHex = hexMap[topColor] ?? '#FFF7E8';
+const bottomHex = hexMap[bottomColor] ?? '#38D8C4';
+
+// Hand-crafted irregular scrapbook paper-edge SVG paths (viewBox 0 0 1440 44)
+const paths = {
+  scrapbook:
+    'M0,44 L0,20 L48,28 L104,14 L168,26 L232,12 L298,27 L362,16 L430,29 L496,13 L564,25 L632,14 L700,28 L768,15 L836,27 L904,12 L972,26 L1040,15 L1108,29 L1176,13 L1244,26 L1312,15 L1380,27 L1440,18 L1440,44 Z',
+  notched:
+    'M0,44 L0,24 L60,24 L78,12 L152,12 L170,26 L264,26 L282,14 L370,14 L388,27 L486,27 L504,13 L602,13 L620,26 L718,26 L736,12 L834,12 L852,27 L950,27 L968,14 L1066,14 L1084,26 L1182,26 L1200,13 L1298,13 L1316,25 L1392,25 L1410,15 L1440,15 L1440,44 Z',
+  deckle:
+    'M0,44 L0,18 L36,26 L82,15 L134,28 L190,17 L246,29 L308,14 L366,25 L422,16 L484,29 L542,14 L604,26 L662,17 L720,29 L782,13 L840,25 L902,16 L960,28 L1022,14 L1084,27 L1144,16 L1206,28 L1268,14 L1328,26 L1388,16 L1440,24 L1440,44 Z'
+};
+
+const strokePaths = {
+  scrapbook:
+    'M0,20 L48,28 L104,14 L168,26 L232,12 L298,27 L362,16 L430,29 L496,13 L564,25 L632,14 L700,28 L768,15 L836,27 L904,12 L972,26 L1040,15 L1108,29 L1176,13 L1244,26 L1312,15 L1380,27 L1440,18',
+  notched:
+    'M0,24 L60,24 L78,12 L152,12 L170,26 L264,26 L282,14 L370,14 L388,27 L486,27 L504,13 L602,13 L620,26 L718,26 L736,12 L834,12 L852,27 L950,27 L968,14 L1066,14 L1084,26 L1182,26 L1200,13 L1298,13 L1316,25 L1392,25 L1410,15 L1440,15',
+  deckle:
+    'M0,18 L36,26 L82,15 L134,28 L190,17 L246,29 L308,14 L366,25 L422,16 L484,29 L542,14 L604,26 L662,17 L720,29 L782,13 L840,25 L902,16 L960,28 L1022,14 L1084,27 L1144,16 L1206,28 L1268,14 L1328,26 L1388,16 L1440,24'
+};
+
+const selectedFill = paths[variant] ?? paths.scrapbook;
+const selectedStroke = strokePaths[variant] ?? strokePaths.scrapbook;
+---
+
+<div
+  class="paper-edge-divider relative w-full h-7 sm:h-9 overflow-hidden select-none pointer-events-none no-print"
+  style={`background-color: ${topHex};`}
+  data-paper-edge
+  data-paper-dir={direction}
+  aria-hidden="true"
+>
+  <svg
+    viewBox="0 0 1440 44"
+    preserveAspectRatio="none"
+    class="paper-edge-svg absolute inset-y-0 -left-[3%] w-[106%] h-full block"
+  >
+    <!-- Hard Offset Ink Shadow behind paper tear -->
+    <path
+      d={selectedStroke}
+      transform="translate(0, -4)"
+      fill="none"
+      stroke="#171717"
+      stroke-width="5"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+      opacity="0.95"
+    />
+    <!-- Bottom Section Paper Fill -->
+    <path d={selectedFill} fill={bottomHex} />
+    <!-- Crisp Neo-Brutalist Ink Cut Line -->
+    <path
+      d={selectedStroke}
+      fill="none"
+      stroke="#171717"
+      stroke-width="4"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+  </svg>
+</div>
+

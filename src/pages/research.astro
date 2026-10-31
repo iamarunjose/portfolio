@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import KnowledgeGraphViz from '../components/KnowledgeGraphViz.astro';
+import PaperEdgeDivider from '../components/PaperEdgeDivider.astro';
+import { RESEARCH_TOPICS, PROFILE } from '../data/portfolio';
+
+const colorClasses = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+---
+
+<Layout
+  title="Research & Knowledge Systems — Arun Jose"
+  description="Applied AI research by Arun Jose: Master's thesis on Hybrid Semantic Framework for Export Control Compliance, Hybrid RAG, Knowledge Graphs, NLP, and Verifiable AI."
+>
+  <!-- Page Header Band -->
+  <section class="bg-yellow border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-4">
+        <span class="memphis-label bg-pink -rotate-2">
+          RESEARCH LAB // SEMANTICS & AI
+        </span>
+        <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+          Research
+        </h1>
+        <div class="memphis-card bg-paper p-5 border-l-[10px] border-l-blue">
+          <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+            Exploring how symbolic knowledge graphs, hybrid retrieval-augmented generation (RAG), and semantic reasoning make intelligent systems verifiable and grounded for engineering and compliance domains.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master's Thesis Spotlight + Retro SVG Architecture Blueprint -->
+  <section id="thesis-framework" class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="MASTER'S THESIS // TU CHEMNITZ"
+        title="Hybrid Semantic Framework for Export Control Compliance"
+        subtitle="Combining dense vector similarity with structured knowledge graph traversal for explainable regulatory reasoning."
+        labelColor="teal"
+        rotate="left"
+      />
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left Description Panel -->
+        <div class="lg:col-span-6 memphis-card bg-paper p-6 sm:p-8 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-ink pb-3">
+            <span class="font-mono text-xs font-bold uppercase bg-yellow px-2.5 py-1 border-2 border-ink">
+              MSc Web Engineering Thesis
+            </span>
+            <span class="font-mono text-xs font-bold text-ink/75">
+              TU CHEMNITZ, GERMANY
+            </span>
+          </div>
+
+          <h3 class="font-display text-xl sm:text-2xl uppercase text-ink m-0">
+            Why Export Control Needs Hybrid Semantics
+          </h3>
+          <p class="font-sans text-base text-ink/90 leading-relaxed m-0">
+            Evaluating technical items against export control regulations requires matching nuanced engineering descriptions to strict, hierarchical legal taxonomies. Pure keyword matching fails when technical synonyms differ, while naive vector RAG lacks awareness of cross-referenced regulatory exclusions and structural hierarchy.
+          </p>
+
+          <div class="bg-cream border-[3px] border-ink p-4 space-y-2">
+            <h4 class="font-mono text-xs font-bold uppercase text-ink m-0">
+              KEY ARCHITECTURAL CONTRIBUTIONS
+            </h4>
+            <ul class="font-sans text-sm text-ink/90 space-y-1.5 pl-4 m-0 list-square">
+              <li><strong>Dual-Channel Retrieval:</strong> Fuses dense neural embeddings with structured Knowledge Graph neighborhood queries.</li>
+              <li><strong>Semantic Grounding:</strong> Preserves taxonomic hierarchy, technical thresholds, and cross-reference links.</li>
+              <li><strong>Traceable Evidence Chains:</strong> Every candidate classification is paired with verifiable source nodes and retrieval rationale.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Retro Architecture Diagram SVG -->
+        <div class="lg:col-span-6 memphis-card bg-paper overflow-hidden">
+          <div class="memphis-window-bar bg-blue text-white">
+            <span>FIG 02 // HYBRID_SEMANTIC_PIPELINE.SVG</span>
+            <span class="bg-yellow text-ink px-2 py-0.5 border border-ink text-[10px]">CONCEPTUAL</span>
+          </div>
+          <div class="p-4 sm:p-6 bg-cream pattern-grid">
+            <svg
+              viewBox="0 0 520 320"
+              class="w-full h-auto block"
+              role="img"
+              aria-label="Conceptual diagram of the Hybrid Semantic Framework showing query parsing into Dense Vector Index and Knowledge Graph, joining into Rank Fusion and Verifiable Synthesis."
+            >
+              <!-- Input Node -->
+              <rect x="20" y="122" width="110" height="76" fill="#171717" />
+              <rect x="14" y="116" width="110" height="76" fill="#FFDE43" stroke="#171717" stroke-width="3.5" />
+              <text x="69" y="148" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="11" fill="#171717">TECHNICAL</text>
+              <text x="69" y="164" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="11" fill="#171717">SPEC QUERY</text>
+
+              <!-- Arrows from Input -->
+              <path d="M124 140 L180 75" stroke="#171717" stroke-width="3.5" fill="none" />
+              <path d="M124 170 L180 235" stroke="#171717" stroke-width="3.5" fill="none" />
+
+              <!-- Top Channel: Dense Vector Search -->
+              <rect x="186" y="36" width="150" height="82" fill="#171717" />
+              <rect x="180" y="30" width="150" height="82" fill="#38D8C4" stroke="#171717" stroke-width="3.5" />
+              <text x="255" y="62" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="11" fill="#171717">DENSE VECTOR</text>
+              <text x="255" y="78" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="10" fill="#171717">SEMANTIC EMBEDDINGS</text>
+              <text x="255" y="96" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#171717">[Conceptual Recall]</text>
+
+              <!-- Bottom Channel: Knowledge Graph -->
+              <rect x="186" y="200" width="150" height="82" fill="#171717" />
+              <rect x="180" y="194" width="150" height="82" fill="#FF5793" stroke="#171717" stroke-width="3.5" />
+              <text x="255" y="226" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="11" fill="#171717">KNOWLEDGE GRAPH</text>
+              <text x="255" y="242" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="10" fill="#171717">SYMBOLIC ONTOLOGY</text>
+              <text x="255" y="260" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#171717">[Multi-Hop Hierarchy]</text>
+
+              <!-- Arrows to Fusion -->
+              <path d="M330 72 L380 135" stroke="#171717" stroke-width="3.5" fill="none" />
+              <path d="M330 235 L380 175" stroke="#171717" stroke-width="3.5" fill="none" />
+
+              <!-- Output Node: Hybrid Fusion & Verification -->
+              <rect x="386" y="106" width="122" height="106" fill="#171717" />
+              <rect x="380" y="100" width="122" height="106" fill="#FFFDF9" stroke="#171717" stroke-width="3.5" />
+              <rect x="380" y="100" width="122" height="24" fill="#377AF5" stroke="#171717" stroke-width="3.5" />
+              <text x="441" y="116" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9.5" fill="#FFFFFF">HYBRID REASONER</text>
+              <text x="441" y="148" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="10.5" fill="#171717">EVIDENCE FUSION</text>
+              <text x="441" y="166" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="10.5" fill="#171717">&amp; TRACEABLE</text>
+              <text x="441" y="184" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="10.5" fill="#171717">VERIFICATION</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Knowledge Graph Topology (Animation 6) -->
+      <div class="mt-12">
+        <KnowledgeGraphViz idPrefix="research-page-kg-viz" />
+      </div>
+    </div>
+  </section>
+
+  <PaperEdgeDivider topColor="cream" bottomColor="teal" variant="deckle" direction="left" />
+
+  <!-- All 5 Research Pillars -->
+  <section class="bg-teal py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="RESEARCH AGENDA // 01–05"
+        title="Core Research Themes & Future Horizons"
+        subtitle="From Hybrid RAG and Knowledge Graphs to Verifiable AI and deterministic knowledge engineering."
+        labelColor="yellow"
+        rotate="right"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {RESEARCH_TOPICS.map((topic) => (
+          <article class="memphis-card bg-paper flex flex-col justify-between">
+            <div>
+              <div class:list={['memphis-window-bar', colorClasses[topic.accentColor]]}>
+                <span>{topic.code} // RESEARCH TRACK</span>
+                <span>ACTIVE FOCUS</span>
+              </div>
+              <div class="p-6 space-y-3">
+                <h2 class="font-display text-2xl uppercase text-ink m-0">
+                  {topic.title}
+                </h2>
+                <p class="font-mono text-xs font-bold text-blue m-0">
+                  {topic.subtitle}
+                </p>
+                <p class="font-sans text-base text-ink/90 leading-relaxed m-0">
+                  {topic.description}
+                </p>
+              </div>
+            </div>
+            <div class="px-6 py-4 bg-cream border-t-[3px] border-ink flex flex-wrap gap-2">
+              {topic.keyConcepts.map((concept) => (
+                <span class="memphis-tag">{concept}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+

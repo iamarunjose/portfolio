@@ -1,0 +1,119 @@
+---
+import Mascot from './Mascot.astro';
+import type { MascotState } from '../../lib/mascot-animation';
+
+export interface Props {
+  id?: string;
+  size?: 'sm' | 'md' | 'lg';
+  initialState?: MascotState;
+  interactive?: boolean;
+  showHud?: boolean;
+  label?: string;
+}
+
+const {
+  id = 'mascot-ajbot',
+  size = 'md',
+  initialState = 'idle',
+  interactive = true,
+  showHud = true,
+  label = 'AJ-BOT main portfolio 8-bit robot mascot. Click or press Enter to celebrate.'
+} = Astro.props;
+---
+
+<Mascot
+  id={id}
+  name="aj-bot"
+  displayName="AJ-BOT"
+  defaultStatus="ONLINE // READY"
+  size={size}
+  initialState={initialState}
+  interactive={interactive}
+  showHud={showHud}
+  label={label}
+>
+  <svg
+    viewBox="0 0 64 64"
+    class="mascot-svg mascot-pixel-art"
+    aria-hidden="true"
+  >
+    <!-- Ground Shadow -->
+    <rect x="16" y="58" width="32" height="4" fill="#171717" opacity="0.25" />
+
+    <!-- Celebration Confetti Burst (Visible in celebrate state) -->
+    <g class="mascot-confetti">
+      <rect x="4" y="8" width="5" height="5" fill="#FF5793" stroke="#171717" stroke-width="1.5" />
+      <rect x="54" y="6" width="5" height="5" fill="#FFDE43" stroke="#171717" stroke-width="1.5" />
+      <rect x="8" y="24" width="4" height="4" fill="#38D8C4" stroke="#171717" stroke-width="1.5" />
+      <rect x="53" y="22" width="4" height="4" fill="#377AF5" stroke="#171717" stroke-width="1.5" />
+    </g>
+
+    <!-- Sleep Zzz Indicator (Visible in sleep state when inactive) -->
+    <g class="mascot-sleep-zzz" aria-hidden="true">
+      <text x="48" y="10" font-family="Space Mono, monospace" font-weight="700" font-size="8" fill="#171717">Z</text>
+      <text x="54" y="6" font-family="Space Mono, monospace" font-weight="700" font-size="6.5" fill="#FF5793">z</text>
+    </g>
+
+    <g class="mascot-body-root">
+      <!-- Antenna (Yellow tip + Black stem) -->
+      <rect x="30" y="6" width="4" height="6" fill="#171717" />
+      <rect x="28" y="2" width="8" height="6" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+
+      <!-- Ear Bolts (Yellow accents) -->
+      <rect x="10" y="18" width="5" height="8" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+      <rect x="49" y="18" width="5" height="8" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+
+      <!-- Turquoise 8-Bit Robot Head (#38D8C4) -->
+      <rect x="15" y="11" width="34" height="22" fill="#38D8C4" stroke="#171717" stroke-width="3" />
+
+      <!-- Digital Visor & Expressive Eyes -->
+      <rect x="19" y="15" width="26" height="11" fill="#171717" />
+      <g class="mascot-eyes">
+        <rect x="22" y="17" width="6" height="6" fill="#FFDE43" />
+        <rect x="24" y="18" width="2" height="2" fill="#FFFDF9" />
+        <rect x="36" y="17" width="6" height="6" fill="#FFDE43" />
+        <rect x="38" y="18" width="2" height="2" fill="#FFFDF9" />
+      </g>
+
+      <!-- Pixel Smile Bar -->
+      <rect x="25" y="28" width="14" height="2.5" fill="#171717" />
+
+      <!-- Left Arm -->
+      <g class="mascot-arm-left">
+        <rect x="8" y="34" width="6" height="13" fill="#38D8C4" stroke="#171717" stroke-width="2.5" />
+        <rect x="8" y="44" width="6" height="4" fill="#FFDE43" stroke="#171717" stroke-width="2" />
+      </g>
+
+      <!-- Right Waving Arm -->
+      <g class="mascot-arm-right">
+        <rect x="50" y="34" width="6" height="13" fill="#38D8C4" stroke="#171717" stroke-width="2.5" />
+        <rect x="50" y="44" width="6" height="4" fill="#FFDE43" stroke="#171717" stroke-width="2" />
+      </g>
+
+      <!-- Cobalt Blue Body (#377AF5) with Yellow & Pink Chest Panel -->
+      <rect x="16" y="33" width="32" height="17" fill="#377AF5" stroke="#171717" stroke-width="3" />
+      <rect x="21" y="37" width="14" height="9" fill="#FFDE43" stroke="#171717" stroke-width="2" />
+      <text
+        x="28"
+        y="44"
+        text-anchor="middle"
+        font-family="Space Mono, monospace"
+        font-weight="700"
+        font-size="7.5"
+        fill="#171717"
+      >
+        AJ
+      </text>
+      <rect x="38" y="38" width="5" height="5" fill="#FF5793" stroke="#171717" stroke-width="2" />
+
+      <!-- Alternating Walking Legs -->
+      <g class="mascot-leg-left">
+        <rect x="20" y="50" width="8" height="8" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+      </g>
+      <g class="mascot-leg-right">
+        <rect x="36" y="50" width="8" height="8" fill="#FFDE43" stroke="#171717" stroke-width="2.5" />
+      </g>
+    </g>
+  </svg>
+</Mascot>
+

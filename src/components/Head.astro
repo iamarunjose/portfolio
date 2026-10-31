@@ -1,0 +1,64 @@
+---
+import { PROFILE } from '../data/portfolio';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title = `${PROFILE.name} — ${PROFILE.role} | Platform, AI & Knowledge Graphs`,
+  description = PROFILE.shortBio,
+  ogType = 'website'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://arun-jose.github.io');
+const fullTitle = title.includes(PROFILE.name) ? title : `${title} | ${PROFILE.name}`;
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="generator" content={Astro.generator} />
+
+  <!-- Primary Meta Tags -->
+  <title>{fullTitle}</title>
+  <meta name="title" content={fullTitle} />
+  <meta name="description" content={description} />
+  <meta name="author" content={PROFILE.name} />
+  <meta name="keywords" content={PROFILE.interests.join(', ') + ', Arun Jose, Siemens Energy, TU Chemnitz, Software Engineer Denmark'} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Sitemap & RSS -->
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="alternate" type="application/rss+xml" title={`${PROFILE.name} — Technical Writing RSS`} href="/rss.xml" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content={`${PROFILE.name} Portfolio`} />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalURL} />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#FFF7E8" />
+
+  <!-- Google Fonts: Archivo Black, Space Grotesk, Space Mono, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+</head>
+

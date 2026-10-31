@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PaperEdgeDivider from '../components/PaperEdgeDivider.astro';
+import { EXPERIENCE_TIMELINE, PROFILE } from '../data/portfolio';
+
+const colorClasses = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+---
+
+<Layout
+  title="Professional Experience & Education — Arun Jose"
+  description="Professional software engineering timeline of Arun Jose across Siemens Energy (Denmark), Siemens Gamesa (Germany & India), Siemens AG (Germany), and MSc Web Engineering at TU Chemnitz."
+>
+  <!-- Page Header Band -->
+  <section class="bg-pink border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-4">
+        <span class="memphis-label bg-yellow -rotate-2">
+          CHRONOLOGY // DENMARK • GERMANY • INDIA
+        </span>
+        <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+          Experience
+        </h1>
+        <div class="memphis-card bg-paper p-5 border-l-[10px] border-l-teal">
+          <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+            Software engineering career across Siemens organizations in India, Germany, and Denmark, paired with graduate Web Engineering research at Technische Universität Chemnitz.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="CAREER TIMELINE"
+        title="Siemens Engineering Journey"
+        subtitle="Progression from full-time software engineering in India to working-student roles during graduate studies in Germany, and full-time software engineering at Siemens Energy in Denmark."
+        labelColor="teal"
+        rotate="left"
+      />
+
+      <!-- Mandatory Verification Callout -->
+      <div class="mb-10 memphis-card bg-yellow p-4 sm:p-5 border-l-[10px] border-l-ink flex flex-wrap items-center justify-between gap-4">
+        <div class="font-mono text-xs sm:text-sm font-bold text-ink">
+          <span class="bg-ink text-yellow px-2 py-0.5 mr-2">EDITORIAL NOTE</span>
+          Verify exact roles and dates before publication.
+        </div>
+        <a href="/cv" class="memphis-btn memphis-btn-cream text-xs py-2 px-3">
+          Open Printable CV Sheet →
+        </a>
+      </div>
+
+      <!-- Vertical Connected Memphis Timeline (Career Logbook Animation 5) -->
+      <div class="relative pl-6 sm:pl-10 space-y-10" data-logbook-spine>
+        <!-- Animated Vertical Spine Line -->
+        <div
+          class="career-vertical-spine-track absolute left-0 top-0 bottom-0 w-[4px] bg-ink/20 overflow-hidden"
+          aria-hidden="true"
+        >
+          <div class="career-vertical-spine-fill w-full h-full bg-ink"></div>
+        </div>
+        {EXPERIENCE_TIMELINE.map((item, idx) => (
+          <div
+            class="relative"
+            data-logbook-entry
+            style={`--logbook-index: ${idx};`}
+          >
+            <!-- Timeline Node Square -->
+            <div
+              class:list={[
+                'absolute -left-[38px] sm:-left-[54px] top-4 w-7 h-7 border-[3px] border-ink shadow-[3px_3px_0px_#171717] flex items-center justify-center font-mono text-xs font-bold z-10',
+                colorClasses[item.accentColor]
+              ]}
+              aria-hidden="true"
+            >
+              {idx + 1}
+            </div>
+
+            <article class="memphis-card logbook-hinge-card bg-paper">
+              <div class:list={['memphis-window-bar', colorClasses[item.accentColor]]}>
+                <span>{item.company.toUpperCase()} // {item.location.toUpperCase()}</span>
+                <span class="bg-paper text-ink px-2 py-0.5 border border-ink text-xs">
+                  {item.period}
+                </span>
+              </div>
+
+              <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h2 class="font-display text-2xl sm:text-3xl uppercase text-ink m-0">
+                      {item.role}
+                    </h2>
+                    <p class="font-mono text-sm font-bold text-ink/80 m-0 mt-1">
+                      {item.company} — {item.location} ({item.type})
+                    </p>
+                  </div>
+                  <span class="font-mono text-xs font-bold bg-cream px-3 py-1.5 border-2 border-ink shadow-[3px_3px_0px_#171717]">
+                    {item.period}
+                  </span>
+                </div>
+
+                <ul class="space-y-2.5 font-sans text-base text-ink/90 pl-5 m-0 list-square">
+                  {item.highlights.map((hl) => (
+                    <li>{hl}</li>
+                  ))}
+                </ul>
+
+                <div class="pt-3 border-t-2 border-dashed border-ink/30 flex flex-wrap gap-2">
+                  {item.domains.map((domain) => (
+                    <span class="memphis-tag">{domain}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PaperEdgeDivider topColor="cream" bottomColor="teal" variant="notched" direction="right" />
+
+  <!-- Education Section -->
+  <section class="bg-teal py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="HIGHER EDUCATION"
+        title="Academic Foundation"
+        subtitle="Graduate computer science and web engineering education in Germany with a focus on intelligent systems and semantic technologies."
+        labelColor="yellow"
+        rotate="right"
+      />
+
+      <div class="memphis-card bg-paper p-6 sm:p-10 border-[4px] border-ink shadow-[10px_10px_0px_#171717]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8 space-y-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="memphis-label bg-yellow">MASTER OF SCIENCE</span>
+              <span class="font-mono text-xs font-bold bg-pink px-2.5 py-1 border-2 border-ink">
+                CHEMNITZ, GERMANY
+              </span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-4xl uppercase text-ink m-0">
+              {PROFILE.education.degree}
+            </h3>
+            <p class="font-mono text-base font-bold text-blue m-0">
+              {PROFILE.education.institution}
+            </p>
+            <p class="font-sans text-base text-ink/90 leading-relaxed m-0">
+              Completed graduate specialization in {PROFILE.education.focus}. Conducted master's thesis research on a <strong>Hybrid Semantic Framework for Export Control Compliance</strong>, uniting dense retrieval and knowledge graphs.
+            </p>
+          </div>
+
+          <div class="lg:col-span-4 bg-cream border-[3px] border-ink p-5 shadow-[5px_5px_0px_#171717] space-y-3">
+            <h4 class="font-mono text-xs font-bold uppercase text-ink border-b-2 border-ink pb-2 m-0">
+              KEY RESEARCH PILLARS
+            </h4>
+            <ul class="font-mono text-xs space-y-2 pl-4 m-0 list-square">
+              <li>Distributed Web Architectures</li>
+              <li>Semantic Web & Knowledge Graphs</li>
+              <li>Hybrid RAG & Information Retrieval</li>
+              <li>NLP & Regulatory Compliance AI</li>
+            </ul>
+            <a href="/research" class="memphis-btn memphis-btn-yellow w-full text-xs py-2.5 mt-2">
+              View Thesis & Research →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+

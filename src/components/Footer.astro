@@ -1,0 +1,114 @@
+---
+import { PROFILE } from '../data/portfolio';
+import AJBot from './mascots/AJBot.astro';
+---
+
+<footer class="bg-ink text-cream border-t-[4px] border-ink no-print">
+  <!-- Geometric Multi-Color Ribbon -->
+  <div class="grid grid-cols-4 h-3 border-b-[3px] border-ink" aria-hidden="true">
+    <div class="bg-yellow border-r-2 border-ink"></div>
+    <div class="bg-pink border-r-2 border-ink"></div>
+    <div class="bg-teal border-r-2 border-ink"></div>
+    <div class="bg-blue"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <!-- Brand Identity Column -->
+      <div class="md:col-span-5 space-y-4">
+        <div class="inline-flex items-center gap-3">
+          <div class="w-11 h-11 bg-yellow text-ink border-[3px] border-cream shadow-[4px_4px_0px_#FF5793] flex items-center justify-center font-display text-xl">
+            AJ
+          </div>
+          <div>
+            <p class="font-display text-xl uppercase tracking-tight text-cream leading-none">
+              {PROFILE.name}
+            </p>
+            <p class="font-mono text-xs text-yellow mt-1">
+              {PROFILE.role} @ {PROFILE.currentOrg} // {PROFILE.location}
+            </p>
+          </div>
+        </div>
+        <p class="font-sans text-sm text-cream/85 max-w-md leading-relaxed">
+          {PROFILE.heroTagline}
+        </p>
+        <div class="inline-block bg-cream text-ink font-mono text-xs font-bold px-3 py-1.5 border-2 border-yellow shadow-[3px_3px_0px_#38D8C4]">
+          MSc Web Engineering // TU Chemnitz, Germany
+        </div>
+      </div>
+
+      <!-- Sitemap Navigation -->
+      <div class="md:col-span-4 grid grid-cols-2 gap-4">
+        <div>
+          <h2 class="font-mono text-xs font-bold uppercase tracking-wider text-yellow mb-3 border-b border-cream/25 pb-1">
+            Directory
+          </h2>
+          <ul class="space-y-2 font-mono text-xs list-none p-0 m-0">
+            <li><a href="/" class="text-cream hover:text-yellow no-underline">01 // Home</a></li>
+            <li><a href="/projects" class="text-cream hover:text-yellow no-underline">02 // Projects</a></li>
+            <li><a href="/experience" class="text-cream hover:text-yellow no-underline">03 // Experience</a></li>
+            <li><a href="/research" class="text-cream hover:text-yellow no-underline">04 // Research</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-mono text-xs font-bold uppercase tracking-wider text-teal mb-3 border-b border-cream/25 pb-1">
+            Index & Feeds
+          </h2>
+          <ul class="space-y-2 font-mono text-xs list-none p-0 m-0">
+            <li><a href="/writing" class="text-cream hover:text-teal no-underline">05 // Writing</a></li>
+            <li><a href="/media" class="text-cream hover:text-pink no-underline">06 // Podcast, Talks &amp; YT</a></li>
+            <li><a href="/about" class="text-cream hover:text-teal no-underline">07 // About &amp; Photo</a></li>
+            <li><a href="/contact" class="text-cream hover:text-teal no-underline">08 // Contact</a></li>
+            <li><a href="/cv" class="text-cream hover:text-pink no-underline">09 // Printable CV</a></li>
+            <li><a href="/rss.xml" class="text-yellow hover:text-pink no-underline">RSS // XML Feed</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Terminal Status Box + Mini Decorative AJ-BOT -->
+      <div class="md:col-span-3 bg-cream text-ink border-[3px] border-yellow p-4 shadow-[6px_6px_0px_#FF5793]">
+        <div class="flex items-center justify-between border-b-2 border-ink pb-2 mb-2.5 font-mono text-xs font-bold">
+          <span class="flex items-center gap-1.5">
+            <AJBot id="footer-ajbot" size="sm" interactive={false} showHud={false} />
+            <span>TERMINAL.LOG</span>
+          </span>
+          <span class="bg-teal px-1.5 py-0.5 border border-ink text-[10px]">READY</span>
+        </div>
+        <dl class="font-mono text-xs space-y-1.5 m-0">
+          <div class="flex justify-between">
+            <dt class="text-ink/70">BASE:</dt>
+            <dd class="font-bold m-0">DENMARK</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-ink/70">STACK:</dt>
+            <dd class="font-bold m-0">ASTRO + MDX</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-ink/70">DESIGN:</dt>
+            <dd class="font-bold m-0">80s MEMPHIS</dd>
+          </div>
+        </dl>
+        <a
+          href="/contact"
+          class="mt-3 w-full memphis-btn memphis-btn-yellow text-xs py-2 px-3"
+        >
+          Send Transmission →
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t-2 border-cream/20 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-cream/75">
+      <p class="m-0">
+        © {new Date().getFullYear()} {PROFILE.name}. Crafted with 1980s Memphis & Neo-Brutalist precision.
+      </p>
+      <p class="m-0 flex items-center gap-3">
+        <a href="/sitemap-index.xml" class="text-yellow hover:underline">Sitemap</a>
+        <span>•</span>
+        <a href="/rss.xml" class="text-teal hover:underline">RSS Feed</a>
+        <span>•</span>
+        <a href="#main-content" class="text-pink hover:underline">Back to Top ↑</a>
+      </p>
+    </div>
+  </div>
+</footer>
+

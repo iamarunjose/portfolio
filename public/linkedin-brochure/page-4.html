@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Page 4</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --bg: #FFF7E8;
+    --paper: #FFFDF9;
+    --yellow: #FFDE43;
+    --pink: #FF5793;
+    --teal: #38D8C4;
+    --blue: #377AF5;
+    --ink: #171717;
+    --font-display: 'Archivo Black', 'Arial Black', 'Impact', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+    --font-mono: 'Space Mono', 'Consolas', 'Courier New', monospace;
+  }
+  html, body {
+    background: var(--ink);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .brochure-page {
+    width: 1080px;
+    height: 1350px;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(to right, rgba(23, 23, 23, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(23, 23, 23, 0.08) 1px, transparent 1px);
+    background-size: 36px 36px;
+    border: 8px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+    break-after: page;
+  }
+  .top-bar {
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid var(--ink);
+    letter-spacing: 0.05em;
+  }
+  .top-bar-badge {
+    background: var(--pink);
+    color: var(--ink);
+    padding: 4px 12px;
+    border: 2px solid var(--bg);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .bottom-bar {
+    background: var(--yellow);
+    color: var(--ink);
+    border-top: 5px solid var(--ink);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .page-content {
+    flex: 1;
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+  .memphis-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px 18px;
+    border: 3.5px solid var(--ink);
+    box-shadow: 5px 5px 0px var(--ink);
+    color: var(--ink);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-shadow:
+      5px 5px 0px var(--yellow),
+      10px 10px 0px var(--pink);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-shadow:
+      4px 4px 0px var(--yellow),
+      8px 8px 0px var(--pink);
+  }
+  .card {
+    background: var(--paper);
+    border: 4px solid var(--ink);
+    box-shadow: 8px 8px 0px var(--ink);
+  }
+  .window-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    border-bottom: 4px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .dots {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    border: 2.5px solid var(--ink);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border: 2.5px solid var(--ink);
+    background: var(--bg);
+    box-shadow: 3px 3px 0px var(--ink);
+  }
+  .bg-yellow { background-color: var(--yellow); color: var(--ink); }
+  .bg-pink { background-color: var(--pink); color: var(--ink); }
+  .bg-teal { background-color: var(--teal); color: var(--ink); }
+  .bg-blue { background-color: var(--blue); color: #FFFFFF; }
+  .bg-paper { background-color: var(--paper); color: var(--ink); }
+  .bg-cream { background-color: var(--bg); color: var(--ink); }
+  .bg-ink { background-color: var(--ink); color: var(--bg); }
+  @page {
+    size: 1080px 1350px;
+    margin: 0;
+  }
+ html, body { width: 1080px; height: 1350px; overflow: hidden; }</style>
+</head>
+<body>
+  
+<section class="brochure-page" style="background-color: var(--yellow);">
+  <div class="top-bar">
+    <span>■ SIEMENS ENGINEERING JOURNEY // DENMARK • GERMANY • INDIA</span>
+    <span class="top-bar-badge" style="background:var(--pink);">PAGE 04 / 05</span>
+  </div>
+
+  <div class="page-content">
+    <div>
+      <span class="memphis-label bg-teal" style="transform:rotate(-1.5deg);">CAREER CHRONOLOGY & CRAFT</span>
+      <div class="section-title" style="font-size:68px; margin-top:12px;">EXPERIENCE & TENETS</div>
+      <p style="font-size:20px; font-weight:700; margin-top:8px; color:var(--ink);">
+        International engineering experience across Siemens organizations paired with graduate research in Germany.
+      </p>
+    </div>
+
+    <!-- Timeline Stack -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="card" style="padding:18px 24px; display:flex; align-items:center; justify-content:space-between; border-left:14px solid var(--teal);">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">STEP 01 // FULL-TIME ROLE • DENMARK</div>
+          <div style="font-family:var(--font-display); font-weight:900; font-size:26px; text-transform:uppercase; margin-top:2px;">
+            Siemens Energy — Software Engineer
+          </div>
+          <p style="font-size:16px; margin-top:4px; color:#222;">
+            Platform engineering, infrastructure automation, system observability, and resilient software delivery.
+          </p>
+        </div>
+        <span class="memphis-label bg-yellow" style="white-space:nowrap;">2026–PRESENT</span>
+      </div>
+
+      <div class="card" style="padding:18px 24px; display:flex; align-items:center; justify-content:space-between; border-left:14px solid var(--pink);">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">STEP 02 // WORKING STUDENT • GERMANY</div>
+          <div style="font-family:var(--font-display); font-weight:900; font-size:26px; text-transform:uppercase; margin-top:2px;">
+            Siemens Gamesa — Working Student
+          </div>
+          <p style="font-size:16px; margin-top:4px; color:#222;">
+            Infrastructure monitoring workflows, DevOps tooling, and engineering automation alongside MSc studies.
+          </p>
+        </div>
+        <span class="memphis-label bg-teal" style="white-space:nowrap;">2023–2026</span>
+      </div>
+
+      <div class="card" style="padding:18px 24px; display:flex; align-items:center; justify-content:space-between; border-left:14px solid var(--blue);">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">STEP 03 // WORKING STUDENT • GERMANY</div>
+          <div style="font-family:var(--font-display); font-weight:900; font-size:26px; text-transform:uppercase; margin-top:2px;">
+            Siemens AG — Working Student
+          </div>
+          <p style="font-size:16px; margin-top:4px; color:#222;">
+            Software development, automated testing workflows, and internal web engineering enhancements.
+          </p>
+        </div>
+        <span class="memphis-label bg-pink" style="white-space:nowrap;">2022</span>
+      </div>
+
+      <div class="card" style="padding:18px 24px; display:flex; align-items:center; justify-content:space-between; border-left:14px solid var(--yellow);">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">STEP 04 // FULL-TIME ENGINEERING • INDIA</div>
+          <div style="font-family:var(--font-display); font-weight:900; font-size:26px; text-transform:uppercase; margin-top:2px;">
+            Siemens Gamesa — Software Engineering
+          </div>
+          <p style="font-size:16px; margin-top:4px; color:#222;">
+            Enterprise software components, backend & web workflows, and production engineering lifecycle delivery.
+          </p>
+        </div>
+        <span class="memphis-label bg-cream" style="white-space:nowrap;">2018–2021</span>
+      </div>
+    </div>
+
+    <!-- Education + Philosophy Row -->
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+      <div class="card bg-teal" style="padding:20px 24px;">
+        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700;">ACADEMIC CREDENTIAL // GERMANY</div>
+        <div style="font-family:var(--font-display); font-weight:900; font-size:24px; text-transform:uppercase; margin-top:4px;">
+          MSc Web Engineering
+        </div>
+        <div style="font-family:var(--font-mono); font-size:15px; font-weight:700; margin-top:4px;">
+          Technische Universität Chemnitz
+        </div>
+        <p style="font-size:15px; margin-top:8px; line-height:1.4;">
+          Specialized in Semantic Web, Distributed Systems & Applied AI.
+        </p>
+      </div>
+
+      <div class="card bg-paper" style="padding:20px 24px;">
+        <div style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--pink);">ENGINEERING PHILOSOPHY</div>
+        <div style="font-family:var(--font-display); font-weight:900; font-size:22px; text-transform:uppercase; margin-top:4px;">
+          Observability & Automation First
+        </div>
+        <p style="font-size:15px; margin-top:8px; line-height:1.4;">
+          Treat telemetry as a first-class feature, codify repeatable toil, and pair AI research with deterministic guardrails.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar" style="background:var(--paper);">
+    <span>* NOTE: Verify exact roles and dates before final publication</span>
+    <span>[BROCHURE PAGE 04 / 05] →</span>
+  </div>
+</section>
+
+</body>
+</html>

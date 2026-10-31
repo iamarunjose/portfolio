@@ -1,0 +1,48 @@
+---
+title: "Knowledge Graphs for Code Intelligence: Beyond Lexical Search"
+subtitle: "Modeling syntax trees, call hierarchies, and architectural boundaries as queryable property graphs"
+summary: "An exploration of how combining AST analysis with knowledge graphs enables structural impact analysis, dependency reasoning, and grounded AI developer tools."
+category: "Software Intelligence"
+status: "draft"
+issueCode: "DRAFT // VOL-02"
+readingTime: "10 MIN READ (DRAFT)"
+accentColor: "teal"
+order: 2
+tags:
+  - "Knowledge Graphs"
+  - "Software Intelligence"
+  - "AST"
+  - "Code Analysis"
+---
+
+> **STATUS: UNPUBLISHED WORKING DRAFT** — This manuscript accompanies the proposed **Code Intelligence Lab** open-source initiative.
+
+## 1. Why Flat Text Chunking Fails on Codebases
+
+Standard vector retrieval treats source code as contiguous blocks of prose. While effective for surface-level snippet lookup, flat chunking loses the explicit structural topology that defines software behavior: imports, interface implementations, type hierarchies, and cross-module call chains.
+
+## 2. The Code Property Graph Approach
+
+By parsing source repositories into a unified **Code Knowledge Graph**, every symbol, module, configuration key, and test case becomes a first-class typed node connected by explicit semantic edges:
+
+- `DEFINES_SYMBOL` / `EXPORTS_INTERFACE`
+- `CALLS_FUNCTION` / `READS_CONFIG`
+- `COVERED_BY_TEST` / `MODIFIED_IN_COMMIT`
+
+```typescript
+// Conceptual Graph Query for Blast-Radius Analysis
+interface ImpactQuery {
+  targetSymbol: string;
+  maxHopDepth: number;
+  includeTransitiveCallers: boolean;
+  verifyTestCoverage: boolean;
+}
+```
+
+## 3. Draft Outline & Upcoming Sections
+
+1. Extracting multi-language AST relationships with incremental parsers
+2. Schema design for repository-scale property graphs
+3. Combining graph neighborhood traversal with semantic docstring embeddings
+4. Evaluating context quality for automated code review and refactoring agents
+

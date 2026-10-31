@@ -1,23 +1,49 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
+import '../styles/mascots.css';
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ArcadeExtras from '../components/ArcadeExtras.astro';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+export interface Props {
+  title?: string;
+  description?: string;
+  ogType?: 'website' | 'article';
+}
+
+const { title, description, ogType } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="arcade-mode-active motion-enabled">
+  <Head title={title} description={description} ogType={ogType} />
+  <body class="min-h-screen flex flex-col bg-cream text-ink antialiased selection:bg-yellow selection:text-ink">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] memphis-btn memphis-btn-yellow"
+    >
+      Skip to main content
+    </a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <ArcadeExtras />
+    <script>
+      import { initPortfolioMotion } from '../scripts/motion';
+      import { initMascotSystem } from '../lib/mascot-controller';
+      import { initArcadeExtras } from '../scripts/arcade-extras';
+
+      function bootAllMotion() {
+        initMascotSystem();
+        initPortfolioMotion();
+        initArcadeExtras();
+      }
+
+      bootAllMotion();
+      document.addEventListener('astro:page-load', bootAllMotion);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+---
+// Neo-Brutalist 1980s Arcade Mode & Independent SFX Mute Controls
+// Provides:
+// 1. ARCADE MODE toggle (data-arcade-toggle)
+// 2. Independent SFX Mute toggle (data-arcade-mute)
+// 3. Decorative Motion toggle (data-motion-toggle)
+---
+
+<div
+  class="arcade-controls-cluster inline-flex flex-wrap items-center gap-1.5 font-mono"
+  role="group"
+  aria-label="Arcade Mode, Sound Effects, and Motion Controls"
+>
+  <!-- 1. ARCADE MODE Toggle Button (Default: ON) -->
+  <button
+    type="button"
+    id="arcade-mode-toggle"
+    data-arcade-toggle
+    aria-pressed="true"
+    aria-label="Toggle Arcade Mode for playful character interactions"
+    class="arcade-ctrl-btn inline-flex items-center gap-1.5 bg-teal text-ink font-bold px-2 py-0.5 text-[10px] uppercase border border-cream cursor-pointer hover:bg-yellow transition-colors"
+  >
+    <!-- Pixel Joystick SVG Icon -->
+    <svg class="w-3 h-3 shrink-0" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <rect x="6" y="2" width="4" height="4" fill="#FF5793" stroke="#171717" stroke-width="1.5" />
+      <rect x="7" y="6" width="2" height="5" fill="#171717" />
+      <rect x="3" y="11" width="10" height="3" fill="#FFDE43" stroke="#171717" stroke-width="1.5" />
+    </svg>
+    <span data-arcade-toggle-label>ARCADE MODE: ON</span>
+  </button>
+
+  <!-- 2. Independent Retro SFX Mute Control (Default: ON / Unmuted) -->
+  <button
+    type="button"
+    id="arcade-mute-toggle"
+    data-arcade-mute
+    aria-pressed="false"
+    aria-label="Mute or unmute retro arcade sound effects"
+    class="arcade-ctrl-btn inline-flex items-center gap-1 bg-paper text-ink font-bold px-2 py-0.5 text-[10px] uppercase border border-cream cursor-pointer hover:bg-yellow transition-colors"
+  >
+    <!-- Pixel Speaker SVG Icon -->
+    <svg class="w-3 h-3 shrink-0" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <polygon points="2,6 6,6 10,3 10,13 6,10 2,10" fill="#171717" />
+      <rect x="12" y="5" width="2" height="2" fill="#FF5793" />
+      <rect x="12" y="9" width="2" height="2" fill="#FF5793" />
+    </svg>
+    <span data-arcade-mute-label>SFX: ON</span>
+  </button>
+
+  <!-- 3. Decorative Motion Master Toggle (Default: ON) -->
+  <button
+    type="button"
+    id="motion-toggle-btn"
+    data-motion-toggle
+    aria-pressed="true"
+    aria-label="Toggle decorative motion and arcade mascot animations"
+    class="arcade-ctrl-btn inline-flex items-center gap-1 bg-yellow text-ink font-bold px-2 py-0.5 text-[10px] uppercase border border-cream cursor-pointer hover:bg-pink transition-colors"
+  >
+    <!-- Pixel Bolt SVG Icon -->
+    <svg class="w-3 h-3 shrink-0" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <polygon points="9,1 3,9 8,9 7,15 13,7 8,7" fill="#171717" />
+    </svg>
+    <span data-motion-toggle-label>MOTION: ON</span>
+  </button>
+
+  <!-- 4. Interactive TERMINAL.86 Launcher (Ctrl+K) -->
+  <button
+    type="button"
+    id="terminal-open-btn"
+    data-terminal-open
+    aria-label="Open TERMINAL.86 interactive command palette"
+    class="arcade-ctrl-btn inline-flex items-center gap-1 bg-pink text-ink font-bold px-2 py-0.5 text-[10px] uppercase border border-cream cursor-pointer hover:bg-yellow transition-colors"
+  >
+    <span>&gt;_ TERM.86</span>
+  </button>
+
+  <!-- 5. Engineering Blueprint / X-Ray Mode Toggle -->
+  <button
+    type="button"
+    id="blueprint-toggle-btn"
+    data-blueprint-toggle
+    aria-pressed="false"
+    aria-label="Toggle Engineering Blueprint CAD Overlay Mode"
+    class="arcade-ctrl-btn inline-flex items-center gap-1 bg-blue text-white font-bold px-2 py-0.5 text-[10px] uppercase border border-cream cursor-pointer hover:bg-teal hover:text-ink transition-colors"
+  >
+    <span data-blueprint-toggle-label>BLUEPRINT: OFF</span>
+  </button>
+</div>
+

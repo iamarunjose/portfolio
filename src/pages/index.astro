@@ -1,11 +1,688 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import HeroIllustration from '../components/HeroIllustration.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import KnowledgeGraphViz from '../components/KnowledgeGraphViz.astro';
+import PaperEdgeDivider from '../components/PaperEdgeDivider.astro';
+import BroadcastSection from '../components/BroadcastSection.astro';
+import Pixel from '../components/mascots/Pixel.astro';
+import {
+  PROFILE,
+  FEATURED_PROJECTS,
+  EXPERIENCE_TIMELINE,
+  RESEARCH_TOPICS,
+  ENGINEERING_PHILOSOPHY,
+  PHOTOGRAPHY_FRAMES
+} from '../data/portfolio';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const writingEntries = (await getCollection('writing')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const colorClasses = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Arun Jose — Software Engineer | 1980s Memphis Retro Portfolio"
+  description={PROFILE.shortBio}
+>
+  <!-- =====================================================================
+       1. HERO SECTION (Cream Paper + Memphis Geometry + Giant Typography)
+       ===================================================================== -->
+  <section
+    class="relative overflow-hidden bg-cream pattern-grid border-b-[4px] border-ink py-12 sm:py-16 lg:py-20"
+    data-hero-section
+  >
+    <!-- Decorative Contained Interactive Memphis Shapes (Animation 2) -->
+    <div
+      class="memphis-spring-shape memphis-float-1 hidden md:block absolute top-10 left-8 w-16 h-16 bg-pink border-[3px] border-ink shadow-[4px_4px_0px_#171717] rotate-12 pointer-events-none"
+      data-memphis-shape
+      data-shape-speed="0.09"
+      data-shape-rotate="6"
+      data-base-rotate="12"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="memphis-spring-shape memphis-float-2 hidden md:block absolute bottom-12 right-10 w-24 h-8 bg-teal border-[3px] border-ink shadow-[4px_4px_0px_#171717] -rotate-6 pointer-events-none"
+      data-memphis-shape
+      data-shape-speed="-0.08"
+      data-shape-rotate="-5"
+      data-base-rotate="-6"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="memphis-spring-shape memphis-float-3 hidden md:flex absolute top-16 right-14 w-12 h-12 rounded-full bg-yellow border-[3px] border-ink shadow-[4px_4px_0px_#171717] items-center justify-center font-mono text-xs font-bold pointer-events-none"
+      data-memphis-shape
+      data-shape-speed="0.07"
+      data-shape-rotate="-8"
+      data-base-rotate="0"
+      aria-hidden="true"
+    >
+      ✦
+    </div>
+    <div
+      class="memphis-spring-shape memphis-float-4 hidden md:block absolute bottom-16 left-12 w-10 h-10 bg-blue border-[3px] border-ink shadow-[3px_3px_0px_#171717] rotate-45 pointer-events-none"
+      data-memphis-shape
+      data-shape-speed="-0.06"
+      data-shape-rotate="7"
+      data-base-rotate="45"
+      aria-hidden="true"
+    ></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <!-- Hero Left Column: Oversized Heading, Copy, Metadata & Buttons -->
+        <div class="lg:col-span-7 space-y-6" data-boot-sequence>
+          <!-- Rotated Role, Location & Retro System Boot Eyebrow Badges (Animation 1) -->
+          <div class="boot-stagger boot-stagger-1 flex flex-wrap items-center gap-3">
+            <span
+              class="memphis-label memphis-boot-pill"
+              data-hero-boot-pill
+            >
+              <span
+                class="w-2.5 h-2.5 bg-teal border border-cream inline-block boot-status-led"
+                aria-hidden="true"
+              ></span>
+              <span
+                data-boot-scramble
+                data-boot-initial="SYS.86 // INITIALIZING"
+                data-boot-final="SYS.86 // SYSTEM READY"
+              >
+                SYS.86 // SYSTEM READY
+              </span>
+            </span>
+            <span class="memphis-label bg-yellow -rotate-2">
+              <span class="w-2.5 h-2.5 bg-pink border border-ink inline-block" aria-hidden="true"></span>
+              SOFTWARE ENGINEER // DENMARK
+            </span>
+            <span class="memphis-label bg-teal rotate-1">
+              SIEMENS ENERGY
+            </span>
+          </div>
+
+          <!-- Oversized Heading: "Arun Jose" with Quick Staggered Word Entrance (Animation 1) -->
+          <div class="boot-stagger boot-stagger-2 relative pt-1">
+            <h1 class="memphis-hero-title text-5xl sm:text-7xl md:text-8xl tracking-tight m-0">
+              <span class="boot-word boot-word-1 inline-block">Arun</span>{' '}
+              <span class="boot-word boot-word-2 inline-block">Jose</span>
+            </h1>
+          </div>
+
+          <!-- Supporting Text -->
+          <div class="boot-stagger boot-stagger-3 memphis-card bg-paper p-5 sm:p-6 border-l-[10px] border-l-pink max-w-2xl">
+            <p class="font-sans font-bold text-lg sm:text-xl md:text-2xl text-ink leading-snug m-0">
+              “{PROFILE.heroTagline}”
+            </p>
+            <div class="mt-4 pt-3 border-t-2 border-dashed border-ink/30 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-ink/85">
+              <span><strong>EDUCATION:</strong> {PROFILE.education.degree} ({PROFILE.education.institution})</span>
+              <span class="text-pink font-bold">//</span>
+              <span><strong>CURRENT:</strong> {PROFILE.role} @ {PROFILE.currentOrg}</span>
+            </div>
+          </div>
+
+          <!-- Primary Hero CTA Buttons -->
+          <div class="boot-stagger boot-stagger-4 flex flex-wrap items-center gap-4 pt-2">
+            <a href="#projects" class="memphis-btn memphis-btn-yellow text-sm sm:text-base px-7 py-4">
+              <span>View My Work</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a href="/about" class="memphis-btn memphis-btn-pink text-sm sm:text-base px-7 py-4">
+              <span>About Me</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a href="/projects" class="memphis-btn memphis-btn-cream text-xs sm:text-sm px-5 py-4">
+              <span>All Case Studies</span>
+            </a>
+          </div>
+
+          <!-- Quick Domain Matrix Pills -->
+          <div class="boot-stagger boot-stagger-5 pt-3">
+            <p class="font-mono text-xs font-bold uppercase tracking-wider text-ink/75 mb-2.5">
+              CORE FOCUS AREAS //
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {PROFILE.interests.map((interest, idx) => {
+                const bgCycle = ['bg-yellow', 'bg-teal', 'bg-paper', 'bg-pink/90'];
+                return (
+                  <span
+                    class:list={[
+                      'font-mono text-xs font-bold px-3 py-1.5 border-2 border-ink shadow-[3px_3px_0px_#171717]',
+                      bgCycle[idx % bgCycle.length]
+                    ]}
+                  >
+                    {interest}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right Column: Large Illustrated 80s Memphis Computer & Portrait Area -->
+        <div class="lg:col-span-5">
+          <HeroIllustration />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       2. HORIZONTAL VIBRANT BAND: Professional Interests & Credentials Strip
+       ===================================================================== -->
+  <section
+    aria-label="Engineering Domains Ribbon"
+    class="bg-yellow border-b-[4px] border-ink py-4 px-4 overflow-x-auto"
+  >
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-ink">
+      <div class="flex items-center gap-2">
+        <span class="bg-ink text-yellow px-2 py-0.5">01</span>
+        <span>Platform Engineering</span>
+      </div>
+      <span class="text-pink font-display" aria-hidden="true">✦</span>
+      <div class="flex items-center gap-2">
+        <span class="bg-ink text-teal px-2 py-0.5">02</span>
+        <span>Infrastructure Monitoring</span>
+      </div>
+      <span class="text-blue font-display" aria-hidden="true">▲</span>
+      <div class="flex items-center gap-2">
+        <span class="bg-ink text-pink px-2 py-0.5">03</span>
+        <span>Knowledge Graphs & Hybrid RAG</span>
+      </div>
+      <span class="text-pink font-display" aria-hidden="true">■</span>
+      <div class="flex items-center gap-2">
+        <span class="bg-ink text-yellow px-2 py-0.5">04</span>
+        <span>Software Intelligence</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       3. FEATURED PROJECTS SECTION (Vintage Printed Panels)
+       ===================================================================== -->
+  <section id="projects" class="bg-cream pt-16 sm:pt-20 pb-14 sm:pb-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <SectionHeading
+          label="FEATURED WORK // 01"
+          title="Featured Projects"
+          subtitle="Selected work spanning academic AI research, enterprise infrastructure automation, and open-source software intelligence."
+          labelColor="teal"
+          rotate="left"
+        />
+        <div class="mb-10 md:mb-12">
+          <a href="/projects" class="memphis-btn memphis-btn-teal text-xs sm:text-sm">
+            <span>Open Full Project Catalog</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3 Vintage Printed Panel Cards (Animation 4: Staggered + Tactile Neo-Brutalist Lift) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {FEATURED_PROJECTS.map((project, idx) => (
+          <ProjectCard project={project} detailed={false} index={idx} />
+        ))}
+      </div>
+
+      <!-- Confidentiality & Non-Disclosure Banner -->
+      <div class="mt-10 memphis-card bg-yellow p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3 font-mono text-xs sm:text-sm font-bold text-ink">
+          <span class="bg-ink text-yellow px-2.5 py-1 border-2 border-ink">GOVERNANCE</span>
+          <span>
+            Public descriptions focus on conceptual methodology and engineering patterns. Confidential internal architectures are strictly omitted.
+          </span>
+        </div>
+        <a href="/projects" class="font-mono text-xs font-bold uppercase underline hover:text-blue shrink-0">
+          Read Methodology Notes →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper-Edge Transition: Cream -> Teal (Animation 7) -->
+  <PaperEdgeDivider topColor="cream" bottomColor="teal" variant="scrapbook" direction="left" />
+
+  <!-- =====================================================================
+       4. EXPERIENCE SECTION (Vibrant Teal Horizontal Band + Career Logbook)
+       ===================================================================== -->
+  <section id="experience" class="bg-teal pt-14 sm:pt-18 pb-14 sm:pb-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <SectionHeading
+          label="CAREER LOG // 02"
+          title="Professional Experience"
+          subtitle="Engineering journey across Denmark, Germany, and India within Siemens organizations, combined with graduate research at TU Chemnitz."
+          labelColor="yellow"
+          rotate="left"
+        />
+        <div class="mb-10 md:mb-12">
+          <a href="/experience" class="memphis-btn memphis-btn-yellow text-xs sm:text-sm">
+            <span>Full Timeline & Education</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Verification Notice Pill -->
+      <div class="mb-6 memphis-card bg-paper p-3.5 border-l-[8px] border-l-pink flex flex-wrap items-center justify-between gap-2 font-mono text-xs">
+        <span>
+          <strong>[TIMELINE STATUS]:</strong> Verify exact roles and dates before publication.
+        </span>
+        <span class="bg-yellow px-2 py-0.5 border border-ink font-bold">
+          DENMARK • GERMANY • INDIA
+        </span>
+      </div>
+
+      <!-- Retro Engineering-Logbook Spine: INDIA -> GERMANY -> DENMARK (Animation 5) -->
+      <div
+        class="mb-8 memphis-card bg-cream p-4 sm:p-5 border-[3px] border-ink"
+        data-logbook-spine
+      >
+        <div class="flex items-center justify-between font-mono text-[11px] font-bold uppercase text-ink/80 mb-3">
+          <span>ENGINEERING LOGBOOK // GEOGRAPHIC PROGRESSION</span>
+          <span class="bg-ink text-yellow px-2 py-0.5">2018 → PRESENT</span>
+        </div>
+        <div class="relative pt-2 pb-1">
+          <!-- Background Track Line -->
+          <div class="h-2.5 w-full bg-paper border-2 border-ink relative overflow-hidden" aria-hidden="true">
+            <div class="logbook-progress-bar h-full bg-pink"></div>
+          </div>
+          <!-- 3 Country Milestones -->
+          <div class="grid grid-cols-3 gap-2 mt-3 font-mono text-xs font-bold">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 bg-blue text-white border-2 border-ink inline-flex items-center justify-center text-[10px] shadow-[2px_2px_0px_#171717]">01</span>
+              <span>INDIA (2018–2021)</span>
+            </div>
+            <div class="flex items-center justify-center gap-2">
+              <span class="w-5 h-5 bg-pink text-ink border-2 border-ink inline-flex items-center justify-center text-[10px] shadow-[2px_2px_0px_#171717]">02</span>
+              <span>GERMANY (2022–2026)</span>
+            </div>
+            <div class="flex items-center justify-end gap-2">
+              <span class="w-5 h-5 bg-yellow text-ink border-2 border-ink inline-flex items-center justify-center text-[10px] shadow-[2px_2px_0px_#171717]">03</span>
+              <span>DENMARK (2026–NOW)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asymmetric Magazine Timeline Grid with Hinged Logbook Reveal (Animation 5) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" data-logbook-list>
+        {EXPERIENCE_TIMELINE.map((item, index) => (
+          <article
+            class="memphis-card logbook-hinge-card bg-paper flex flex-col justify-between relative"
+            data-logbook-entry
+            style={`--logbook-index: ${index};`}
+          >
+            <div>
+              <div class:list={['memphis-window-bar', colorClasses[item.accentColor]]}>
+                <span class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 bg-paper border border-ink inline-block" aria-hidden="true"></span>
+                  <span>LOG 0{index + 1} // {item.location.toUpperCase()}</span>
+                </span>
+                <span class="bg-paper text-ink px-2 py-0.5 border border-ink text-[11px]">
+                  {item.period}
+                </span>
+              </div>
+              <div class="p-5 sm:p-6">
+                <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+                  <h3 class="font-display text-xl sm:text-2xl uppercase text-ink m-0">
+                    {item.company}
+                  </h3>
+                  <span class="font-mono text-xs font-bold uppercase bg-cream px-2.5 py-1 border-2 border-ink">
+                    {item.role}
+                  </span>
+                </div>
+                <p class="font-mono text-xs font-bold text-ink/75 mb-4 m-0">
+                  {item.type} • {item.location} ({item.period})
+                </p>
+                <ul class="space-y-2 font-sans text-sm text-ink/90 pl-4 m-0 list-square">
+                  {item.highlights.map((hl) => (
+                    <li>{hl}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div class="px-5 py-3 bg-cream border-t-[3px] border-ink flex flex-wrap items-center justify-between gap-1.5">
+              <div class="flex flex-wrap gap-1.5">
+                {item.domains.map((dom) => (
+                  <span class="memphis-tag">{dom}</span>
+                ))}
+              </div>
+              <span class="logbook-page-corner font-mono text-[10px] font-bold text-ink/60" aria-hidden="true">
+                PG.0{index + 1} ◢
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Education Banner Card -->
+      <div class="mt-8 memphis-card bg-yellow p-6 sm:p-8 border-[4px] border-ink shadow-[8px_8px_0px_#171717]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-8 space-y-2">
+            <span class="memphis-label bg-pink text-ink -rotate-1">
+              ACADEMIC DEGREE // GERMANY
+            </span>
+            <h3 class="font-display text-2xl sm:text-3xl uppercase text-ink m-0 pt-1">
+              {PROFILE.education.degree}
+            </h3>
+            <p class="font-mono text-sm font-bold text-ink m-0">
+              {PROFILE.education.institution} — {PROFILE.education.location}
+            </p>
+            <p class="font-sans text-sm sm:text-base text-ink/90 m-0 pt-1">
+              Focus: {PROFILE.education.focus}. Master's research investigated a Hybrid Semantic Framework for Export Control Compliance.
+            </p>
+          </div>
+          <div class="lg:col-span-4 flex lg:justify-end">
+            <a href="/research" class="memphis-btn memphis-btn-cream text-xs sm:text-sm">
+              <span>Inspect Thesis Research</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper-Edge Transition: Teal -> Cream (Animation 7) -->
+  <PaperEdgeDivider topColor="teal" bottomColor="cream" variant="notched" direction="right" />
+
+  <!-- =====================================================================
+       5. RESEARCH SECTION (Interactive Knowledge Graph + Semantic & AI Systems)
+       ===================================================================== -->
+  <section id="research" class="bg-cream pattern-grid pt-14 sm:pt-18 pb-14 sm:pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <SectionHeading
+          label="APPLIED AI & SEMANTICS // 03"
+          title="Research & Knowledge Systems"
+          subtitle="Connecting symbolic knowledge engineering with neural language models for explainable, verifiable software systems."
+          labelColor="pink"
+          rotate="right"
+        />
+        <div class="mb-10 md:mb-12">
+          <a href="/research" class="memphis-btn memphis-btn-pink text-xs sm:text-sm">
+            <span>Explore Research Lab</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Interactive SVG Knowledge Graph Visualization (Animation 6) -->
+      <KnowledgeGraphViz idPrefix="home-kg-viz" />
+
+      <!-- Asymmetric 5-Card Magazine Spread -->
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-6 sm:gap-8">
+        {RESEARCH_TOPICS.map((topic, idx) => {
+          const spanClass = idx < 2 ? 'md:col-span-3' : 'md:col-span-2';
+          return (
+            <article class:list={['memphis-card bg-paper flex flex-col justify-between', spanClass]}>
+              <div>
+                <div class:list={['memphis-window-bar', colorClasses[topic.accentColor]]}>
+                  <span>{topic.code}</span>
+                  <span>RESEARCH VECTOR</span>
+                </div>
+                <div class="p-5 sm:p-6 space-y-3">
+                  <h3 class="font-display text-xl uppercase text-ink m-0 leading-snug">
+                    {topic.title}
+                  </h3>
+                  <p class="font-mono text-xs font-bold text-blue m-0">
+                    {topic.subtitle}
+                  </p>
+                  <p class="font-sans text-sm sm:text-base text-ink/90 leading-relaxed m-0">
+                    {topic.description}
+                  </p>
+                </div>
+              </div>
+              <div class="px-5 py-3.5 bg-cream border-t-[3px] border-ink flex flex-wrap gap-1.5">
+                {topic.keyConcepts.map((concept) => (
+                  <span class="memphis-tag">{concept}</span>
+                ))}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper-Edge Transition: Cream -> Yellow (Animation 7) -->
+  <PaperEdgeDivider topColor="cream" bottomColor="yellow" variant="deckle" direction="left" />
+
+  <!-- =====================================================================
+       6. WRITING SECTION (Yellow Horizontal Band + MDX Technical Blog)
+       ===================================================================== -->
+  <section id="writing" class="bg-yellow pt-14 sm:pt-18 pb-14 sm:pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <SectionHeading
+          label="TECHNICAL DISPATCHES // 04"
+          title="Technical Writing & Notes"
+          subtitle="MDX-powered engineering notebook featuring working drafts on reliable infrastructure, code knowledge graphs, Hybrid RAG, and developer automation."
+          labelColor="pink"
+          rotate="left"
+          titleVariant="teal"
+        />
+        <div class="mb-10 md:mb-12 flex flex-wrap items-center gap-3">
+          <Pixel id="home-pixel-mascot" size="sm" />
+          <a href="/writing" class="memphis-btn memphis-btn-cream text-xs sm:text-sm">
+            <span>All Draft Articles & RSS</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 MDX Draft Cards (No publication dates assigned!) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        {writingEntries.map((post) => (
+          <article class="memphis-card memphis-card-interactive bg-paper flex flex-col justify-between">
+            <div>
+              <div class:list={['memphis-window-bar', colorClasses[post.data.accentColor]]}>
+                <span>{post.data.issueCode} // {post.data.category.toUpperCase()}</span>
+                <span class="bg-ink text-yellow px-2 py-0.5 text-[10px] uppercase">
+                  STATUS: {post.data.status.toUpperCase()} (UNPUBLISHED)
+                </span>
+              </div>
+              <div class="p-5 sm:p-6 space-y-3">
+                <h3 class="font-display text-xl sm:text-2xl uppercase text-ink m-0 leading-snug">
+                  <a href={`/writing/${post.id}`} class="text-ink no-underline hover:underline">
+                    {post.data.title}
+                  </a>
+                </h3>
+                <p class="font-sans text-sm sm:text-base text-ink/90 leading-relaxed m-0">
+                  {post.data.summary}
+                </p>
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  {post.data.tags.map((tag) => (
+                    <span class="memphis-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div class="px-5 py-3.5 bg-cream border-t-[3px] border-ink flex items-center justify-between font-mono text-xs font-bold">
+              <span>{post.data.readingTime}</span>
+              <a href={`/writing/${post.id}`} class="text-ink underline hover:text-blue">
+                Read Draft Outline →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper-Edge Transition: Yellow -> Cream (Animation 7) -->
+  <PaperEdgeDivider topColor="yellow" bottomColor="cream" variant="scrapbook" direction="right" />
+
+  <!-- =====================================================================
+       6B. BROADCAST STUDIO // PODCAST, TECH TALKS & YOUTUBE
+       ===================================================================== -->
+  <BroadcastSection compact={true} />
+
+  <!-- Paper-Edge Transition: Cream -> Cream/Notched -->
+  <PaperEdgeDivider topColor="cream" bottomColor="cream" variant="notched" direction="left" />
+
+  <!-- =====================================================================
+       7. ABOUT & PHOTOGRAPHY PREVIEW SECTION (Cream Magazine Spread)
+       ===================================================================== -->
+  <section id="about" class="bg-cream pt-14 sm:pt-18 pb-14 sm:pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <!-- Left Column: Bio & Engineering Philosophy -->
+        <div class="lg:col-span-7 space-y-6">
+          <SectionHeading
+            label="ENGINEER & OBSERVER // 05"
+            title="About Arun Jose"
+            subtitle="Connecting pragmatic platform engineering with semantic AI research—and documenting architectural geometry through photography."
+            labelColor="yellow"
+            rotate="left"
+          />
+
+          <div class="memphis-card bg-paper p-6 space-y-4">
+            <p class="font-sans text-base text-ink leading-relaxed m-0">
+              I am a <strong>Software Engineer at Siemens Energy in Denmark</strong>, holding an <strong>MSc in Web Engineering from Technische Universität Chemnitz, Germany</strong>. Across my career with Siemens organizations in India, Germany, and Denmark, I have focused on building reliable software systems, automating operational workflows, and making complex infrastructure observable.
+            </p>
+            <p class="font-sans text-base text-ink leading-relaxed m-0">
+              My academic and independent research explores the intersection of <strong>Knowledge Graphs, Hybrid RAG, and Software Intelligence</strong>—investigating how explicit symbolic structure can make AI systems verifiable and trustworthy for real-world engineering and compliance tasks.
+            </p>
+          </div>
+
+          <!-- Philosophy Mini-Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {ENGINEERING_PHILOSOPHY.slice(0, 2).map((phil) => (
+              <div class="memphis-card bg-paper p-4 border-t-[6px] border-t-teal">
+                <span class="font-mono text-[11px] font-bold text-ink/70">{phil.code}</span>
+                <h3 class="font-display text-base uppercase text-ink mt-1 mb-2">{phil.title}</h3>
+                <p class="font-sans text-xs sm:text-sm text-ink/90 m-0 leading-relaxed">{phil.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="pt-2">
+            <a href="/about" class="memphis-btn memphis-btn-teal text-xs sm:text-sm">
+              <span>Read Full Bio & Photography Sheet</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Retro Contact-Sheet Photography Preview -->
+        <div class="lg:col-span-5">
+          <div class="memphis-card bg-ink text-cream p-5 border-[4px] border-ink shadow-[8px_8px_0px_#FF5793]">
+            <div class="flex items-center justify-between border-b-2 border-cream/30 pb-3 mb-4 font-mono text-xs font-bold">
+              <span class="text-yellow">CONTACT_SHEET // 35MM ARCHIVE</span>
+              <span class="bg-pink text-ink px-2 py-0.5 border border-cream">4 FRAMES</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {PHOTOGRAPHY_FRAMES.map((frame) => (
+                <div class="bg-paper text-ink border-2 border-cream p-3 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between font-mono text-[10px] font-bold text-ink/75 mb-2">
+                      <span>{frame.frameNumber}</span>
+                      <span>{frame.location}</span>
+                    </div>
+                    <!-- Geometric Viewfinder Illustration -->
+                    <div class:list={['h-24 border-2 border-ink mb-2.5 relative overflow-hidden flex items-center justify-center', colorClasses[frame.accentColor]]}>
+                      <div class="w-10 h-10 border-2 border-ink rounded-full bg-cream/80 flex items-center justify-center font-mono text-[10px] font-bold text-ink">
+                        AF
+                      </div>
+                      <span class="absolute bottom-1 right-1 bg-ink text-cream font-mono text-[9px] px-1">
+                        {frame.subject.split('&')[0]}
+                      </span>
+                    </div>
+                    <h4 class="font-display text-xs uppercase text-ink m-0">{frame.title}</h4>
+                  </div>
+                  <p class="font-mono text-[10px] text-ink/75 mt-2 mb-0 pt-1 border-t border-dashed border-ink/30">
+                    {frame.cameraMeta}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-4 pt-3 border-t-2 border-cream/30 flex items-center justify-between font-mono text-xs">
+              <span class="text-cream/80">ARCH & STREET PHOTOGRAPHY</span>
+              <a href="/about#photography" class="text-yellow font-bold hover:underline">
+                Open Darkroom →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper-Edge Transition: Cream -> Pink (Animation 7) -->
+  <PaperEdgeDivider topColor="cream" bottomColor="pink" variant="notched" direction="left" />
+
+  <!-- =====================================================================
+       8. CONTACT & CV CALLOUT SECTION (Pink + Yellow Memphis Dispatch Panel)
+       ===================================================================== -->
+  <section id="contact" class="bg-pink pt-14 sm:pt-18 pb-16 sm:pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="memphis-card bg-cream p-6 sm:p-10 lg:p-12 border-[4px] border-ink shadow-[12px_12px_0px_#171717]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <span class="memphis-label bg-yellow -rotate-2">
+              COMMUNICATIONS TERMINAL // 06
+            </span>
+            <h2 class="memphis-section-title text-3xl sm:text-5xl m-0 pt-1">
+              Let’s Connect & Collaborate
+            </h2>
+            <p class="font-sans text-base sm:text-lg text-ink/90 max-w-xl leading-relaxed m-0">
+              Open to conversations with engineering leaders, applied AI researchers, and fellow builders working on platform engineering, observability, or knowledge graphs.
+            </p>
+            <p class="font-mono text-xs text-ink/75 m-0">
+              * Note: Direct links below use clean placeholders ready for final production URLs.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <a
+              href={`mailto:${PROFILE.contact.emailPlaceholder}`}
+              class="memphis-btn memphis-btn-yellow flex-col items-start p-4 text-left"
+            >
+              <span class="text-[10px] uppercase bg-ink text-yellow px-1.5 py-0.5">EMAIL (PLACEHOLDER)</span>
+              <span class="text-xs sm:text-sm font-bold break-all mt-1">Send Email →</span>
+            </a>
+
+            <a
+              href={PROFILE.contact.githubPlaceholder}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="memphis-btn memphis-btn-teal flex-col items-start p-4 text-left"
+            >
+              <span class="text-[10px] uppercase bg-ink text-teal px-1.5 py-0.5">GITHUB (PLACEHOLDER)</span>
+              <span class="text-xs sm:text-sm font-bold mt-1">{PROFILE.contact.githubHandle} ↗</span>
+            </a>
+
+            <a
+              href={PROFILE.contact.linkedinPlaceholder}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="memphis-btn memphis-btn-cream flex-col items-start p-4 text-left"
+            >
+              <span class="text-[10px] uppercase bg-ink text-cream px-1.5 py-0.5">LINKEDIN (PLACEHOLDER)</span>
+              <span class="text-xs sm:text-sm font-bold mt-1">{PROFILE.contact.linkedinHandle} ↗</span>
+            </a>
+
+            <a
+              href={PROFILE.contact.cvUrl}
+              class="memphis-btn memphis-btn-blue flex-col items-start p-4 text-left"
+            >
+              <span class="text-[10px] uppercase bg-yellow text-ink px-1.5 py-0.5">CURRICULUM VITAE</span>
+              <span class="text-xs sm:text-sm font-bold mt-1">Download / Print CV ↓</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Pixel from '../../components/mascots/Pixel.astro';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const colorClasses = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+---
+
+<Layout
+  title="Technical Writing & Engineering Notebook — Arun Jose"
+  description="Retro-styled MDX technical blog by Arun Jose covering reliable infrastructure, knowledge graphs for code intelligence, hybrid RAG, and software automation."
+>
+  <!-- Page Header Band -->
+  <section class="bg-yellow border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-3xl space-y-4">
+          <span class="memphis-label bg-pink -rotate-2">
+            MDX TECHNICAL ZINE // WORKING DRAFTS
+          </span>
+          <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+            Writing
+          </h1>
+          <div class="memphis-card bg-paper p-5 border-l-[10px] border-l-teal">
+            <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+              Long-form engineering essays and working manuscripts on infrastructure observability, knowledge graphs for code intelligence, retrieval-augmented generation, and developer productivity.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <Pixel id="writing-page-pixel-mascot" size="sm" />
+          <a href="/rss.xml" class="memphis-btn memphis-btn-pink text-xs sm:text-sm">
+            <span>Subscribe via RSS</span>
+            <span aria-hidden="true">✦</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Draft Articles Grid -->
+  <section class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 memphis-card bg-teal p-4 flex flex-wrap items-center justify-between gap-3 font-mono text-xs sm:text-sm font-bold text-ink">
+        <span>
+          [MANUSCRIPT QUEUE]: All articles below are currently unpublished working drafts. No publication dates are assigned until final release.
+        </span>
+        <span class="bg-paper px-2.5 py-1 border-2 border-ink">
+          {posts.length} MDX DRAFTS
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {posts.map((post) => (
+          <article class="memphis-card memphis-card-interactive bg-paper flex flex-col justify-between">
+            <div>
+              <div class:list={['memphis-window-bar', colorClasses[post.data.accentColor]]}>
+                <span>{post.data.issueCode} // {post.data.category.toUpperCase()}</span>
+                <span class="bg-ink text-yellow px-2 py-0.5 text-[10px]">
+                  DRAFT // UNPUBLISHED
+                </span>
+              </div>
+
+              <div class="p-6 sm:p-8 space-y-4">
+                <h2 class="font-display text-2xl sm:text-3xl uppercase text-ink m-0 leading-snug">
+                  <a href={`/writing/${post.id}`} class="text-ink no-underline hover:underline">
+                    {post.data.title}
+                  </a>
+                </h2>
+
+                <p class="font-mono text-xs font-bold text-blue m-0">
+                  {post.data.subtitle}
+                </p>
+
+                <p class="font-sans text-base text-ink/90 leading-relaxed m-0">
+                  {post.data.summary}
+                </p>
+
+                <div class="flex flex-wrap gap-2 pt-2">
+                  {post.data.tags.map((tag) => (
+                    <span class="memphis-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div class="px-6 py-4 bg-cream border-t-[3px] border-ink flex items-center justify-between font-mono text-xs font-bold">
+              <span>{post.data.readingTime}</span>
+              <a
+                href={`/writing/${post.id}`}
+                class="memphis-btn memphis-btn-yellow text-xs py-2 px-4"
+              >
+                Open Draft Manuscript →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+

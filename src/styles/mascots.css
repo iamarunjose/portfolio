@@ -1,0 +1,3 @@
+/* Re-export / Alias for src/styles/mascots.css architecture convention */
+@import './mascot-animations.css';
+

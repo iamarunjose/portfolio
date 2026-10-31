@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Page 3</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --bg: #FFF7E8;
+    --paper: #FFFDF9;
+    --yellow: #FFDE43;
+    --pink: #FF5793;
+    --teal: #38D8C4;
+    --blue: #377AF5;
+    --ink: #171717;
+    --font-display: 'Archivo Black', 'Arial Black', 'Impact', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+    --font-mono: 'Space Mono', 'Consolas', 'Courier New', monospace;
+  }
+  html, body {
+    background: var(--ink);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .brochure-page {
+    width: 1080px;
+    height: 1350px;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(to right, rgba(23, 23, 23, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(23, 23, 23, 0.08) 1px, transparent 1px);
+    background-size: 36px 36px;
+    border: 8px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+    break-after: page;
+  }
+  .top-bar {
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid var(--ink);
+    letter-spacing: 0.05em;
+  }
+  .top-bar-badge {
+    background: var(--pink);
+    color: var(--ink);
+    padding: 4px 12px;
+    border: 2px solid var(--bg);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .bottom-bar {
+    background: var(--yellow);
+    color: var(--ink);
+    border-top: 5px solid var(--ink);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .page-content {
+    flex: 1;
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+  .memphis-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px 18px;
+    border: 3.5px solid var(--ink);
+    box-shadow: 5px 5px 0px var(--ink);
+    color: var(--ink);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-shadow:
+      5px 5px 0px var(--yellow),
+      10px 10px 0px var(--pink);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-shadow:
+      4px 4px 0px var(--yellow),
+      8px 8px 0px var(--pink);
+  }
+  .card {
+    background: var(--paper);
+    border: 4px solid var(--ink);
+    box-shadow: 8px 8px 0px var(--ink);
+  }
+  .window-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    border-bottom: 4px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .dots {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    border: 2.5px solid var(--ink);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border: 2.5px solid var(--ink);
+    background: var(--bg);
+    box-shadow: 3px 3px 0px var(--ink);
+  }
+  .bg-yellow { background-color: var(--yellow); color: var(--ink); }
+  .bg-pink { background-color: var(--pink); color: var(--ink); }
+  .bg-teal { background-color: var(--teal); color: var(--ink); }
+  .bg-blue { background-color: var(--blue); color: #FFFFFF; }
+  .bg-paper { background-color: var(--paper); color: var(--ink); }
+  .bg-cream { background-color: var(--bg); color: var(--ink); }
+  .bg-ink { background-color: var(--ink); color: var(--bg); }
+  @page {
+    size: 1080px 1350px;
+    margin: 0;
+  }
+ html, body { width: 1080px; height: 1350px; overflow: hidden; }</style>
+</head>
+<body>
+  
+<section class="brochure-page">
+  <div class="top-bar">
+    <span>■ APPLIED AI RESEARCH // SEMANTIC & GRAPH SYSTEMS</span>
+    <span class="top-bar-badge" style="background:var(--teal);">PAGE 03 / 05</span>
+  </div>
+
+  <div class="page-content">
+    <div>
+      <span class="memphis-label bg-pink" style="transform:rotate(1.5deg);">RESEARCH LAB // TU CHEMNITZ & BEYOND</span>
+      <div class="section-title" style="font-size:70px; margin-top:12px;">HYBRID RAG & GRAPHS</div>
+      <p style="font-size:20px; font-weight:700; margin-top:8px; color:#222;">
+        Combining neural language models with explicit symbolic structures for verifiable, grounded engineering intelligence.
+      </p>
+    </div>
+
+    <!-- Custom SVG Architecture Diagram Card -->
+    <div class="card">
+      <div class="window-bar bg-blue">
+        <span>FIG 02 // HYBRID_SEMANTIC_COMPLIANCE_PIPELINE.SVG</span>
+        <span style="background:var(--yellow); color:var(--ink); padding:2px 10px; border:2px solid var(--ink);">ARCHITECTURE</span>
+      </div>
+      <div style="padding:20px 28px; background:var(--bg);">
+        <svg viewBox="0 0 900 280" style="width:100%; height:245px; display:block;">
+          <!-- Query Box -->
+          <rect x="24" y="88" width="175" height="114" fill="#171717"/>
+          <rect x="16" y="80" width="175" height="114" fill="#FFDE43" stroke="#171717" stroke-width="4"/>
+          <text x="103" y="128" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="17" fill="#171717">TECHNICAL SPEC</text>
+          <text x="103" y="152" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="17" fill="#171717">&amp; REGULATORY</text>
+          <text x="103" y="176" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="17" fill="#171717">QUERY</text>
+
+          <!-- Connector Lines -->
+          <path d="M191 115 L285 65" stroke="#171717" stroke-width="5" fill="none"/>
+          <path d="M191 165 L285 215" stroke="#171717" stroke-width="5" fill="none"/>
+
+          <!-- Channel 1: Dense Vector -->
+          <rect x="293" y="22" width="270" height="98" fill="#171717"/>
+          <rect x="285" y="14" width="270" height="98" fill="#38D8C4" stroke="#171717" stroke-width="4"/>
+          <text x="420" y="54" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="18" fill="#171717">DENSE VECTOR INDEX</text>
+          <text x="420" y="78" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="14" fill="#171717">Semantic Embeddings &amp; Recall</text>
+          <text x="420" y="98" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" fill="#171717">[Captures Conceptual Equivalence]</text>
+
+          <!-- Channel 2: Knowledge Graph -->
+          <rect x="293" y="168" width="270" height="98" fill="#171717"/>
+          <rect x="285" y="160" width="270" height="98" fill="#FF5793" stroke="#171717" stroke-width="4"/>
+          <text x="420" y="200" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="18" fill="#171717">KNOWLEDGE GRAPH</text>
+          <text x="420" y="224" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="14" fill="#171717">Ontology &amp; Multi-Hop Traversal</text>
+          <text x="420" y="244" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" fill="#171717">[Enforces Structural Rules]</text>
+
+          <!-- Connectors to Fusion -->
+          <path d="M555 65 L645 115" stroke="#171717" stroke-width="5" fill="none"/>
+          <path d="M555 215 L645 165" stroke="#171717" stroke-width="5" fill="none"/>
+
+          <!-- Fusion Output Box -->
+          <rect x="653" y="64" width="230" height="156" fill="#171717"/>
+          <rect x="645" y="56" width="230" height="156" fill="#FFFDF9" stroke="#171717" stroke-width="4"/>
+          <rect x="645" y="56" width="230" height="36" fill="#377AF5" stroke="#171717" stroke-width="4"/>
+          <text x="760" y="80" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="15" fill="#FFFFFF">HYBRID REASONER</text>
+          <text x="760" y="122" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="17" fill="#171717">RANK FUSION +</text>
+          <text x="760" y="148" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="17" fill="#171717">TRACEABLE EVIDENCE</text>
+          <text x="760" y="174" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="17" fill="#171717">&amp; VERIFICATION</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 4 Research Pillars Grid -->
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:22px;">
+      <div class="card" style="padding:22px; border-top:10px solid var(--yellow);">
+        <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">RES-01 // MASTER'S THESIS</div>
+        <div style="font-family:var(--font-display); font-weight:900; font-size:22px; text-transform:uppercase; margin-top:6px;">
+          Export Control Compliance AI
+        </div>
+        <p style="font-size:16px; line-height:1.45; margin-top:8px;">
+          Modeled regulatory hierarchies and technical concepts to assist complex classification with human-in-the-loop verification.
+        </p>
+      </div>
+
+      <div class="card" style="padding:22px; border-top:10px solid var(--teal);">
+        <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">RES-02 // HYBRID RETRIEVAL</div>
+        <div style="font-family:var(--font-display); font-weight:900; font-size:22px; text-transform:uppercase; margin-top:6px;">
+          Vector + Symbolic Graph RAG
+        </div>
+        <p style="font-size:16px; line-height:1.45; margin-top:8px;">
+          Fusing dense embeddings, lexical BM25 precision, and graph neighborhood assembly to mitigate hallucinations.
+        </p>
+      </div>
+
+      <div class="card" style="padding:22px; border-top:10px solid var(--pink);">
+        <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">RES-03 // SEMANTIC SYSTEMS</div>
+        <div style="font-family:var(--font-display); font-weight:900; font-size:22px; text-transform:uppercase; margin-top:6px;">
+          Knowledge Graphs & NLP
+        </div>
+        <p style="font-size:16px; line-height:1.45; margin-top:8px;">
+          Property graphs, entity linking, and domain-adapted NLP for technical corpora and large software repositories.
+        </p>
+      </div>
+
+      <div class="card" style="padding:22px; border-top:10px solid var(--blue);">
+        <div style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--blue);">RES-04 // FUTURE HORIZONS</div>
+        <div style="font-family:var(--font-display); font-weight:900; font-size:22px; text-transform:uppercase; margin-top:6px;">
+          Verifiable AI Engineering
+        </div>
+        <p style="font-size:16px; line-height:1.45; margin-top:8px;">
+          Neuro-symbolic guardrails, citation-grounded generation, and deterministic policy checks for critical systems.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <span>APPLIED AI RESEARCH // HYBRID RAG & KNOWLEDGE GRAPHS</span>
+    <span>[BROCHURE PAGE 03 / 05] →</span>
+  </div>
+</section>
+
+</body>
+</html>

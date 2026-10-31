@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PaperEdgeDivider from '../components/PaperEdgeDivider.astro';
+import { FEATURED_PROJECTS, PROFILE } from '../data/portfolio';
+---
+
+<Layout
+  title="Projects & Case Studies — Arun Jose"
+  description="Featured engineering and research projects by Arun Jose: Hybrid Semantic Framework for Export Control Compliance, Infrastructure Monitoring & Automation, and Code Intelligence Lab."
+>
+  <!-- Page Header Band -->
+  <section class="bg-teal border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-4">
+        <span class="memphis-label bg-yellow -rotate-2">
+          SYSTEMS & CASE STUDIES // 01–03
+        </span>
+        <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+          Projects & Lab
+        </h1>
+        <div class="memphis-card bg-paper p-5 border-l-[10px] border-l-pink">
+          <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+            A curated catalog of academic applied AI research, enterprise platform & monitoring engineering, and proposed open-source software intelligence tooling.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Vintage Printed Panels -->
+  <section class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="DETAILED PANELS // FULL SPECS"
+        title="Featured Engineering & Research Work"
+        subtitle="Each panel outlines the problem domain, methodological approach, and technology stack while respecting enterprise confidentiality and accurate publication status."
+        labelColor="yellow"
+        rotate="left"
+      />
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {FEATURED_PROJECTS.map((project, idx) => (
+          <ProjectCard project={project} detailed={true} index={idx} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PaperEdgeDivider topColor="cream" bottomColor="yellow" variant="scrapbook" direction="left" />
+
+  <!-- Retro System Comparison Matrix -->
+  <section class="bg-yellow py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="ARCHITECTURAL MATRIX"
+        title="Project Taxonomy & Scope"
+        subtitle="Side-by-side breakdown of research artifacts, professional engineering work, and proposed open-source labs."
+        labelColor="pink"
+        rotate="right"
+      />
+
+      <div class="memphis-card bg-paper overflow-x-auto">
+        <table class="w-full text-left border-collapse font-sans text-sm">
+          <thead>
+            <tr class="bg-ink text-cream font-mono text-xs uppercase">
+              <th class="p-4 border-b-[3px] border-r-2 border-ink">ID // Project</th>
+              <th class="p-4 border-b-[3px] border-r-2 border-ink">Category</th>
+              <th class="p-4 border-b-[3px] border-r-2 border-ink">Core Architecture</th>
+              <th class="p-4 border-b-[3px] border-ink">Public Status & Governance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {FEATURED_PROJECTS.map((proj) => (
+              <tr class="border-b-[3px] border-ink hover:bg-cream/70">
+                <td class="p-4 border-r-2 border-ink font-display text-sm uppercase">
+                  <span class="font-mono text-xs bg-yellow px-1.5 py-0.5 border border-ink mr-2">
+                    {proj.number}
+                  </span>
+                  {proj.title}
+                </td>
+                <td class="p-4 border-r-2 border-ink font-mono text-xs font-bold">
+                  {proj.category}
+                </td>
+                <td class="p-4 border-r-2 border-ink">
+                  <div class="flex flex-wrap gap-1">
+                    {proj.tags.map((t) => (
+                      <span class="memphis-tag text-[11px]">{t}</span>
+                    ))}
+                  </div>
+                </td>
+                <td class="p-4 font-mono text-xs text-ink/85">
+                  {proj.note}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Layout>
+

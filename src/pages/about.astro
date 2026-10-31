@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import {
+  PROFILE,
+  ENGINEERING_PHILOSOPHY,
+  PHOTOGRAPHY_FRAMES
+} from '../data/portfolio';
+
+const colorClasses = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+---
+
+<Layout
+  title="About Arun Jose — Background, Philosophy & Photography"
+  description="Learn about Arun Jose's software engineering background across India, Germany, and Denmark, his engineering philosophy, research interests, and photography."
+>
+  <!-- Page Header Band -->
+  <section class="bg-teal border-b-[4px] border-ink py-14 sm:py-18 pattern-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-4">
+        <span class="memphis-label bg-yellow -rotate-2">
+          PROFILE DOSSIER // DENMARK
+        </span>
+        <h1 class="memphis-hero-title text-4xl sm:text-6xl md:text-7xl m-0 pt-1">
+          About Me
+        </h1>
+        <div class="memphis-card bg-paper p-5 border-l-[10px] border-l-pink">
+          <p class="font-sans text-base sm:text-lg text-ink font-medium m-0 leading-relaxed">
+            Software Engineer at Siemens Energy in Denmark, TU Chemnitz Web Engineering graduate, applied AI researcher, and keen observer of architectural and coastal geometry through photography.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. Professional Background & Research Interests -->
+  <section class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-7 space-y-6">
+          <SectionHeading
+            label="BACKGROUND // BIOGRAPHY"
+            title="Engineering Across Three Countries"
+            subtitle="From enterprise software engineering in India to graduate research in Germany and platform engineering in Denmark."
+            labelColor="pink"
+            rotate="left"
+          />
+
+          <div class="memphis-card bg-paper p-6 sm:p-8 space-y-4 font-sans text-base text-ink/95 leading-relaxed">
+            <p class="m-0">
+              My path in software engineering has been shaped by building and operating real-world systems across international engineering teams within <strong>Siemens organizations</strong>—starting in <strong>India (Siemens Gamesa)</strong>, continuing through working-student positions in <strong>Germany (Siemens AG and Siemens Gamesa)</strong> alongside my master's degree, and now serving as a <strong>Software Engineer at Siemens Energy in Denmark</strong>.
+            </p>
+            <p class="m-0">
+              While completing my <strong>MSc in Web Engineering at Technische Universität Chemnitz</strong>, I deepened my focus on semantic technologies, distributed systems, and intelligent information retrieval. My master's thesis developed a <em>Hybrid Semantic Framework for Export Control Compliance</em>, demonstrating how Knowledge Graphs and dense vector retrieval can complement one another in complex regulatory domains.
+            </p>
+            <p class="m-0">
+              Today, I enjoy working where <strong>platform reliability, infrastructure monitoring, and DevOps automation</strong> meet <strong>applied AI systems and software intelligence</strong>—creating tools and workflows that make engineering teams faster and complex systems easier to reason about.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Quick Facts & Research Interests Card -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="memphis-card bg-yellow p-6 border-[4px] border-ink shadow-[8px_8px_0px_#171717]">
+            <h2 class="font-display text-xl uppercase text-ink border-b-[3px] border-ink pb-3 mb-4">
+              Quick Dossier // Specs
+            </h2>
+            <dl class="font-mono text-xs sm:text-sm space-y-3 m-0">
+              <div class="flex justify-between border-b border-ink/30 pb-2">
+                <dt class="font-bold text-ink/75">NAME:</dt>
+                <dd class="font-bold m-0">{PROFILE.name}</dd>
+              </div>
+              <div class="flex justify-between border-b border-ink/30 pb-2">
+                <dt class="font-bold text-ink/75">CURRENT ROLE:</dt>
+                <dd class="font-bold m-0">{PROFILE.role}</dd>
+              </div>
+              <div class="flex justify-between border-b border-ink/30 pb-2">
+                <dt class="font-bold text-ink/75">ORGANIZATION:</dt>
+                <dd class="font-bold m-0">{PROFILE.currentOrg}</dd>
+              </div>
+              <div class="flex justify-between border-b border-ink/30 pb-2">
+                <dt class="font-bold text-ink/75">LOCATION:</dt>
+                <dd class="font-bold m-0">{PROFILE.location}</dd>
+              </div>
+              <div class="flex justify-between pb-1">
+                <dt class="font-bold text-ink/75">EDUCATION:</dt>
+                <dd class="font-bold text-right m-0">MSc Web Engineering<br />TU Chemnitz, DE</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="memphis-card bg-paper p-6">
+            <h2 class="font-display text-lg uppercase text-ink mb-3">
+              Professional & Research Interests
+            </h2>
+            <div class="flex flex-wrap gap-2">
+              {PROFILE.interests.map((interest) => (
+                <span class="memphis-tag text-xs">{interest}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Software Engineering Philosophy -->
+  <section class="bg-yellow py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="PRINCIPLES // CRAFT"
+        title="Software Engineering Philosophy"
+        subtitle="Core tenets that guide how I design infrastructure pipelines, build software tools, and evaluate intelligent systems."
+        labelColor="teal"
+        rotate="right"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {ENGINEERING_PHILOSOPHY.map((item) => (
+          <article class="memphis-card bg-paper p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b-2 border-ink pb-3 mb-4">
+                <span class:list={['font-mono text-xs font-bold px-2.5 py-1 border-2 border-ink', colorClasses[item.color as keyof typeof colorClasses]]}>
+                  {item.code}
+                </span>
+                <span class="font-mono text-xs font-bold text-ink/70">ENGINEERING TENET</span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl uppercase text-ink mb-3">
+                {item.title}
+              </h3>
+              <p class="font-sans text-base text-ink/90 leading-relaxed m-0">
+                {item.body}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Photography Section (35mm Contact Sheet & Visual Notebook) -->
+  <section id="photography" class="bg-cream py-16 sm:py-20 border-b-[4px] border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        label="VISUAL NOTEBOOK // 35MM"
+        title="Photography & Geometry"
+        subtitle="Outside of software engineering and AI research, I practice architectural, street, and landscape photography—looking for symmetry, light, and structure."
+        labelColor="pink"
+        rotate="left"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {PHOTOGRAPHY_FRAMES.map((frame, index) => (
+          <article class="memphis-card bg-paper overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="bg-ink text-cream px-4 py-2.5 flex items-center justify-between font-mono text-xs font-bold border-b-[3px] border-ink">
+                <span class="text-yellow">{frame.frameNumber} // FILM STRIP</span>
+                <span>{frame.location.toUpperCase()}</span>
+              </div>
+
+              <!-- Stylized Retro Architectural / Landscape Viewfinder SVG -->
+              <div class:list={['p-6 border-b-[3px] border-ink relative pattern-grid', colorClasses[frame.accentColor]]}>
+                <div class="bg-paper border-[3px] border-ink p-4 shadow-[5px_5px_0px_#171717]">
+                  <svg
+                    viewBox="0 0 400 180"
+                    class="w-full h-40 block"
+                    role="img"
+                    aria-label={`Stylized photographic composition for ${frame.title} in ${frame.location}`}
+                  >
+                    <rect x="0" y="0" width="400" height="180" fill="#FFF7E8" stroke="#171717" stroke-width="3" />
+                    <!-- Viewfinder Crosshairs -->
+                    <line x1="200" y1="15" x2="200" y2="35" stroke="#171717" stroke-width="2" />
+                    <line x1="200" y1="145" x2="200" y2="165" stroke="#171717" stroke-width="2" />
+                    <line x1="15" y1="90" x2="35" y2="90" stroke="#171717" stroke-width="2" />
+                    <line x1="365" y1="90" x2="385" y2="90" stroke="#171717" stroke-width="2" />
+                    <circle cx="200" cy="90" r="28" fill="none" stroke="#171717" stroke-width="2" stroke-dasharray="4 4" />
+
+                    <!-- Geometric Composition Varies by Index -->
+                    {index % 2 === 0 ? (
+                      <g>
+                        <circle cx="310" cy="55" r="24" fill="#FF5793" stroke="#171717" stroke-width="3" />
+                        <polygon points="40,155 130,55 210,155" fill="#38D8C4" stroke="#171717" stroke-width="3" />
+                        <polygon points="150,155 245,70 340,155" fill="#FFDE43" stroke="#171717" stroke-width="3" />
+                      </g>
+                    ) : (
+                      <g>
+                        <rect x="55" y="45" width="90" height="110" fill="#377AF5" stroke="#171717" stroke-width="3" />
+                        <rect x="165" y="30" width="110" height="125" fill="#FFDE43" stroke="#171717" stroke-width="3" />
+                        <circle cx="320" cy="95" r="32" fill="#FF5793" stroke="#171717" stroke-width="3" />
+                      </g>
+                    )}
+                  </svg>
+                </div>
+              </div>
+
+              <div class="p-6 space-y-2">
+                <span class="font-mono text-xs font-bold uppercase text-blue">
+                  {frame.subject}
+                </span>
+                <h3 class="font-display text-2xl uppercase text-ink m-0">
+                  {frame.title}
+                </h3>
+                <p class="font-sans text-sm sm:text-base text-ink/90 m-0 leading-relaxed">
+                  {frame.caption}
+                </p>
+              </div>
+            </div>
+
+            <div class="px-6 py-3 bg-cream border-t-[3px] border-ink font-mono text-xs font-bold text-ink/80 flex items-center justify-between">
+              <span>EXIF // {frame.cameraMeta}</span>
+              <span class="bg-yellow text-ink px-2 py-0.5 border border-ink">35MM</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+

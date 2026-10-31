@@ -1,0 +1,96 @@
+---
+export interface Props {
+  label: string;
+  title: string;
+  subtitle?: string;
+  labelColor?: 'yellow' | 'pink' | 'teal' | 'blue';
+  rotate?: 'left' | 'right';
+  align?: 'left' | 'center';
+  titleVariant?: 'default' | 'teal';
+}
+
+const {
+  label,
+  title,
+  subtitle,
+  labelColor = 'pink',
+  rotate = 'left',
+  align = 'left',
+  titleVariant = 'default'
+} = Astro.props;
+
+const colorMap = {
+  yellow: 'bg-yellow text-ink',
+  pink: 'bg-pink text-ink',
+  teal: 'bg-teal text-ink',
+  blue: 'bg-blue text-white'
+};
+
+const rotateClass = rotate === 'left' ? '-rotate-2' : 'rotate-2';
+const titleClass =
+  titleVariant === 'teal' ? 'memphis-section-title-teal' : 'memphis-section-title';
+
+const words = title.trim().split(/\s+/);
+const splitIndex = Math.max(1, Math.floor(words.length / 2));
+const firstPart = words.slice(0, splitIndex).join(' ');
+const secondPart = words.slice(splitIndex).join(' ');
+---
+
+<div
+  class:list={[
+    'mb-10 sm:mb-12',
+    align === 'center' ? 'text-center flex flex-col items-center' : ''
+  ]}
+>
+  <div class="inline-flex items-center gap-2 mb-3">
+    <span class:list={['memphis-label transform', colorMap[labelColor], rotateClass]}>
+      <span aria-hidden="true">◆</span>
+      {label}
+    </span>
+    <svg
+      class="w-12 h-4 stroke-ink fill-none hidden sm:block"
+      viewBox="0 0 60 16"
+      stroke-width="3"
+      aria-hidden="true"
+    >
+      <path
+        d="M2 12 L12 4 L22 12 L32 4 L42 12 L52 4"
+        stroke-linecap="square"
+        stroke-linejoin="miter"
+      />
+    </svg>
+  </div>
+
+  <h2
+    class:list={[
+      titleClass,
+      'memphis-heading-highlight text-3xl sm:text-4xl md:text-5xl tracking-tight m-0'
+    ]}
+    data-heading-highlight
+  >
+    <span class="memphis-hl-segment">
+      <span class="memphis-hl-text">{firstPart}</span>
+      <span class="memphis-hl-bar memphis-hl-bar-yellow" aria-hidden="true"></span>
+    </span>
+    {secondPart && (
+      <>
+        {' '}
+        <span class="memphis-hl-segment">
+          <span class="memphis-hl-text">{secondPart}</span>
+          <span class="memphis-hl-bar memphis-hl-bar-pink" aria-hidden="true"></span>
+        </span>
+      </>
+    )}
+  </h2>
+
+  {subtitle && (
+    <p
+      class:list={[
+        'mt-4 font-sans text-base sm:text-lg text-ink/90 max-w-2xl leading-relaxed m-0',
+        align === 'center' ? 'mx-auto' : ''
+      ]}
+    >
+      {subtitle}
+    </p>
+  )}
+</div>

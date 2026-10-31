@@ -1,0 +1,243 @@
+---
+// 1980s Memphis & Neo-Brutalist Interactive Cool Extras:
+// 1. TERMINAL.86 Interactive Command Palette (Ctrl+K or Header button)
+// 2. AJ-BOT: INFRA RUNNER 86 Playable 8-Bit Mini-Game
+// 3. Arcade "Achievement Unlocked!" Toast Notification System
+// 4. SYNTH.86 FM Procedural Chiptune Jukebox Deck
+// 5. Memphis Geometric Click Confetti Burst Layer
+---
+
+<!-- 1. Memphis Geometric Click Confetti Burst Layer -->
+<div
+  id="arcade-click-burst-layer"
+  class="fixed inset-0 pointer-events-none z-[90] overflow-hidden"
+  aria-hidden="true"
+></div>
+
+<!-- 2. Arcade "Achievement Unlocked!" Toast Notification -->
+<div
+  id="arcade-achievement-toast"
+  data-achievement-toast
+  class="fixed top-16 right-4 z-[95] pointer-events-none transition-all duration-300 opacity-0 translate-y-[-16px]"
+  aria-live="polite"
+>
+  <div class="bg-yellow text-ink border-[3px] border-ink shadow-[6px_6px_0px_#171717] px-3.5 py-2.5 flex items-center gap-3 font-mono max-w-xs">
+    <div
+      class="w-9 h-9 bg-pink border-2 border-ink flex items-center justify-center text-lg shrink-0"
+      data-achievement-icon
+    >
+      🏆
+    </div>
+    <div class="min-w-0">
+      <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-ink/80">
+        <span class="bg-ink text-teal px-1.5 py-0.2" data-achievement-count>1/6</span>
+        <span>ACHIEVEMENT UNLOCKED!</span>
+      </div>
+      <p class="text-xs font-bold text-ink truncate mt-0.5" data-achievement-title>
+        80S COOL SHADES
+      </p>
+      <p class="text-[10px] text-ink/85 truncate" data-achievement-desc>
+        Discovered the animated PORTRAIT.BMP shades!
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- 3. SYNTH.86 FM Pocket Chiptune Jukebox Widget (Bottom-Right) -->
+<aside
+  id="arcade-synth-deck"
+  aria-label="SYNTH.86 FM Chiptune Jukebox"
+  class="fixed bottom-4 right-4 z-[80] bg-paper border-[3px] border-ink shadow-[6px_6px_0px_#171717] font-mono text-xs select-none no-print"
+>
+  <div class="bg-pink text-ink border-b-[2.5px] border-ink px-2.5 py-1 flex items-center justify-between gap-3 font-bold text-[10px]">
+    <div class="flex items-center gap-1.5">
+      <span class="w-2 h-2 bg-yellow border border-ink inline-block"></span>
+      <span>SYNTH.86 FM // CHIPTUNE</span>
+    </div>
+    <span class="bg-ink text-cream px-1 text-[9px]" data-synth-bpm>118 BPM</span>
+  </div>
+  <div class="p-2.5 flex items-center gap-2.5 bg-cream">
+    <button
+      type="button"
+      id="synth-play-toggle"
+      data-synth-toggle
+      aria-pressed="false"
+      class="bg-teal hover:bg-yellow text-ink font-bold px-2.5 py-1 border-2 border-ink shadow-[2px_2px_0px_#171717] text-[10px] uppercase cursor-pointer transition-colors"
+    >
+      ▶ PLAY SYNTH
+    </button>
+    <!-- 5-Bar Pixel Equalizer -->
+    <div
+      class="flex items-end gap-1 h-5 px-1.5 py-0.5 bg-ink border border-ink"
+      data-synth-eq
+      aria-hidden="true"
+    >
+      <span class="synth-eq-bar w-1.5 h-1.5 bg-teal block"></span>
+      <span class="synth-eq-bar w-1.5 h-2.5 bg-yellow block"></span>
+      <span class="synth-eq-bar w-1.5 h-1 bg-pink block"></span>
+      <span class="synth-eq-bar w-1.5 h-3 bg-teal block"></span>
+      <span class="synth-eq-bar w-1.5 h-2 bg-yellow block"></span>
+    </div>
+    <button
+      type="button"
+      data-terminal-open
+      class="bg-yellow hover:bg-pink text-ink font-bold px-2 py-1 border-2 border-ink shadow-[2px_2px_0px_#171717] text-[10px] uppercase cursor-pointer transition-colors hidden sm:inline-block"
+      title="Open TERMINAL.86 Command Palette (Ctrl+K)"
+    >
+      &gt;_ TERM
+    </button>
+  </div>
+</aside>
+
+<!-- 4. TERMINAL.86 Interactive Command Palette Modal -->
+<div
+  id="arcade-terminal-modal"
+  data-terminal-modal
+  class="fixed inset-0 z-[110] bg-ink/75 hidden items-center justify-center p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="terminal-modal-title"
+>
+  <div class="w-full max-w-2xl bg-paper border-[4px] border-ink shadow-[12px_12px_0px_#FFDE43] overflow-hidden font-mono">
+    <!-- Window Bar -->
+    <div class="bg-blue text-white border-b-[4px] border-ink px-4 py-2.5 flex items-center justify-between text-xs font-bold">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-yellow border-2 border-ink inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-pink border-2 border-ink inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-teal border-2 border-ink inline-block"></span>
+        <span id="terminal-modal-title" class="ml-1 tracking-wider">
+          ARUN_OS // TERMINAL.86 (INTERACTIVE SHELL)
+        </span>
+      </div>
+      <button
+        type="button"
+        data-terminal-close
+        class="bg-pink text-ink px-2 py-0.5 border-2 border-ink font-bold text-[10px] uppercase cursor-pointer hover:bg-yellow"
+      >
+        [ESC / CLOSE ✕]
+      </button>
+    </div>
+
+    <!-- Quick-Command Chips for One-Click Exploration -->
+    <div class="bg-cream border-b-[3px] border-ink px-4 py-2 flex flex-wrap items-center gap-1.5 text-[10px]">
+      <span class="font-bold uppercase text-ink/70 mr-1">QUICK COMMANDS:</span>
+      <button type="button" data-term-cmd="help" class="bg-yellow px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-pink">help</button>
+      <button type="button" data-term-cmd="whois arun" class="bg-teal px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-yellow">whois arun</button>
+      <button type="button" data-term-cmd="skills" class="bg-paper px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-yellow">skills</button>
+      <button type="button" data-term-cmd="siemens" class="bg-paper px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-yellow">siemens</button>
+      <button type="button" data-term-cmd="thesis" class="bg-paper px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-yellow">thesis</button>
+      <button type="button" data-term-cmd="media" class="bg-pink px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-yellow">podcast &amp; youtube</button>
+      <button type="button" data-term-cmd="mascot party" class="bg-yellow px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-pink">mascot party</button>
+      <button type="button" data-term-cmd="play game" class="bg-teal px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-yellow">play game</button>
+      <button type="button" data-term-cmd="sudo hire arun" class="bg-yellow px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-teal">sudo hire arun</button>
+      <button type="button" data-term-cmd="clear" class="bg-paper px-2 py-0.5 border-2 border-ink font-bold cursor-pointer hover:bg-pink">clear</button>
+    </div>
+
+    <!-- CRT Output Screen -->
+    <div
+      data-terminal-output
+      class="bg-ink text-[#00FF66] p-4 h-72 overflow-y-auto text-xs leading-relaxed space-y-2 font-mono"
+    >
+      <div class="text-yellow font-bold">
+        ========================================================<br />
+        ARUN_OS v2.6 // MEMPHIS WORKSTATION SHELL (1986 EDITION)<br />
+        ========================================================
+      </div>
+      <div class="text-cream">
+        Welcome! Click any <span class="text-teal font-bold">QUICK COMMAND</span> above or type a command below (<span class="text-yellow">help</span>, <span class="text-yellow">whois arun</span>, <span class="text-yellow">skills</span>, <span class="text-yellow">mascot party</span>, <span class="text-yellow">sudo hire arun</span>).
+      </div>
+    </div>
+
+    <!-- Command Input Bar -->
+    <form data-terminal-form class="bg-ink border-t-[3px] border-teal px-4 py-2.5 flex items-center gap-2">
+      <label for="terminal-cmd-input" class="text-yellow font-bold text-xs shrink-0">
+        C:\ARUN_JOSE&gt;
+      </label>
+      <input
+        id="terminal-cmd-input"
+        data-terminal-input
+        type="text"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Type command (e.g. whois arun) and press Enter..."
+        class="w-full bg-transparent text-[#00FF66] font-mono text-xs focus:outline-none placeholder:text-cream/40"
+      />
+      <button
+        type="submit"
+        class="bg-teal text-ink font-bold px-3 py-1 border-2 border-cream text-[10px] uppercase cursor-pointer hover:bg-yellow shrink-0"
+      >
+        RUN ↵
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- 5. AJ-BOT: INFRA RUNNER 86 Playable 8-Bit Mini-Game Modal -->
+<div
+  id="arcade-game-modal"
+  data-game-modal
+  class="fixed inset-0 z-[110] bg-ink/80 hidden items-center justify-center p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="game-modal-title"
+>
+  <div class="w-full max-w-xl bg-paper border-[4px] border-ink shadow-[12px_12px_0px_#38D8C4] overflow-hidden font-mono">
+    <div class="bg-pink text-ink border-b-[4px] border-ink px-4 py-2.5 flex items-center justify-between text-xs font-bold">
+      <div class="flex items-center gap-2">
+        <span class="bg-yellow px-1.5 py-0.5 border-2 border-ink text-[10px]">8-BIT ARCADE</span>
+        <span id="game-modal-title">AJ-BOT // INFRA RUNNER 86</span>
+      </div>
+      <button
+        type="button"
+        data-game-close
+        class="bg-yellow text-ink px-2 py-0.5 border-2 border-ink font-bold text-[10px] uppercase cursor-pointer hover:bg-teal"
+      >
+        [ESC / EXIT ✕]
+      </button>
+    </div>
+
+    <div class="bg-cream p-4 space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold">
+        <div class="flex items-center gap-3">
+          <span class="bg-ink text-yellow px-2.5 py-1 border-2 border-ink">
+            SCORE: <span data-game-score>0000</span>
+          </span>
+          <span class="bg-ink text-teal px-2.5 py-1 border-2 border-ink">
+            HI-SCORE: <span data-game-hiscore>0120</span>
+          </span>
+        </div>
+        <span class="text-[11px] text-ink/80">
+          [SPACE / CLICK CANVAS TO JUMP OVER <span class="text-pink font-bold">500_ERR</span> &amp; COLLECT <span class="text-blue font-bold">KG NODES</span>]
+        </span>
+      </div>
+
+      <div class="relative border-[4px] border-ink bg-ink shadow-[6px_6px_0px_#171717]">
+        <canvas
+          id="arcade-runner-canvas"
+          data-game-canvas
+          width="520"
+          height="220"
+          class="w-full h-auto block cursor-pointer"
+        ></canvas>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 pt-1">
+        <button
+          type="button"
+          data-game-jump
+          class="memphis-btn memphis-btn-yellow text-xs py-1.5 px-4 cursor-pointer"
+        >
+          ▲ JUMP (SPACE)
+        </button>
+        <button
+          type="button"
+          data-game-restart
+          class="memphis-btn memphis-btn-teal text-xs py-1.5 px-4 cursor-pointer"
+        >
+          ↻ RESTART RUN
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

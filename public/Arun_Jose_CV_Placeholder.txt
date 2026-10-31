@@ -1,0 +1,49 @@
+================================================================================
+ARUN JOSE — CURRICULUM VITAE (PLACEHOLDER DOSSIER)
+================================================================================
+Role:     Software Engineer at Siemens Energy
+Location: Denmark
+Degree:   MSc Web Engineering, Technische Universität Chemnitz, Germany
+
+Contact Placeholders (Replace with verified details before publication):
+- Email:    arun.jose.placeholder@example.com
+- GitHub:   https://github.com/arunjose-placeholder
+- LinkedIn: https://www.linkedin.com/in/arunjose-placeholder
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+Building useful software, exploring intelligent systems, and connecting
+engineering with research.
+
+Professional Interests:
+- Platform Engineering
+- Infrastructure Monitoring
+- DevOps and Automation
+- AI Systems
+- Knowledge Graphs
+- Software Intelligence
+- Applied AI Research
+
+--------------------------------------------------------------------------------
+EXPERIENCE TIMELINE (Verify exact roles and dates before publication)
+--------------------------------------------------------------------------------
+* Siemens Energy — Software Engineer | Denmark | 2026–present
+* Siemens Gamesa — Working Student   | Germany | 2023–2026
+* Siemens AG     — Working Student   | Germany | 2022
+* Siemens Gamesa — Software Eng.     | India   | 2018–2021
+
+--------------------------------------------------------------------------------
+EDUCATION
+--------------------------------------------------------------------------------
+* MSc Web Engineering — Technische Universität Chemnitz, Germany
+  Master's Thesis: Hybrid Semantic Framework for Export Control Compliance
+
+--------------------------------------------------------------------------------
+FEATURED PROJECTS & RESEARCH
+--------------------------------------------------------------------------------
+1. Hybrid Semantic Framework for Export Control Compliance (Master's Research)
+2. Infrastructure Monitoring & Automation (Professional Experience)
+3. Code Intelligence Lab (Proposed Personal Open-Source Project)
+================================================================================
+

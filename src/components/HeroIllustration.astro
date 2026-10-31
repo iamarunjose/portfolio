@@ -1,0 +1,457 @@
+---
+// Custom 1980s Memphis + Neo-Brutalist Hero Illustration
+// Combines: Custom 1980s Memphis & Neo-Brutalist portrait of Arun Jose (/images/arun-portrait-memphis.jpg)
+// inside PORTRAIT.BMP, Retro CRT computer workstation, Geometric Memphis patterns, Software & AI motifs,
+// and interactive 8-bit arcade mascots AJ-BOT & BYTE.
+import AJBot from './mascots/AJBot.astro';
+import Byte from './mascots/Byte.astro';
+---
+
+<div
+  class="boot-workstation-enter relative w-full max-w-xl mx-auto select-none"
+  data-boot-workstation
+>
+  <!-- Decorative Background Halftone & Offset Frame (Interactive Memphis Shapes) -->
+  <div
+    class="memphis-spring-shape absolute -top-4 -right-4 w-36 h-36 pattern-halftone border-[3px] border-ink bg-yellow/40 -z-10 hidden sm:block pointer-events-none"
+    data-memphis-shape
+    data-shape-speed="0.06"
+    data-shape-rotate="3.5"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="memphis-spring-shape absolute -bottom-5 -left-5 w-44 h-28 pattern-stripes-yellow border-[3px] border-ink -z-10 hidden sm:block pointer-events-none"
+    data-memphis-shape
+    data-shape-speed="-0.05"
+    data-shape-rotate="-2.5"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Main Vintage Magazine / Desktop Collage Container -->
+  <div class="memphis-card bg-paper border-[4px] border-ink shadow-[10px_10px_0px_#171717] overflow-hidden">
+    <!-- Top Retro Workstation Window Bar -->
+    <div class="bg-blue text-white border-b-[4px] border-ink px-3.5 py-2 flex items-center justify-between font-mono text-xs font-bold">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-yellow border-2 border-ink inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-pink border-2 border-ink inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-teal border-2 border-ink inline-block"></span>
+        <span class="ml-1 tracking-wider">WORKSTATION_86 // ARUN_JOSE.SYS</span>
+      </div>
+      <span class="bg-yellow text-ink px-2 py-0.5 border-2 border-ink text-[10px]">
+        AI + INFRA
+      </span>
+    </div>
+
+    <!-- Illustrated Canvas Area -->
+    <div class="p-4 sm:p-5 bg-cream pattern-grid relative">
+      <svg
+        viewBox="0 0 560 430"
+        class="w-full h-auto block"
+        role="img"
+        aria-label="1980s Memphis and Neo-Brutalist illustration featuring Arun Jose's illustrated portrait in PORTRAIT.BMP, a vintage CRT computer running knowledge graph software, and geometric Memphis shapes."
+      >
+        <defs>
+          <pattern id="heroHalftone" width="10" height="10" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="2" fill="#171717" />
+          </pattern>
+          <pattern id="heroStripes" width="12" height="12" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="12" stroke="#171717" stroke-width="4" />
+          </pattern>
+          <clipPath id="portraitBmpClip">
+            <rect x="14" y="38" width="168" height="152" />
+          </clipPath>
+        </defs>
+
+        <!-- Background Memphis Geometric Shapes (Spring-enabled SVG groups) -->
+        <!-- Giant Yellow Circle with Halftone Shadow -->
+        <g class="hero-svg-shape hero-svg-shape-circle" data-svg-shape="circle">
+          <animateTransform attributeName="transform" type="translate" values="0,0; -7,-6; 5,4; 0,0" dur="4.4s" repeatCount="indefinite" />
+          <circle cx="430" cy="115" r="74" fill="url(#heroHalftone)" />
+          <circle cx="420" cy="105" r="74" fill="#FFDE43" stroke="#171717" stroke-width="4" />
+        </g>
+
+        <!-- Teal Rotated Memphis Triangle -->
+        <g class="hero-svg-shape hero-svg-shape-triangle" data-svg-shape="triangle">
+          <animateTransform attributeName="transform" type="translate" values="0,0; 6,-7; -4,5; 0,0" dur="3.8s" repeatCount="indefinite" />
+          <polygon
+            points="45,355 115,270 150,375"
+            fill="#171717"
+          />
+          <polygon
+            points="38,348 108,263 143,368"
+            fill="#38D8C4"
+            stroke="#171717"
+            stroke-width="4"
+          />
+        </g>
+
+        <!-- Pink Zigzag Ribbon Top-Center -->
+        <g class="hero-svg-shape hero-svg-shape-zigzag" data-svg-shape="zigzag">
+          <animateTransform attributeName="transform" type="translate" values="0,0; 8,-4; -6,3; 0,0" dur="3.2s" repeatCount="indefinite" />
+          <polyline
+            points="215,26 235,12 255,26 275,12 295,26 315,12 335,26"
+            fill="none"
+            stroke="#FF5793"
+            stroke-width="7"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+          <polyline
+            points="215,26 235,12 255,26 275,12 295,26 315,12 335,26"
+            fill="none"
+            stroke="#171717"
+            stroke-width="3"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+        </g>
+
+        <!-- ============================================================
+             LEFT PANEL: PORTRAIT.BMP Window (Animated 4-Expression 1980s Memphis Portrait)
+             Expressions: 1. Classic -> 2. Smile -> 3. Laugh -> 4. 80s Sunglasses
+             ============================================================ -->
+        <g transform="translate(22, 24)" class="hero-portrait-window cursor-pointer" data-portrait-window>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="22,24; 22,21.5; 22,24"
+            dur="1.8s"
+            repeatCount="indefinite"
+          />
+          <!-- Hard Shadow -->
+          <rect x="8" y="8" width="196" height="236" fill="#171717" />
+          <!-- Frame Container -->
+          <rect x="0" y="0" width="196" height="236" fill="#FFFDF9" stroke="#171717" stroke-width="4" />
+          <!-- Window Header -->
+          <rect x="0" y="0" width="196" height="28" fill="#FF5793" stroke="#171717" stroke-width="4" />
+          <circle cx="14" cy="14" r="5" fill="#FFDE43" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FFDE43;#38D8C4;#FFFDF9;#FFDE43" dur="1.8s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="28" cy="14" r="5" fill="#38D8C4" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#38D8C4;#FFDE43;#FF5793;#38D8C4" dur="1.8s" repeatCount="indefinite" />
+          </circle>
+          <text
+            x="44"
+            y="18"
+            font-family="Space Mono, monospace"
+            font-weight="700"
+            font-size="10"
+            fill="#171717"
+            data-portrait-file
+          >
+            PORTRAIT.BMP
+          </text>
+
+          <!-- 1980s Memphis & Neo-Brutalist Animated Portrait Frames of Arun Jose -->
+          <rect x="14" y="38" width="168" height="152" fill="#38D8C4" />
+          <!-- Frame 0: Classic Confident Portrait -->
+          <image
+            href="/images/arun-portrait-memphis.jpg"
+            x="14"
+            y="38"
+            width="168"
+            height="152"
+            preserveAspectRatio="xMidYMid slice"
+            clip-path="url(#portraitBmpClip)"
+            data-portrait-frame="0"
+          />
+          <!-- Frame 1: Warm Friendly Smile -->
+          <image
+            href="/images/arun-portrait-memphis-smile.jpg"
+            x="14"
+            y="38"
+            width="168"
+            height="152"
+            opacity="0"
+            preserveAspectRatio="xMidYMid slice"
+            clip-path="url(#portraitBmpClip)"
+            data-portrait-frame="1"
+          >
+            <animate
+              attributeName="opacity"
+              values="0;0;1;1;0;0;0;0;0"
+              keyTimes="0;0.23;0.25;0.48;0.50;0.73;0.75;0.98;1"
+              dur="7.2s"
+              repeatCount="indefinite"
+            />
+          </image>
+          <!-- Frame 2: Joyful Open Laugh -->
+          <image
+            href="/images/arun-portrait-memphis-laugh.jpg"
+            x="14"
+            y="38"
+            width="168"
+            height="152"
+            opacity="0"
+            preserveAspectRatio="xMidYMid slice"
+            clip-path="url(#portraitBmpClip)"
+            data-portrait-frame="2"
+          >
+            <animate
+              attributeName="opacity"
+              values="0;0;0;0;1;1;0;0;0"
+              keyTimes="0;0.23;0.25;0.48;0.50;0.73;0.75;0.98;1"
+              dur="7.2s"
+              repeatCount="indefinite"
+            />
+          </image>
+          <!-- Frame 3: 1980s Retro Sunglasses & Smirk -->
+          <image
+            href="/images/arun-portrait-memphis-sunglasses.jpg"
+            x="14"
+            y="38"
+            width="168"
+            height="152"
+            opacity="0"
+            preserveAspectRatio="xMidYMid slice"
+            clip-path="url(#portraitBmpClip)"
+            data-portrait-frame="3"
+          >
+            <animate
+              attributeName="opacity"
+              values="0;0;0;0;0;0;1;1;0"
+              keyTimes="0;0.23;0.25;0.48;0.50;0.73;0.75;0.98;1"
+              dur="7.2s"
+              repeatCount="indefinite"
+            />
+          </image>
+          <rect x="14" y="38" width="168" height="152" fill="none" stroke="#171717" stroke-width="3.5" />
+
+          <!-- Portrait Caption Strip -->
+          <rect x="14" y="196" width="168" height="28" fill="#FFDE43" stroke="#171717" stroke-width="3">
+            <animate attributeName="fill" values="#FFDE43;#38D8C4;#FF5793;#FFDE43" dur="7.2s" repeatCount="indefinite" />
+          </rect>
+          <text
+            x="98"
+            y="214"
+            text-anchor="middle"
+            font-family="Space Mono, monospace"
+            font-weight="700"
+            font-size="10.5"
+            fill="#171717"
+            data-portrait-caption
+          >
+            ARUN JOSE // PORTRAIT
+          </text>
+        </g>
+
+        <!-- ============================================================
+             RIGHT/CENTER PANEL: Retro 1980s CRT Computer + AI Graph Motifs
+             ============================================================ -->
+        <g transform="translate(245, 58)">
+          <!-- Monitor Shadow -->
+          <rect x="10" y="10" width="280" height="210" rx="8" fill="#171717" />
+          <!-- Outer Monitor Bezel -->
+          <rect x="0" y="0" width="280" height="210" rx="8" fill="#FFF7E8" stroke="#171717" stroke-width="4" />
+          <!-- Inner CRT Screen -->
+          <rect x="18" y="18" width="244" height="154" rx="4" fill="#171717" stroke="#171717" stroke-width="3" />
+
+          <!-- Screen Top Status Bar -->
+          <rect x="22" y="22" width="236" height="20" fill="#38D8C4" />
+          <text x="30" y="36" font-family="Space Mono, monospace" font-weight="700" font-size="10.5" fill="#171717">
+            KNOWLEDGE_GRAPH.AI // LIVE
+          </text>
+          <g class="hero-kg-status-pill">
+            <rect x="218" y="25" width="34" height="14" fill="#FFDE43" stroke="#171717" stroke-width="2">
+              <animate attributeName="fill" values="#FFDE43;#FF5793;#38D8C4;#FFDE43" dur="2.8s" repeatCount="indefinite" />
+            </rect>
+            <text x="235" y="35" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">
+              OK
+            </text>
+          </g>
+
+          <!-- Knowledge Graph Nodes & Semantic Edges inside CRT Screen -->
+          <line class="hero-kg-edge hero-kg-edge-1" x1="72" y1="82" x2="142" y2="68" stroke="#FFDE43" stroke-width="3">
+            <animate attributeName="stroke-width" values="3;5;3" dur="2.2s" begin="0s" repeatCount="indefinite" />
+          </line>
+          <line class="hero-kg-edge hero-kg-edge-2" x1="72" y1="82" x2="115" y2="132" stroke="#38D8C4" stroke-width="3">
+            <animate attributeName="stroke-width" values="3;5;3" dur="2.2s" begin="0.5s" repeatCount="indefinite" />
+          </line>
+          <line class="hero-kg-edge hero-kg-edge-3" x1="142" y1="68" x2="212" y2="92" stroke="#FF5793" stroke-width="3">
+            <animate attributeName="stroke-width" values="3;5;3" dur="2.2s" begin="1.0s" repeatCount="indefinite" />
+          </line>
+          <line class="hero-kg-edge hero-kg-edge-4" x1="115" y1="132" x2="195" y2="140" stroke="#FFDE43" stroke-width="3">
+            <animate attributeName="stroke-width" values="3;5;3" dur="2.2s" begin="1.4s" repeatCount="indefinite" />
+          </line>
+          <line class="hero-kg-edge hero-kg-edge-dashed" x1="142" y1="68" x2="195" y2="140" stroke="#38D8C4" stroke-width="2.5" stroke-dasharray="4 4">
+            <animate attributeName="stroke-dashoffset" values="24;0" dur="1.1s" repeatCount="indefinite" />
+          </line>
+
+          <!-- Animated Data Packets Travelling Along Graph Edges -->
+          <circle r="4" fill="#FFF7E8" stroke="#171717" stroke-width="1.5">
+            <animateMotion path="M 72 82 L 142 68 L 212 92 L 142 68 L 72 82" dur="3.2s" repeatCount="indefinite" />
+          </circle>
+          <circle r="4" fill="#38D8C4" stroke="#171717" stroke-width="1.5">
+            <animateMotion path="M 72 82 L 115 132 L 195 140 L 115 132 L 72 82" dur="3.6s" begin="0.8s" repeatCount="indefinite" />
+          </circle>
+          <circle r="4" fill="#FF5793" stroke="#FFF7E8" stroke-width="1.5">
+            <animateMotion path="M 142 68 L 195 140 L 142 68" dur="2.6s" begin="0.4s" repeatCount="indefinite" />
+          </circle>
+
+          <!-- Graph Nodes (Animated periodically in traversal sequence) -->
+          <g class="hero-kg-node">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-4; 0,2; 0,0" dur="2.2s" begin="0s" repeatCount="indefinite" />
+            <circle cx="72" cy="82" r="16" fill="#FF5793" stroke="#FFF7E8" stroke-width="3">
+              <animate attributeName="r" values="16;18.5;16" dur="2.2s" begin="0s" repeatCount="indefinite" />
+            </circle>
+            <text x="72" y="86" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">RAG</text>
+          </g>
+
+          <g class="hero-kg-node">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-5; 0,2; 0,0" dur="2.2s" begin="0.45s" repeatCount="indefinite" />
+            <circle cx="142" cy="68" r="18" fill="#FFDE43" stroke="#FFF7E8" stroke-width="3">
+              <animate attributeName="r" values="18;21;18" dur="2.2s" begin="0.45s" repeatCount="indefinite" />
+            </circle>
+            <text x="142" y="72" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">KG</text>
+          </g>
+
+          <g class="hero-kg-node">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-4; 0,2; 0,0" dur="2.2s" begin="0.9s" repeatCount="indefinite" />
+            <circle cx="212" cy="92" r="15" fill="#38D8C4" stroke="#FFF7E8" stroke-width="3">
+              <animate attributeName="r" values="15;17.5;15" dur="2.2s" begin="0.9s" repeatCount="indefinite" />
+            </circle>
+            <text x="212" y="96" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">NLP</text>
+          </g>
+
+          <g class="hero-kg-node">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-4; 0,2; 0,0" dur="2.2s" begin="1.35s" repeatCount="indefinite" />
+            <circle cx="115" cy="132" r="15" fill="#377AF5" stroke="#FFF7E8" stroke-width="3">
+              <animate attributeName="r" values="15;17.5;15" dur="2.2s" begin="1.35s" repeatCount="indefinite" />
+            </circle>
+            <text x="115" y="136" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#FFF7E8">AST</text>
+          </g>
+
+          <g class="hero-kg-node">
+            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-4; 0,2; 0,0" dur="2.2s" begin="1.8s" repeatCount="indefinite" />
+            <rect x="172" y="124" width="56" height="28" fill="#FFDE43" stroke="#FFF7E8" stroke-width="2.5">
+              <animate attributeName="fill" values="#FFDE43;#38D8C4;#FFDE43" dur="2.2s" begin="1.8s" repeatCount="indefinite" />
+            </rect>
+            <text x="200" y="142" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">VERIFY</text>
+          </g>
+
+          <!-- Monitor Badge & Power LED -->
+          <rect x="20" y="182" width="90" height="16" fill="#FF5793" stroke="#171717" stroke-width="2.5" />
+          <text x="65" y="193" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="9" fill="#171717">
+            MEMPHIS-86
+          </text>
+          <circle class="hero-crt-led" cx="250" cy="190" r="6" fill="#38D8C4" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#38D8C4;#FFDE43;#FF5793;#38D8C4" dur="1.6s" repeatCount="indefinite" />
+            <animate attributeName="r" values="6;7.2;6" dur="1.6s" repeatCount="indefinite" />
+          </circle>
+
+          <!-- Monitor Neck & Floppy Base Unit -->
+          <rect x="105" y="210" width="70" height="22" fill="#FFDE43" stroke="#171717" stroke-width="4" />
+          <rect x="40" y="238" width="212" height="50" fill="#171717" />
+          <rect x="32" y="230" width="212" height="50" fill="#FFFDF9" stroke="#171717" stroke-width="4" />
+          <!-- Floppy Drive Slot -->
+          <rect x="148" y="248" width="76" height="12" fill="#171717" />
+          <rect class="hero-floppy-led" x="180" y="244" width="20" height="6" fill="#FF5793" stroke="#171717" stroke-width="2">
+            <animate attributeName="fill" values="#FF5793;#38D8C4;#FFDE43;#FF5793" dur="1.2s" repeatCount="indefinite" />
+          </rect>
+          <!-- Ventilation Slots -->
+          <line x1="48" y1="244" x2="112" y2="244" stroke="#171717" stroke-width="3.5" />
+          <line x1="48" y1="254" x2="112" y2="254" stroke="#171717" stroke-width="3.5" />
+          <line x1="48" y1="264" x2="112" y2="264" stroke="#171717" stroke-width="3.5" />
+
+          <!-- Chunky Retro Mechanical Keyboard (Illuminated Console Keys in Motion) -->
+          <polygon points="18,300 264,300 282,344 0,344" fill="#171717" />
+          <polygon points="12,292 258,292 276,336 -6,336" fill="#FFDE43" stroke="#171717" stroke-width="4" />
+          <!-- Keycaps Row -->
+          <rect class="hero-kbd-key hero-kbd-key-1" x="16" y="302" width="22" height="10" fill="#FFFDF9" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FFFDF9;#FF5793;#38D8C4;#FFFDF9" dur="1.6s" begin="0s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="0s" repeatCount="indefinite" />
+          </rect>
+          <rect class="hero-kbd-key hero-kbd-key-2" x="44" y="302" width="22" height="10" fill="#FFFDF9" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FFFDF9;#38D8C4;#377AF5;#FFFDF9" dur="1.6s" begin="0.2s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="0.2s" repeatCount="indefinite" />
+          </rect>
+          <rect class="hero-kbd-key hero-kbd-key-3" x="72" y="302" width="22" height="10" fill="#FF5793" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FF5793;#38D8C4;#377AF5;#FFFDF9;#FF5793" dur="1.6s" begin="0.4s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="0.4s" repeatCount="indefinite" />
+          </rect>
+          <rect class="hero-kbd-key hero-kbd-key-4" x="100" y="302" width="22" height="10" fill="#FFFDF9" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FFFDF9;#377AF5;#FF5793;#FFFDF9" dur="1.6s" begin="0.6s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="0.6s" repeatCount="indefinite" />
+          </rect>
+          <rect class="hero-kbd-key hero-kbd-key-5" x="128" y="302" width="22" height="10" fill="#FFFDF9" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FFFDF9;#FF5793;#38D8C4;#FFFDF9" dur="1.6s" begin="0.8s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="0.8s" repeatCount="indefinite" />
+          </rect>
+          <rect class="hero-kbd-key hero-kbd-key-6" x="156" y="302" width="22" height="10" fill="#38D8C4" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#38D8C4;#377AF5;#FF5793;#FFFDF9;#38D8C4" dur="1.6s" begin="1.0s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="1.0s" repeatCount="indefinite" />
+          </rect>
+          <rect class="hero-kbd-key hero-kbd-key-7" x="184" y="302" width="22" height="10" fill="#FFFDF9" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FFFDF9;#38D8C4;#FF5793;#FFFDF9" dur="1.6s" begin="1.2s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="1.2s" repeatCount="indefinite" />
+          </rect>
+          <rect class="hero-kbd-key hero-kbd-key-8" x="212" y="302" width="32" height="10" fill="#377AF5" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#377AF5;#FF5793;#38D8C4;#FFFDF9;#377AF5" dur="1.6s" begin="1.4s" repeatCount="indefinite" />
+            <animate attributeName="y" values="302;304.5;302" dur="1.6s" begin="1.4s" repeatCount="indefinite" />
+          </rect>
+          <!-- Spacebar Row -->
+          <rect class="hero-kbd-key hero-kbd-space" x="56" y="317" width="150" height="11" fill="#FFFDF9" stroke="#171717" stroke-width="2.5">
+            <animate attributeName="fill" values="#FFFDF9;#38D8C4;#FFFDF9;#FF5793;#FFFDF9" dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="y" values="317;319.2;317" dur="1.2s" repeatCount="indefinite" />
+          </rect>
+        </g>
+
+        <!-- ============================================================
+             BOTTOM LEFT FLOATING CARD: Telemetry & DevOps Motif
+             ============================================================ -->
+        <g transform="translate(22, 286)">
+          <rect x="6" y="6" width="196" height="114" fill="#171717" />
+          <rect x="0" y="0" width="196" height="114" fill="#38D8C4" stroke="#171717" stroke-width="4" />
+          <rect x="12" y="12" width="172" height="90" fill="#FFFDF9" stroke="#171717" stroke-width="3" />
+          <text x="22" y="30" font-family="Space Mono, monospace" font-weight="700" font-size="10" fill="#171717">
+            INFRA_TELEMETRY // OK
+          </text>
+          <!-- Signal Waveform -->
+          <polyline
+            class="hero-telemetry-wave"
+            points="22,68 48,68 60,44 74,84 88,52 102,68 134,68 146,48 158,76 172,62"
+            fill="none"
+            stroke="#FF5793"
+            stroke-width="3.5"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          >
+            <animate
+              attributeName="points"
+              values="22,68 48,68 60,44 74,84 88,52 102,68 134,68 146,48 158,76 172,62; 22,68 48,52 60,80 74,46 88,76 102,52 134,74 146,64 158,44 172,68; 22,68 48,68 60,44 74,84 88,52 102,68 134,68 146,48 158,76 172,62"
+              dur="1.8s"
+              repeatCount="indefinite"
+            />
+          </polyline>
+          <rect x="22" y="80" width="150" height="12" fill="#FFDE43" stroke="#171717" stroke-width="2" />
+          <text x="97" y="89" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="8.5" fill="#171717">
+            PLATFORM AUTOMATION 99.9%
+          </text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Interactive 8-Bit Arcade Mascots Dock: AJ-BOT, BYTE & Playable Mini-Game -->
+    <div class="bg-cream border-t-[4px] border-ink px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-2.5">
+        <AJBot id="hero-ajbot" size="sm" />
+        <Byte id="hero-byte" size="sm" />
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          data-game-open
+          class="bg-pink hover:bg-yellow text-ink font-mono font-bold text-[10px] uppercase px-2.5 py-1 border-2 border-ink shadow-[2px_2px_0px_#171717] cursor-pointer transition-colors"
+        >
+          🕹️ PLAY 8-BIT GAME
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Caption Strip -->
+    <div class="bg-yellow border-t-[4px] border-ink px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 font-mono text-xs font-bold">
+      <span>FIG 01 // ENGINEER + RESEARCHER WORKBENCH</span>
+      <span class="bg-ink text-cream px-2 py-0.5 text-[10px]">SIEMENS ENERGY // TU CHEMNITZ</span>
+    </div>
+  </div>
+</div>

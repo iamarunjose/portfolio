@@ -185,6 +185,30 @@ let sharedAudioCtx: AudioContext | null = null;
 let activeMascotCleanup: (() => void) | null = null;
 
 /**
+ * Obtain or unlock AudioContext on user interaction for mobile Safari / Chrome compatibility.
+ */
+function getOrCreateAudioContext(): AudioContext | null {
+  if (typeof window === 'undefined') return null;
+  const AudioCtx =
+    window.AudioContext ||
+    (window as unknown as { webkitAudioContext?: typeof AudioContext })
+      .webkitAudioContext;
+  if (!AudioCtx) return null;
+
+  if (!sharedAudioCtx) {
+    try {
+      sharedAudioCtx = new AudioCtx();
+    } catch {
+      return null;
+    }
+  }
+  if (sharedAudioCtx && sharedAudioCtx.state === 'suspended') {
+    sharedAudioCtx.resume().catch(() => {});
+  }
+  return sharedAudioCtx;
+}
+
+/**
  * Synthesize subtle 1980s 8-bit retro sound effects via Web Audio API.
  * Strictly user-interaction-initiated, only when Arcade Mode is ON and SFX is unmuted.
  * Never autoplays music.
@@ -194,23 +218,13 @@ export function playArcadeSfx(
   enabled: boolean
 ): void {
   if (!enabled || typeof window === 'undefined') return;
-  const AudioCtx =
-    window.AudioContext ||
-    (window as unknown as { webkitAudioContext?: typeof AudioContext })
-      .webkitAudioContext;
-  if (!AudioCtx) return;
+  const ctx = getOrCreateAudioContext();
+  if (!ctx) return;
 
   try {
-    if (!sharedAudioCtx) {
-      sharedAudioCtx = new AudioCtx();
-    }
-    if (sharedAudioCtx.state === 'suspended') {
-      sharedAudioCtx.resume();
-    }
-
-    const now = sharedAudioCtx.currentTime;
-    const osc = sharedAudioCtx.createOscillator();
-    const gain = sharedAudioCtx.createGain();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
     osc.type = 'square';
 
     if (kind === 'hover') {
@@ -219,7 +233,7 @@ export function playArcadeSfx(
       osc.frequency.setValueAtTime(783.99, now + 0.035);
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
       osc.connect(gain);
-      gain.connect(sharedAudioCtx.destination);
+      gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.08);
       return;
@@ -234,7 +248,7 @@ export function playArcadeSfx(
       osc.frequency.setValueAtTime(1046.5, now + 0.165);
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.26);
       osc.connect(gain);
-      gain.connect(sharedAudioCtx.destination);
+      gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.26);
     } else if (kind === 'byte') {
@@ -243,7 +257,7 @@ export function playArcadeSfx(
       osc.frequency.setValueAtTime(1174.66, now + 0.12);
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
       osc.connect(gain);
-      gain.connect(sharedAudioCtx.destination);
+      gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.22);
     } else if (kind === 'spark') {
@@ -253,7 +267,7 @@ export function playArcadeSfx(
       osc.frequency.linearRampToValueAtTime(1318.5, now + 0.18);
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
       osc.connect(gain);
-      gain.connect(sharedAudioCtx.destination);
+      gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.22);
     } else {
@@ -264,7 +278,7 @@ export function playArcadeSfx(
       osc.frequency.setValueAtTime(880, now + 0.12);
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
       osc.connect(gain);
-      gain.connect(sharedAudioCtx.destination);
+      gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.22);
     }
@@ -423,24 +437,22 @@ export function initMascotSystem(): () => void {
 
   syncControlHud();
 
-  // Unlock Web Audio API on first user gesture when Arcade Mode & SFX are ON
+  // Unlock Web Audio API on first user touch/click gesture (essential for mobile Safari/Chrome)
   let audioUnlocked = false;
   const unlockAudioOnFirstGesture = () => {
+    getOrCreateAudioContext();
     if (audioUnlocked) return;
     audioUnlocked = true;
     if (isArcadeMode && !isSfxMuted && !isMotionDisabled) {
       playArcadeSfx('toggle', true);
     }
   };
-  window.addEventListener('pointerdown', unlockAudioOnFirstGesture, {
-    once: true,
-    passive: true,
-    signal
-  });
-  window.addEventListener('keydown', unlockAudioOnFirstGesture, {
-    once: true,
-    passive: true,
-    signal
+
+  ['pointerdown', 'touchstart', 'touchend', 'click', 'keydown'].forEach((evt) => {
+    window.addEventListener(evt, unlockAudioOnFirstGesture, {
+      passive: true,
+      signal
+    });
   });
 
   // Play subtle 8-bit feedback when clicking portfolio buttons/cards in Arcade Mode
